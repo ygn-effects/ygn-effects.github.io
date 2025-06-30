@@ -1,0 +1,210 @@
+/* =========================================
+   YGN Design-Tokens
+   ========================================= */
+:root{
+  /* Palette ─────────────────────────────── */
+  --ygn-bg:          #121212;     /* canvas */
+  --ygn-surface:     #1B1B1B;     /* cards / nav */
+  --ygn-on-surface:  #E0E0E0;
+
+  --ygn-primary:     #FFC107;
+  --ygn-primary-dark:#FFA000;
+  --ygn-on-primary:  #121212;
+
+  --ygn-secondary:   #673AB7;
+  --ygn-secondary-dark:#552DA8;
+  --ygn-on-secondary:#D1C4E9;
+
+  /* Shape & elevation ───────────────────── */
+  --ygn-radius: 1.75rem;           /* ≈ MDB rounded-9 */
+  --ygn-shadow: 0 3px 6px rgba(0,0,0,.40);
+  --ygn-shadow-lg: 0 6px 12px rgba(0,0,0,.45);
+
+    /* base surface */
+  --ygn-surface-0: #1B1B1B;                     /* 0 dp */
+
+  /* tonal elevation overlay – 5-12 % white */
+  --ygn-surface-1: rgba(255,255,255,.05);       /* 1 dp */
+  --ygn-surface-2: rgba(255,255,255,.08);       /* 2 dp */
+  --ygn-surface-3: rgba(255,255,255,.11);       /* 3 dp+ */
+
+  /* Motion */
+  --ygn-ease: cubic-bezier(.4,0,.2,1);
+  --ygn-dur:  180ms;
+}
+
+/* =========================================
+   Base
+   ========================================= */
+body{
+  background: var(--ygn-bg);
+  color: var(--ygn-on-surface);
+  font-family:'Questrial',sans-serif;
+}
+
+/* reusable helpers */
+.bg-surface      { background: var(--ygn-surface)!important; }
+.text-surface    { color: var(--ygn-on-surface)!important;   }
+
+.bg-surface-0 { background: var(--ygn-surface-0); }
+.bg-surface-1 { background: color-mix(in srgb,
+                    var(--ygn-surface-0) 100%,
+                    var(--ygn-surface-1) 100%); }
+.bg-surface-2 { background: color-mix(in srgb,
+                    var(--ygn-surface-0) 100%,
+                    var(--ygn-surface-2) 100%); }
+.bg-surface-3 { background: color-mix(in srgb,
+                    var(--ygn-surface-0) 100%,
+                    var(--ygn-surface-3) 100%); }
+
+.section-elevated{
+  border-radius: var(--ygn-radius);
+  box-shadow: var(--ygn-shadow);
+  background-color: var(--ygn-surface-0);
+  padding: 2rem;
+}
+
+/* =========================================
+   Navigation
+   ========================================= */
+.navbar-dark{
+  background: var(--ygn-surface-0);
+  border-radius: var(--ygn-radius);
+  box-shadow: var(--ygn-shadow);
+}
+.navbar-dark .nav-link{
+  color: var(--ygn-on-surface);
+  border-radius: var(--ygn-radius);
+  transition: background var(--ygn-dur) var(--ygn-ease),
+              color       var(--ygn-dur) var(--ygn-ease);
+}
+.navbar-dark .nav-link:hover{
+  background: var(--ygn-secondary);
+  color: var(--ygn-on-secondary);
+}
+.navbar-dark .nav-link.active{
+  background: var(--ygn-primary);
+  color: var(--ygn-on-primary);
+}
+.navbar-dark .nav-link.active:hover{
+  background: var(--ygn-primary-dark);
+  color: var(--ygn-on-primary);
+}
+.nav .nav-item .nav-link{
+  border-radius: var(--ygn-radius);
+  background: var(--ygn-surface-0);
+  color: var(--ygn-on-surface);
+}
+.nav .nav-item .nav-link:hover{
+  background: var(--ygn-secondary);
+  color: var(--ygn-on-secondary);
+}
+.nav .nav-item .nav-link.active{
+  background: var(--ygn-primary);
+  color: var(--ygn-on-primary);
+}
+.nav .nav-item .nav-link.active:hover{
+  background: var(--ygn-primary-dark);
+  color: var(--ygn-on-primary);
+}
+
+/* =========================================
+   Buttons
+   ========================================= */
+.btn{
+  border-radius: var(--ygn-radius);
+  box-shadow: var(--ygn-shadow);
+  transition: background var(--ygn-dur) var(--ygn-ease),
+              color       var(--ygn-dur) var(--ygn-ease);
+}
+.btn-primary{
+  background: var(--ygn-primary);
+  color: var(--ygn-on-primary);
+}
+.btn-primary:hover{
+  background: var(--ygn-primary-dark);
+  color: var(--ygn-on-primary);
+}
+.btn-secondary{
+  background: var(--ygn-secondary);
+  color: var(--ygn-on-secondary);
+}
+.btn-secondary:hover{
+  background: var(--ygn-secondary-dark);
+  color: var(--ygn-on-secondary);
+}
+
+/* =========================================
+   Hero
+   ========================================= */
+.hero-400{
+  height:400px;
+  background-size:cover;
+  background-position:center;
+  border-radius:var(--ygn-radius);
+}
+
+/* =========================================
+   Cards
+   ========================================= */
+.card{
+  background: var(--ygn-surface-0);
+  color: var(--ygn-on-surface);
+  border-radius: var(--ygn-radius);
+  box-shadow: var(--ygn-shadow);
+  transition: transform var(--ygn-dur) var(--ygn-ease),
+              box-shadow var(--ygn-dur) var(--ygn-ease);
+}
+.card:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--ygn-shadow-lg);
+}
+
+/* aspect-ratio helpers */
+.card-img-news   { width:100%; height:200px; object-fit:cover; border-top-left-radius:var(--ygn-radius); border-top-right-radius:var(--ygn-radius);}
+.card-img-effect { width:100%; height:300px; object-fit:cover; border-top-left-radius:var(--ygn-radius); border-top-right-radius:var(--ygn-radius);}
+
+/* =========================================
+   Content adornments
+   ========================================= */
+.knob-desc,
+.internal-desc{
+  padding-left:20px;
+  border-left:3px solid var(--ygn-primary);
+}
+.quote{
+  margin-right:20px;
+  padding-right:20px;
+  border-right:3px solid var(--ygn-primary);
+  font-style:italic;
+  font-weight:bold;
+}
+
+/* =========================================
+   Footer
+   ========================================= */
+footer{
+  background: var(--ygn-bg);
+  color: var(--ygn-on-surface);
+  border-top:1px solid var(--ygn-surface-0);
+  font-family:'Questrial',sans-serif;
+}
+
+/* =========================================
+   Links
+   ========================================= */
+a{ color: var(--ygn-primary); }
+a:hover{ color: var(--ygn-on-secondary); }
+
+/* =========================================
+   Accessibility: focus ring
+   ========================================= */
+*:focus-visible{
+  outline:2px dashed var(--ygn-secondary);
+  outline-offset:4px;
+}
+
+/* =========================================
+   Utility: remove default list radius
+   ========================================= */
+.list-group{ border-radius:0; }

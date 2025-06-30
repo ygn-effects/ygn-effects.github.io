@@ -1,0 +1,49 @@
+  <header>
+    <!-- Navbar container -->
+    <div class="container mt-3">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg sticky-top navbar-dark rounded-9 shadow-2-strong">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          <!-- Toggle button -->
+          <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <div class="navbar-brand mt-1 mb-1 ms-3">
+              <!-- Logo -->
+              <img src="{{ '/assets/images/logo.png' | relative_url }}" height="35" alt="YGN Logo"/>
+              <!-- Logo -->
+            </div>
+            <!-- Navbar brand -->
+
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mt-1 mb-1">
+              {% for entry in site.data.navigation %}
+                <li class="nav-item ms-1 me-1 mb-1 mt-1">
+                  <a class="nav-link ps-3 pe-3 rounded-9 {% if entry.url == page.url %}active shadow-2-strong{% endif %}" href="{{ entry.url }}">{{ entry.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+            <!-- Left links -->
+          </div>
+          <!-- Collapsible wrapper -->
+
+          <!-- Right elements -->
+          <div class="d-flex align-items-center">
+            <!-- Icon -->
+            <a class="ms-3 me-3" href="#">
+              <i class="fa-brands fa-github nav-link"></i>
+            </a>
+          </div>
+          <!-- Right elements -->
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+      <!-- Navbar -->
+    </div>
+    <!-- Navbar container -->
+  </header>

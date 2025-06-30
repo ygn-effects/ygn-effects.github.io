@@ -1,0 +1,221 @@
+---
+layout: default
+---
+
+<!-- Hero container -->
+<section class="container mt-3">
+  <!-- Background image -->
+  <div class="bg-image hero-400" style="background-image: url('{{ page.images.hero }}');">
+  <!-- Background image -->
+</section>
+<!-- Hero container -->
+
+<!-- Pills container -->
+<nav class="container mt-3" aria-label="Product details navigation">
+  <div class="row justify-content-center">
+    <!-- Pills navs container -->
+    <div class="col-md-5">
+      <!-- Pills navs -->
+      <ul class="nav nav-pills nav-justified mb-3" id="pills-content" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a data-mdb-pill-init class="nav-link active" id="tab-story" href="#story" role="tab" aria-controls="story" aria-selected="true">
+            Story
+          </a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a data-mdb-pill-init class="nav-link" id="tab-knobs" href="#knobs" role="tab" aria-controls="knobs" aria-selected="false">
+            Knobs
+          </a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a data-mdb-pill-init class="nav-link" id="tab-sounds" href="#sounds" role="tab" aria-controls="sounds" aria-selected="false">
+            Sounds
+          </a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a data-mdb-pill-init class="nav-link" id="tab-pics" href="#pics" role="tab" aria-controls="pics" aria-selected="false">
+            Pics
+          </a>
+        </li>
+      </ul>
+      <!-- Pills navs -->
+    </div>
+    <!-- Pills navs container -->
+  </div>
+</nav>
+<!-- Pills container -->
+
+<!-- Pills content container -->
+<div class="container mt-3 pe-5 ps-5">
+  <!-- Pills content -->
+  <div class="tab-content" id="main-content">
+    <!-- Story tab -->
+    <section class="tab-pane fade show active" id="story" role="tabpanel" aria-labelledby="story">
+      <!-- Header -->
+      <div class="row">
+        <div class="col-12 ps-2">
+          <h2 class="text-left ms-5 mb-4">Story</h2>
+        </div>
+      </div>
+      <!-- Header -->
+
+      <!-- Content -->
+      <div class="section-elevated">
+        <div class="img-fluid float-start me-4 mb-2">
+          <img src="{{ page.images.story_1 }}" alt="{{ page.title }} three quarter view" class="rounded-9 shadow-2-strong">
+        </div>
+        <div>
+          <p class="ml-3">
+            {{ page.story }}
+          </p>
+        </div>
+      </div>
+      <!-- Content -->
+    </section>
+    <!-- Story tab -->
+
+    <!-- Knobs tab -->
+    <section class="tab-pane fade" id="knobs" role="tabpanel" aria-labelledby="knobs">
+      <!-- Knobs header -->
+      <div class="row">
+        <div class="col-12 ps-2">
+          <h2 class="text-left ms-5 mb-4">Knobs</h2>
+        </div>
+      </div>
+      <!-- Kobs header -->
+
+      <!-- Knobs -->
+      <div class="row align-items-center section-elevated">
+        <!-- Knob layout -->
+        <div class="col-md-4 align-items-center">
+          <img src="{{ page.images.knobs }}" alt="{{ page.title }} knobs and controls layout" class="img-fluid">
+        </div>
+        <!-- Knob layout -->
+
+        <!-- Knob description -->
+        <div class="col-md-8 d-flex align-items-center">
+          <ol class="list-group ps-3 knob-desc">
+            {% for knob in page.knobs %}
+              <li class="d-flex">
+                <div class="mt-2 mb-2 ms-2">
+                  <h4>{{ knob.name }}</h4>
+                  {{ knob.desc }}
+                </div>
+              </li>
+            {% endfor %}
+          </ol>
+        </div>
+        <!-- Knob description -->
+      </div>
+      <!-- Knobs -->
+
+      <!-- Internals header -->
+      <div class="row">
+        <div class="col-12 ps-2 mt-5">
+          <h2 class="text-left ms-5 mb-4">Internal controls</h2>
+        </div>
+      </div>
+      <!-- Internals Header -->
+
+      <!-- Internals -->
+      <div class="row align-items-center section-elevated mb-5">
+        {% if page.internals %}
+          <div class="row align-items-center mb-5">
+            <!-- Internal controls layout -->
+            <div class="col-md-4">
+              <img src="{{ page.images.internals }}" alt="{{ page.title }} internal controls layout" class="img-fluid">
+            </div>
+            <!-- Internal controls layout -->
+
+            <!-- Internal controls description -->
+            <div class="col-md-8 d-flex align-items-center mt-3">
+              <ol class="list-group ps-3 internal-desc">
+                <li class="d-flex">
+                  <div class="ms-2 mb-3 me-auto">
+                    <h3>Effect board</h3>
+                  </div>
+                </li>
+                {% for internal in page.internals %}
+                  <li class="d-flex">
+                    <div class="mt-2 mb-2 ms-2">
+                      <h4>{{ internal.name }}</h4>
+                      {{ internal.desc }}
+                    </div>
+                  </li>
+                {% endfor %}
+              </ol>
+            </div>
+            <!-- Internal controls description -->
+          </div>
+        {% endif %}
+
+        <div class="row align-items-center">
+          <!-- Internal controls layout -->
+          <div class="col-md-4">
+            <img src="{{ page.images.ioboard }}" alt="{{ page.title }} internal controls layout" class="img-fluid">
+          </div>
+          <!-- Internal controls layout -->
+
+          <!-- Internal controls description -->
+          <div class="col-md-8 d-flex align-items-center mt-3">
+            <ol class="list-group ps-3 internal-desc">
+              <li class="d-flex">
+                <div class="ms-2 mb-3 me-auto">
+                  <h3>IO board</h3>
+                </div>
+              </li>
+              {% for internal in page.ioboard %}
+                <li class="d-flex">
+                  <div class="mt-2 mb-2 ms-2">
+                    <h4>{{ internal.name }}</h4>
+                    {{ internal.desc }}
+                  </div>
+                </li>
+              {% endfor %}
+            </ol>
+          </div>
+          <!-- Internal controls description -->
+        </div>
+      </div>
+      <!-- Internals -->
+
+      <!-- Tips header -->
+      <div class="row">
+        <div class="col-12 ps-2">
+          <h2 class="text-left ms-5 mb-4">Tips and tricks</h2>
+        </div>
+      </div>
+      <!-- Tips header -->
+
+      <!-- Tips -->
+      <div class="row align-items-center section-elevated">
+        <!-- Knob description -->
+        <div class="col-md-12 d-flex align-items-center mt-3">
+          <ol class="list-group">
+            {% for tip in page.tips %}
+              <li class="d-flex">
+                <div class="mb-3 me-auto">
+                  <h4>{{ tip.name }}</h4>
+                  {{ tip.desc }}
+                </div>
+              </li>
+            {% endfor %}
+          </ol>
+        </div>
+        <!-- Knob description -->
+      </div>
+      <!-- Knobs -->
+    </section>
+    <!-- Knobs tab -->
+
+    <section class="tab-pane fade" id="sounds" role="tabpanel" aria-labelledby="sounds">
+      Tab 3 content
+    </section>
+    <section class="tab-pane fade" id="pics" role="tabpanel" aria-labelledby="pics">
+      Tab 4 content
+    </section>
+    <!-- Pills content -->
+  </div>
+  <!-- Pills content -->
+</div>
+<!-- Pills content container -->
