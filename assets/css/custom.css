@@ -94,6 +94,8 @@ body{
   border-radius: var(--ygn-radius);
   background: var(--ygn-surface-0);
   color: var(--ygn-on-surface);
+  transition: background var(--ygn-dur) var(--ygn-ease),
+              color       var(--ygn-dur) var(--ygn-ease);
 }
 .nav .nav-item .nav-link:hover{
   background: var(--ygn-secondary);
@@ -169,7 +171,6 @@ body{
    ========================================= */
 .knob-desc,
 .internal-desc{
-  padding-left:20px;
   border-left:3px solid var(--ygn-primary);
 }
 .quote{
@@ -178,6 +179,51 @@ body{
   border-right:3px solid var(--ygn-primary);
   font-style:italic;
   font-weight:bold;
+}
+.effect-content{
+  margin-top: 2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+.effect-section{
+  margin-bottom: 3rem;
+}
+.effect-section-title{
+  margin-left: 3rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+.effect-story-image {
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+  border-radius: var(--ygn-radius);
+  box-shadow: var(--ygn-shadow);
+}
+
+.knob-list{
+  list-style:none;
+  margin:0;
+  padding:0 0 0 1.5rem;
+}
+.knob-item{
+  margin-block: .75rem;
+}
+.knob-item__section{
+  margin-bottom: 2rem;
+}
+.knob-item__title{
+  margin:0 0 .25rem;
+}
+.knob-item__desc{
+  margin:0;
+}
+.knob-internal__section{
+  margin-bottom: 2rem;
+}
+.tricks-list{
+  list-style:none;
+  margin:0;
+  padding:0;
 }
 
 /* =========================================
