@@ -6,44 +6,45 @@ permalink: /effects/
 <!-- Title container -->
 <div class="container mt-4">
   <!-- Title -->
-  <div class="text-center">
-    <h1 class="mb-3">Blah blah blah discover our effects</h1>
-    <h4 class="mb-5">More blah blah blah this stuff is so amazing it's crazy.</h4>
+  <div class="hero-250 text-center">
+    <h1>Blah blah blah discover our effects</h1>
+    <h4>More blah blah blah this stuff is so amazing it's crazy.</h4>
   </div>
   <!-- Title -->
-
-  <!-- Effects cards container -->
-  <div class="container mt-5">
-    {% assign categories = site.effects | map: 'category' | uniq %}
-    {% for category in categories %}
-      <!-- Category header -->
-      <div class="row">
-        <div class="col-12 ps-5">
-          <h2 class="text-left ms-5 mb-4">{{ category }}</h2>
-        </div>
-      </div>
-      <!-- Category header -->
-
-      <!-- Cards -->
-      <div class="row pe-5 ps-5 mb-4">
-        {% for effect in site.effects %}
-          {% if effect.category == category %}
-            <!-- Card -->
-            <div class="col-md-4 mb-4">
-              <a class="card rounded-9 shadow-2-strong" href="{{ effect.permalink }}">
-                <img src="{{ '/assets/images/' | append: effect.card }}" alt="{{ effect.title }}" class="card-img-top card-img-effect rounded-9">
-                <div class="card-body">
-                  <h5 class="card-title">{{ effect.title }}</h5>
-                  <p class="card-text">{{ effect.cardtext }}</p>
-                </div>
-              </a>
-            </div>
-            <!-- Card -->
-          {% endif %}
-        {% endfor %}
-      </div>
-      <!-- Cards -->
-    {% endfor %}
-  </div>
-  <!-- Effects cards container -->
 </div>
+<!-- Title container -->
+
+<!-- Effects cards container -->
+<div class="container effects-list">
+  {% assign categories = site.effects | map: 'category' | uniq %}
+  {% for category in categories %}
+    <!-- Category header -->
+    <div class="row">
+      <div class="col-12">
+        <h2 class="effect-section-title">{{ category }}</h2>
+      </div>
+    </div>
+    <!-- Category header -->
+
+    <!-- Cards -->
+    <div class="row effect-section">
+      {% for effect in site.effects %}
+        {% if effect.category == category %}
+          <!-- Card -->
+          <div class="col-md-4">
+            <a class="card" href="{{ effect.permalink }}">
+              <img src="{{ effect.images.card }}" alt="{{ effect.title }}" class="card-img-top card-img-effect">
+              <div class="card-body">
+                <h5 class="card-title">{{ effect.title }}</h5>
+                <p class="card-text">{{ effect.excerpt }}</p>
+              </div>
+            </a>
+          </div>
+          <!-- Card -->
+        {% endif %}
+      {% endfor %}
+    </div>
+    <!-- Cards -->
+  {% endfor %}
+</div>
+<!-- Effects cards container -->
