@@ -171,7 +171,7 @@ body{
    ========================================= */
 .knob-desc,
 .internal-desc{
-  border-left:3px solid var(--ygn-primary);
+  border-left:3px solid var(--ygn-surface-3);
 }
 .quote{
   margin-right:20px;
