@@ -185,6 +185,14 @@ body {
   border-radius: var(--ygn-radius);
 }
 
+.hero-250{
+  height:200px;
+  background-size: cover;
+  background-position: center;
+  border-radius:var(--ygn-radius);
+  padding-top: 50px;
+}
+
 /* =========================================
   Cards
 ========================================= */
@@ -199,6 +207,7 @@ body {
 }
 
 .card:hover {
+  background: var(--ygn-secondary);
   transform: translateY(-2px);
   box-shadow: var(--ygn-shadow-lg);
 }
@@ -216,8 +225,7 @@ body {
   width: 100%;
   height: 300px;
   object-fit: cover;
-  border-top-left-radius: var(--ygn-radius);
-  border-top-right-radius: var(--ygn-radius);
+  border-radius: var(--ygn-radius);
 }
 
 /* =========================================
@@ -237,8 +245,9 @@ body {
   font-weight: bold;
 }
 
+.effects-list,
 .effect-content {
-  margin-top: 2rem;
+  margin-top: 4rem;
   padding-left: 3rem;
   padding-right: 3rem;
 }
