@@ -222,6 +222,13 @@ body {
   color:var(--ygn-on-surface);
 }
 
+.hero-effect {
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--ygn-radius);
+}
+
 /* =========================================
   Cards
 ========================================= */
