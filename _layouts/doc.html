@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<div class="doc-container">
+  <aside class="doc-sidebar">
+    <h3>{{ page.title }}</h3>
+    {% if page.toc %}
+      <nav>
+        {% for item in page.toc %}
+          <a href="{{ item.href }}">{{ item.label }}</a>
+        {% endfor %}
+      </nav>
+    {% endif %}
+    <p class="doc-meta">
+      Updated {{ page.updated | date: "%Y-%m-%d" }}<br>
+      Difficulty: {{ page.difficulty }}
+    </p>
+  </aside>
+
+  <article class="doc-content">
+    {{ content }}
+  </article>
+</div>

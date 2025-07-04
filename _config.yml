@@ -38,6 +38,7 @@ collections:
   effects:
     output: true
   docs:
+    output: true
 
 exclude:
   - graphics/
