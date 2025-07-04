@@ -351,6 +351,106 @@ body {
 }
 
 /* =========================================
+  Doc
+========================================= */
+
+.doc-shell {
+  display: flex;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.doc-nav {
+  flex:0 0 220px;
+  position: sticky;
+  top: 2rem;
+  background: var(--ygn-surface-1);
+  padding: 1.5rem;
+  border-radius: var(--ygn-radius);
+  max-height:calc(100vh - 4rem);
+  overflow-y: auto;
+}
+
+.doc-content {
+  min-width: 0;
+  flex: 1;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.doc-content td {
+  padding: 0.2rem;
+}
+
+.doc-toc a {
+  display: block;
+  margin: .25rem 0;
+  color: var(--ygn-on-surface);
+  text-decoration: none;
+  font-size: .95rem;
+}
+
+.doc-toc a:hover {
+  color: var(--ygn-secondary);
+}
+
+.doc-toc a.is-active{
+  color:var(--ygn-primary);
+  font-weight:600;
+}
+.doc-toc a.is-active::before{
+  content:"•";
+  margin-right:.25rem;
+}
+
+.doc-meta {
+  font-size: .8rem;
+  margin-top: 2rem;
+  opacity: .7
+}
+
+@media(max-width:768px) {
+  .doc-shell {
+    flex-direction: column;
+  }
+
+  .doc-nav {
+    position: relative;
+    top: auto;
+    flex: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .doc-nav__toggle {
+    display: block;
+    width: 100%;
+    margin-bottom: .5rem;
+    background: var(--ygn-primary);
+    color: var(--ygn-on-primary);
+    border: none;
+    padding: .5rem;
+    border-radius: var(--ygn-radius);
+  }
+
+  .doc-toc {
+    display: none;
+  }
+
+  .doc-nav.open .doc-toc {
+    display: block;
+  }
+}
+
+.doc-nav__toggle {
+  display: none
+}
+
+/* =========================================
   Footer
 ========================================= */
 

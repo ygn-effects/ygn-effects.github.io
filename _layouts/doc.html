@@ -1,24 +1,29 @@
 ---
-layout: default
+layout: default                # wraps your site header/footer
 ---
 
-<div class="doc-container">
-  <aside class="doc-sidebar">
-    <h3>{{ page.title }}</h3>
+<div class="doc-shell">
+  <aside class="doc-nav" id="doc-nav">
+    <button class="doc-nav__toggle" aria-label="Toggle navigation">☰</button>
+    <h3 class="doc-nav__title">{{ page.title }}</h3>
+
     {% if page.toc %}
-      <nav>
+      <nav class="doc-toc">
         {% for item in page.toc %}
           <a href="{{ item.href }}">{{ item.label }}</a>
         {% endfor %}
       </nav>
     {% endif %}
+
     <p class="doc-meta">
-      Updated {{ page.updated | date: "%Y-%m-%d" }}<br>
-      Difficulty: {{ page.difficulty }}
+      Updated {{ page.updated | default: page.date | date: "%Y-%m-%d" }}<br>
     </p>
   </aside>
 
-  <article class="doc-content">
+  <article class="doc-content" id="doc-content">
     {{ content }}
   </article>
+
 </div>
+
+<script src="{{ '/assets/js/doc.js' | relative_url }}" defer></script>
