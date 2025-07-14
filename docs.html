@@ -1,0 +1,51 @@
+---
+layout: default
+permalink: /docs/
+---
+
+<!-- Title container -->
+<div class="container mt-4">
+  <!-- Title -->
+  <div class="hero-200 parallax" style="background-image: url('/assets/images/hero-400.png');">
+    <div class="hero-content">
+      <h1 class="mb-3">Blah blah blah check out our docs</h1>
+      <h4>More blah blah blah this stuff is so amazing it's crazy.</h4>
+    </div>
+  </div>
+  <!-- Title -->
+</div>
+<!-- Title container -->
+
+<!-- Effects cards container -->
+<div class="container docs-list">
+  {% assign topics = site.docs | map: 'topic' | uniq %}
+  {% for topic in topics %}
+    <!-- Category header -->
+    <div class="row">
+      <div class="col-12">
+        <h2 class="doc-section-title">{{ topic }}</h2>
+      </div>
+    </div>
+    <!-- Category header -->
+
+    <!-- Cards -->
+    <div class="row doc-section">
+      {% for doc in site.docs %}
+        {% if doc.topic == topic %}
+          <!-- Card -->
+          <div class="col-md-4">
+            <a class="card" href="{{ doc.permalink }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ doc.title }}</h5>
+                <p class="card-text">{{ doc.excerpt }}</p>
+              </div>
+            </a>
+          </div>
+          <!-- Card -->
+        {% endif %}
+      {% endfor %}
+    </div>
+    <!-- Cards -->
+  {% endfor %}
+</div>
+<!-- Effects cards container -->

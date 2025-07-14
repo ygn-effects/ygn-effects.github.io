@@ -3,7 +3,7 @@ title: SMD PCB Assembly
 layout: doc
 permalink: /docs/smd-pcb-assembly/
 updated: 2025-07-02
-topic: pcb
+topic: PCB
 excerpt: Assembly of a SMD PCB. Paste application to components placement and reflow.
 tags: [soldering, smd, stencil, pcb]
 toc:

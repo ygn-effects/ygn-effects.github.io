@@ -301,10 +301,12 @@ body {
   margin-bottom: 2rem;
 }
 
+.doc-section,
 .effect-section {
   margin-bottom: 3rem;
 }
 
+.doc-section-title,
 .effect-section-title {
   margin-left: 3rem;
   margin-bottom: 2rem;
