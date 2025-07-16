@@ -181,45 +181,47 @@ body {
 ========================================= */
 
 .hero-300 {
-  height:300px;
-  position:relative;
-  overflow:hidden;
-  border-radius:var(--ygn-radius);
-  background-size:cover;
-  background-position:center top;
-  background-attachment:fixed;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--ygn-radius);
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
 }
 
-.hero-200{
-  height:200px;
-  position:relative;
-  overflow:hidden;
-  border-radius:var(--ygn-radius);
-  background-size:cover;
-  background-position:center top;
-  background-attachment:fixed;
+.hero-200 {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--ygn-radius);
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
 }
 
-.hero-300::before{
-  content:"";
-  position:absolute;inset:0;
-  background:rgba(0,0,0,.70);
-  pointer-events:none;
+.hero-300::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .70);
+  pointer-events: none;
 }
 
-.hero-200::before{
-  content:"";
-  position:absolute;inset:0;
-  background:rgba(0,0,0,.70);
-  pointer-events:none;
+.hero-200::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .70);
+  pointer-events: none;
 }
 
-.hero-content{
-  position:relative;
-  z-index:1;
-  text-align:center;
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
   padding-top: 3rem;
-  color:var(--ygn-on-surface);
+  color: var(--ygn-on-surface);
 }
 
 .hero-effect {
@@ -253,7 +255,7 @@ body {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  object-position:center top;
+  object-position: center top;
   border-radius: var(--ygn-radius);
 }
 
@@ -270,7 +272,7 @@ body {
 
 .knob-desc,
 .internal-desc {
-  border-left:3px solid var(--ygn-surface-3);
+  border-left: 3px solid var(--ygn-surface-3);
 }
 
 .quote {
@@ -353,6 +355,53 @@ body {
 }
 
 /* =========================================
+  Images
+========================================= */
+
+.img-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  z-index: 1000;
+}
+
+.img-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+  border-radius: var(--ygn-radius);
+}
+
+.img-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0;
+  grid-template-columns: repeat(var(--cols, 2), 1fr);
+}
+
+.cols-2 {
+  --cols: 2;
+}
+
+.cols-3 {
+  --cols: 3;
+}
+
+.cols-4 {
+  --cols: 4;
+}
+
+@media(max-width:600px) {
+  .img-grid {
+    --cols: 2 !important;
+  }
+}
+
+/* =========================================
   Doc
 ========================================= */
 
@@ -368,13 +417,13 @@ body {
 }
 
 .doc-nav {
-  flex:0 0 220px;
+  flex: 0 0 220px;
   position: sticky;
   top: 2rem;
   background: var(--ygn-surface-1);
   padding: 1.5rem;
   border-radius: var(--ygn-radius);
-  max-height:calc(100vh - 4rem);
+  max-height: calc(100vh - 4rem);
   overflow-y: auto;
 }
 
@@ -401,13 +450,14 @@ body {
   color: var(--ygn-secondary);
 }
 
-.doc-toc a.is-active{
-  color:var(--ygn-primary);
-  font-weight:600;
+.doc-toc a.is-active {
+  color: var(--ygn-primary);
+  font-weight: 600;
 }
-.doc-toc a.is-active::before{
-  content:"•";
-  margin-right:.25rem;
+
+.doc-toc a.is-active::before {
+  content: "•";
+  margin-right: .25rem;
 }
 
 .doc-meta {
@@ -451,6 +501,20 @@ body {
 .doc-nav__toggle {
   display: none
 }
+
+.doc-content .doc-img {
+  display: block;
+  margin: 1rem auto;
+  max-width: 100%;
+  height: auto;
+  cursor: zoom-in;
+  border-radius: var(--ygn-radius);
+  box-shadow: var(--ygn-shadow);
+}
+
+.doc-img.quart { max-width:75%; }
+.doc-img.half { max-width:50%; }
+.doc-img.third{ max-width:33%; }
 
 /* =========================================
   Footer
