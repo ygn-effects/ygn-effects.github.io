@@ -28,3 +28,13 @@ document.addEventListener("DOMContentLoaded",()=>{
 
   headings.forEach(h => io.observe(h));
 });
+
+document.querySelectorAll('.doc-img').forEach(img=>{
+  img.addEventListener('click',()=>{
+    const overlay = document.createElement('div');
+    overlay.className = 'img-overlay';
+    overlay.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
+    overlay.addEventListener('click',()=>overlay.remove());
+    document.body.appendChild(overlay);
+  });
+});
