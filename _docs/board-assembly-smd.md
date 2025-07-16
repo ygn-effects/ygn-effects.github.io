@@ -116,6 +116,15 @@ _See the full list and recommended models in [Tools & Supplies](/docs/tools)._ `
 
 _See the full list and recommended models in [Tools & Supplies](/docs/tools)._ `{:.small}`
 
+![Stencil holder](/assets/images/docs/board-assembly-smd/tools-stencil-holder.webp){:.doc-img .half}
+
+<div class="img-grid cols-2" markdown="0">
+  <img src="/assets/images/docs/board-assembly-smd/tools-stencil-holder.webp" alt="" class="doc-img quart">
+  <img src="/assets/images/docs/board-assembly-smd/tools-stencil-holder.webp" alt="" class="doc-img quart">
+  <img src="/assets/images/docs/board-assembly-smd/tools-stencil-holder.webp" alt="" class="doc-img quart">
+</div>
+
+
 ---
 
 ## 3. Paste application {#paste}
