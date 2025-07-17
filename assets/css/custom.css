@@ -435,7 +435,26 @@ body {
 }
 
 .doc-content td {
-  padding: 0.2rem;
+  padding: 0.5rem;
+}
+
+.doc-content th {
+  padding-left: 0.5rem;
+}
+
+.doc-content table {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.doc-content h2 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.doc-content h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .doc-toc a {
