@@ -535,6 +535,21 @@ body {
 .doc-img.half { max-width:50%; }
 .doc-img.third{ max-width:33%; }
 
+.doc-content blockquote {
+  background: var(--ygn-secondary);
+  color: var(--ygn-on-secondary);
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 0.2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  border-radius: var(--ygn-radius);
+}
+
+.doc-content hr {
+  margin-top: 2rem;
+}
+
 /* =========================================
   Footer
 ========================================= */
