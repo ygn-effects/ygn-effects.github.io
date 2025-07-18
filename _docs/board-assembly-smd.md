@@ -69,9 +69,9 @@ Below is a quick‑glance checklist of everything you’ll want within arm’s r
 
 Optional nice‑to‑haves
 
-- Magnifier or USB microscope for inspection
-- Digital multimeter for power‑on checks
-- Isopropyl alcohol and paper towel. Solder paste can be messy.
+- **Magnifier or USB microscope**: for inspection, also useful to check the polarity on tiny diodes.
+- **Digital multimeter**: for power‑on checks.
+- **Isopropyl alcohol and paper towel**: solder paste can be messy.
 
 <div class="img-grid cols-2" markdown="0">
   <img src="/assets/images/docs/board-assembly-smd/tools-stencil-holder.webp" alt="" class="doc-img quart">
@@ -85,29 +85,30 @@ Optional nice‑to‑haves
 
 Laying down perfect, even pads of solder paste is critical for them to wick up into smooth fillets during reflow.
 
-### Prep & Clean
+1. **Prep & Clean**
   - Secure the PCB in the jig. Ensure it sits flush with no wobble.
   - Dampen a lint‑free wipe with IPA and **wipe both the board copper and the underside of the stencil** to remove fingerprints and dust. Allow to air‑dry (≈30 s).
+  - Stir the paste thoroughly for 2-3 minutes. It tends to dry up a bit when not refrigerated.
 
-### Load the Squeegee
+2. **Load the Squeegee**
   - Scoop a pea‑sized blob of SMD291SNL50T3 and **smear it evenly along one edge of your credit card**—use a toothpick to get a continuous bead.
 
-### Fill the Apertures
+3. **Fill the Apertures**
   - Holding the card **flat against the stencil**, slide it across the apertures with firm, even pressure. This forces paste into every cavity.
   - Lift the card, **tilt it to ≈45° and slide it** along the same path. Excess paste jumps back onto the card edge.
   - **Repeat flat‑then‑45° passes** 2–3 × until you see paste flush with the stencil surface and very little residue on top.
 
-### Recover & Tidy
+4. **Recover & Tidy**
   - Make one final **45° cleaning pass** to leave only a whisper‑thin film on the stencil.
   - Scrape excess paste from the card back into the jar and close the lid.
 
-### Stencil Release
+5. **Stencil Release**
   - Gripping the stencil by its frame, **snap it upward in a single, quick “book‑opening” motion**—the hinge on the jig helps lift vertically first, then away. Aim for a smooth, decisive pop to avoid smearing.
 
-### Clean‑Up
+6. **Clean‑Up**
   - Swab the stencil and card with fresh IPA; dry with paper towel. Store the stencil flat.
 
-### Inspect & Re‑do if Needed
+7. **Inspect & Re‑do if Needed**
   - Hold the board under strong light or a microscope. **Every pad should have a neat, mesas‑flat deposit**—no bald spots, bridges, or smears.
   - If you spot voids or over‑paste, it is possible to drop the stencil back into the jig and repeat the flat‑plus‑45° routine. Again, just aim for a smooth, precise and decisive pop on/off motion to avoid smearing.
 
@@ -145,3 +146,93 @@ Placing parts is mostly zen‑like repetition—but good **prep** separates a 15
 
 > **Tip:** SMT is surprisingly forgiving. Worried that your 0603s aren’t pixel‑perfect? Relax—the reflow process will pull most parts into place as long as the paste was spread cleanly. Even fine‑pitch MSOP/TSSOP ICs tolerate slight offset or skew. So focus on consistent paste volume and you’ll be amazed how “self‑correcting” the process is.
 
+---
+
+## 5. Board reflow {#reflow}
+
+Before we melt any metal, a quick primer: a standard reflow profile has **three main phases**—**Ramp-Up → Soak → Reflow**.
+Following the Chip Quik **SMD291SNL** curve for the first two phases lets the flux do its job; the last phase is mostly visual because our benchtop hot-plate can’t quite hit the datasheet’s 249 °C peak, especially that quickly.
+
+![Chip Quik recommended Sn-Pb profile](ae7da0c2-3f2f-431f-9bb5-0c6a7c5026e6.png)
+
+| Stage | Target Temp & Time | What’s happening |
+|-------|-------------------|------------------|
+| **Ramp-Up** | Room → 150 °C ≈ 90 s | Gentle warm-up drives off solvents without spatter. |
+| **Soak / Activation** | 150 → 180 °C ≈ 90 s | Flux activates, oxides dissolve, paste dulls and begins to “wet.” |
+| **Reflow (Liquidus)** | ≥ 217 °C for ≤ 30 s; practical peak ≈ 245 °C | Solder liquefies; surface tension pulls parts into perfect alignment. |
+
+> **Tip:** Most hobby hot-plates top out at ~245 °C. That’s fine: once every pad flashes from matte grey to mirror-bright, you’re done. Trust your eyes more than the display.
+
+### Gear & Prep
+- **Board lifter:** Flat or duck-bill tweezers let you pinch the PCB edge without crushing parts. Rehearse the pickup while everything’s cold.
+- **Cooling pad:** A piece of copper or thick aluminum sinks heat fast so components don’t “tombstone” while cooling.
+- **Landing zone:** Keep a clear, clutter-free spot to drop the hot board—liquid solder is slippery!
+
+### Step-by-Step
+
+1. **Place the board**
+  - Center it on the hot-plate, parts face up.
+2. **Pre-heat – 150 °C / ≈ 90 s**
+  - Dial the plate to 150 °C. Paste softens but stays grey.
+3. **Soak – 180 °C / ≈ 90 s**
+  - Bump to 180 °C. You’ll see a wisp of smoke as flux activates.
+4. **Reflow – 250 °C set-point**
+  - Crank to 250 °C; surface thermocouples usually read 240–245 °C. Watch: joints turn shiny in rapid succession. The **largest pads** (usually electrolytics) are your tell—once they’ve flowed, **kill the heat**.
+5. **Lift & cool**
+  - In one smooth, hinge-like motion, slide tweezers under a corner, lift straight up, and place the board on the copper slab to cool. Avoid tilting—liquid solder will let parts skate.
+
+### Inspecting the Joints
+
+A proper SMT fillet forms a smooth, concave meniscus that wets both the **land** and the **component termination**:
+
+![Good SMT fillet](93a9a325-5d6f-498d-891a-882cace96903.gif)
+
+Look for:
+
+* **Smooth, concave meniscus**. A dull, grainy surface hints at a cold joint.
+* **Even height** on both sides of each passive. One tall / one thin leg signals tombstoning risk.
+* **No bridging** between adjacent leads.
+
+If you spot a bridge or an incompletely-wetted pad, don’t panic—add a touch of flux and hit it with a quick hot-air pass.
+
+---
+
+## 6. Power-On & Functional Tests {#tests}
+
+Once the through-hole parts are soldered and the board has cooled, it’s time to **prove the build**.
+Every YGN PCB ships with clearly labeled **TP\_x** markers in the silkscreen *and* a companion **_test-points.pdf_** inside the repo’s *fabrication-output* folder (right next to the mechanical-layer drawing). The PDF lists each point’s nominal voltage or waveform so you can tick them off one by one.
+
+### Pre-Power Sanity Checks
+
+| Check | How | Pass / Fail |
+|-------|-----|-------------|
+| **Supply rail ≠ GND** | DMM in continuity mode between V\+ and GND. | **Open** (no beep) |
+| **No solder bridges** | 10× loupe or USB microscope around IC pins & switch lugs. | No unintended shorts |
+| **Polarity parts installed correctly** | Visual: electrolytics, diodes, IC notch/dot. | Orientation matches overlay |
+
+### Initial Power-On
+
+1. **Bench supply** → current-limit to ~50 mA.
+2. Clip the **– lead** to any of the **untented edge-vias**—they’re tied to the internal ground-plane and make a rock-solid COM anchor.
+3. Apply the rated voltage (e.g., +9 V).
+4. Verify inrush current stays below the limit.
+
+### Probe the Test Points
+
+Some examples :
+
+| TP label | Expected | Notes |
+|----------|----------|-------|
+| **TP\_5V** | 4.85 – 5.10 V | LDO output; should be steady within ±2 %. |
+| **TP\_VB** | ≈ ½ VCC (bias) | Audio mid-rail; tolerance ±100 mV. |
+| **TP\_IN** | Bypass cap-coupled | Inject 100 mVrms, 1 kHz and scope for clean sine. |
+| *(etc.)* | *see repo PDF* |  |
+
+### Signal & Functional Tests
+1. **Audio pass-through:** Feed a guitar-level sine and listen/ scope the output—no crackles or dropouts.
+2. **Control sweep:** Rotate each pot / flip each switch while watching the output amplitude/frequency response.
+3. **LED & relay check:** Confirm status LED toggles and relay clicks (if fitted) on effect/bypass change.
+
+---
+
+🎉 **If every TP lands inside its spec and the audio test sounds clean—you’re done!**
