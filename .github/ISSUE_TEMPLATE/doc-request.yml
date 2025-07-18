@@ -1,0 +1,46 @@
+name: "📚 Documentation Request"
+description: "Propose a new or updated section for the YGN Effects docs."
+labels: ["documentation"]
+title: "[Docs] <short descriptive title>"
+projects: ["Documentation to-do list"]
+
+body:
+  - type: input
+    id: doc_title
+    attributes:
+      label: "Requested Title"
+      description: "Concise heading that should appear in the docs."
+      placeholder: "e.g. Reflow Hot-Plate Profile"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Category"
+      description: "Pick the section where this content belongs."
+      options:
+        - PCB
+        - Firmware
+        - Enclosure
+        - CNC
+        - Hardware
+        - Tools
+        - Misc
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Detailed Description"
+      description: |
+        Outline what the doc should cover.  
+        • Key points or steps  
+        • Links to reference material, photos, or diagrams  
+        • Any edge-cases or notes for reviewers
+      placeholder: |
+        *What problem does this documentation solve?  
+        What specific information should be included?*
+    validations:
+      required: true
