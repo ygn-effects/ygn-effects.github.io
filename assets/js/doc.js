@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded",()=>{
-  const headings = [...document.querySelectorAll("#doc-content h2, #doc-content h3")];
+  const headings = [...document.querySelectorAll("#doc-content h2")];
   const links    = [...document.querySelectorAll(".doc-toc a")];
 
   if(!headings.length || !links.length) return;
