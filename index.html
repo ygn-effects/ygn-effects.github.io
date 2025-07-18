@@ -1,0 +1,171 @@
+---
+layout: default
+---
+
+<!-- Hero container -->
+<div class="container mt-4">
+  <!-- Background image -->
+  <div class="hero-300 parallax" style="background-image: url('/assets/images/hero-400.png');">
+    <!-- Text container -->
+    <div class="hero-content">
+      <h1 class="mb-3">Tone, Tweaked by You: The Open-Source Way</h1>
+      <h4 class="mb-5">Your tone, your rules - because great sound should be open to all.</h4>
+      <!-- Buttons container -->
+      <div class="button-container">
+        <a class="btn btn-primary btn-lg me-4" href="#!" role="button">Start Building Now</a>
+        <a class="btn btn-secondary btn-lg" href="#!" role="button">Why Open Source?</a>
+      </div>
+      <!-- Buttons container -->
+    </div>
+    <!-- Text container -->
+  </div>
+  <!-- Background image -->
+</div>
+<!-- Hero container -->
+
+<!-- News cards container -->
+<div class="container news-list">
+  <!-- Header -->
+  <div class="row">
+    <div class="col-12">
+      <h2 class="effect-section-title">News & Launches</h2>
+    </div>
+  </div>
+  <!-- Header -->
+
+  <!-- Cards -->
+  {% assign latest_effects = site.effects | sort: 'date' | reverse %}
+  <div class="row">
+    {% for effect in latest_effects limit: 3 %}
+      <!-- Card -->
+      <div class="col-md-4">
+        <div class="card">
+          <img src="/assets/images/card-news-3.png" class="card-img-news" alt="Abstract stompbox image"/>
+          <div class="card-body">
+            <h5 class="card-title">{{ effect.title }}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Card -->
+    {% endfor %}
+  </div>
+  <!-- Cards -->
+</div>
+<!-- News cards container -->
+
+<!-- Docs updates container -->
+<div class="container news-list">
+  <!-- Header -->
+  <div class="row">
+    <div class="col-12">
+      <h2 class="effect-section-title">Documentation Updates</h2>
+    </div>
+  </div>
+  <!-- Header -->
+
+  <!-- Cards -->
+  <div class="row">
+    <!-- Card 1 -->
+    <div class="col-md-4">
+      <div class="card">
+        <img src="{{ '/assets/images/card-docs-5.png' | relative_url }}" class="card-img-top card-img-news" alt="Abstract stompbox image"/>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Card 1 -->
+
+    <!-- Card 2 -->
+    <div class="col-md-4">
+      <div class="card">
+        <img src="{{ '/assets/images/card-docs-4.png' | relative_url }}" class="card-img-top card-img-news" alt="Abstract stompbox image"/>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+
+    <!-- Card 3 -->
+    <div class="col-md-4">
+      <div class="card">
+        <img src="{{ '/assets/images/card-docs-7.png' | relative_url }}" class="card-img-top card-img-news" alt="Abstract stompbox image"/>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Card 3 -->
+  </div>
+  <!-- Cards -->
+</div>
+<!-- Docs updates container -->
+
+<!-- Resources container -->
+<div class="container resources-list">
+  <!-- Header -->
+  <div class="row">
+    <div class="col-12">
+      <h2 class="effect-section-title">Resources</h2>
+    </div>
+  </div>
+  <!-- Header -->
+
+  <!-- Cards line 1 -->
+  <div class="row resource-section">
+    <!-- Card 1 -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Card 1 -->
+
+    <!-- Card 2 -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+  </div>
+  <!-- Cards line 1 -->
+
+  <!-- Cards line 2 -->
+  <div class="row">
+    <!-- Card 1 -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Card 1 -->
+
+    <!-- Card 2 -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+  </div>
+  <!-- Cards line 2 -->
+</div>
+<!-- Resources container -->
