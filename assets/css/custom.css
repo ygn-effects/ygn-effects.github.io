@@ -20,6 +20,7 @@
 
   /* Shape & elevation ───────────────────── */
   --ygn-radius: 1.75rem;
+  --ygn-radius-code: 0.2rem;
   /* ≈ MDB rounded-9 */
   --ygn-shadow: 0 3px 6px rgba(0, 0, 0, .40);
   --ygn-shadow-lg: 0 6px 12px rgba(0, 0, 0, .45);
@@ -39,6 +40,10 @@
   /* Motion */
   --ygn-ease: cubic-bezier(.4, 0, .2, 1);
   --ygn-dur: 180ms;
+
+  /* Fonts */
+  --font: 'Questrial', sans-serif;
+  --font-code: 'Source Code Pro', monospace;
 }
 
 /* =========================================
@@ -378,6 +383,7 @@ body {
 
 .img-grid {
   display: grid;
+  align-items: center;
   gap: 1rem;
   margin: 1rem 0;
   grid-template-columns: repeat(var(--cols, 2), 1fr);
@@ -457,6 +463,11 @@ body {
   margin-bottom: 1rem;
 }
 
+.doc-content h5 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
 .doc-toc a {
   display: block;
   margin: .25rem 0;
@@ -471,6 +482,11 @@ body {
 
 .doc-toc a.is-active {
   color: var(--ygn-primary);
+  font-weight: 600;
+}
+
+.doc-toc a.is-active:hover {
+  color: var(--ygn-primary-dark);
   font-weight: 600;
 }
 
@@ -546,9 +562,26 @@ body {
   border-radius: var(--ygn-radius);
 }
 
+.doc-content blockquote a {
+  color: var(--ygn-on-secondary);
+  font-weight: 600;
+}
+
+.doc-content blockquote a:hover {
+  color: var(--ygn-secondary-dark);
+}
+
 .doc-content hr {
   margin-top: 2rem;
 }
+
+.doc-content code {
+  font-size: 1em;
+  background: var(--ygn-surface);
+  color: var(--ygn-on-surface);
+  padding: 0.2rem;
+  border-radius: var(--ygn-radius-code);
+};
 
 /* =========================================
   Footer
