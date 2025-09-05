@@ -20,219 +20,101 @@ toc:
   - label: Tests
     href: "#tests"
 ---
-## 1. Introduction {#intro}
+## Introduction {#intro}
 
-Welcome to the **YGN Framework** PCB‑assembly guide! In this section we’ll take a hobbyist‑friendly, step‑by‑step walk through turning a blank printed‑circuit board into a fully populated, electrically verified module ready to drop into your pedal enclosure.
+Welcome to the YGN Effects Framework documentation\! This guide will walk you through every step of populating your pedal's Printed Circuit Board (PCB) with all its electronic components. To get started, we will be assembling the **Small IO Board**. It's a quick and simple build, making it the perfect introduction to the process.
 
-### Scope & Audience
-- **Who**: Makers, tinkerers, and boutique‑pedal enthusiasts who are comfortable with basic soldering but may be new to surface‑mount (SMT) work or the reflow process.
-- **What**: The procedure is *identical* across all YGN board sizes. To keep things quick and visual, we’ll demonstrate every step on a **small IO board**—the fastest variant to assemble—then note any size‑specific call‑outs along the way.
+The techniques and methods you learn here are universal across our entire range of PCBs. Whether you're building a simple fuzz or a complex digital effect, the core skills are exactly the same. Let's get our tools ready\!
 
-### SMT: Easier Than It Looks — and Why We Love It
+### A friendly note on SMT
 
-Surface-mount technology (SMT) can feel intimidating when you first see 0603 capacitors the size of a grain of pepper—but in practice it streamlines both **assembly** *and* **PCB design**:
+If you've only ever worked with larger, through-hole components, the idea of handling tiny Surface-Mount Technology (SMT) parts might seem a bit intimidating. But we're going to use a technique that makes it surprisingly simple: **hot plate reflow soldering**.
 
-| Why it’s simpler in the workshop | Why it’s tidier on the board |
-| --- | --- |
-| **One-step soldering** – Dab paste through a stencil, place all parts, then reflow once. No repeated heat cycles or board-flipping. | **More routing room** – Tiny footprints free up copper real-estate, so traces run direct and ground planes stay solid—great for low-noise audio. |
-| **Fast rework** – A quick blast of hot-air lifts most SMD parts cleanly; no solder-pump gymnastics. | **Shorter signal paths** – Components sit closer together, cutting parasitic inductance/capacitance that can dull high-end frequencies. |
-| **Fewer mechanical stresses** – No long leads acting as heat-sinks; joints cool evenly, so thermal-shock cracks are rare. | **Easier layer management** – Low-profile parts often let you keep all routing on one side and pour a continuous ground on the other. |
-| **Cleaner finish** – Excess paste is minimal and flux residue wipes off quickly—your board looks almost factory-made. | **Consistent part libraries** – Standard SMD packages mean well-vetted footprints in every open-source CAD tool. |
+This method involves applying solder paste with a stencil and letting a controlled heat source do all the work. It's an incredibly forgiving process, as the surface tension of the molten solder naturally pulls components into perfect alignment. We chose SMT for our framework because it allows for simpler, cleaner circuit routing. Best of all, this process results in a beautiful, professional-looking board that requires no cleaning and that can be easily reworked with a hot-air station.
 
-In short, once you’ve tried SMT you’ll wonder why you ever drilled hundreds of tiny holes. The **YGN Framework** leans on these advantages so hobbyists can get professional-grade results with nothing more exotic than a $40 hot plate and a steady hand.
+We'll guide you through each step. Take your time, and you'll be an SMT pro before you know it.
 
-### What You’ll Learn
-- **Reading YGN documentation**: BOM sheets, placement diagrams and open‑source CAD files.
-- **Preparing the board**: Stencil/jig setup and paste application best practices.
-- **Populating components**: Manual placement of the components.
-- **Soldering/Reflow**: Using a hot plate to reflow the board and thru hole components hand soldering.
-- **Inspection & Rework**: Visual QA checklist, common faults (bridging, tombstoning), and quick‑fix methods.
-- **Electrical test**: Power‑on checks and continuity tests.
+## Required Tools and Materials {#tools}
 
-By the end, you’ll have a proven workflow you can replicate on medium and large YGN boards—or any other DIY pedal PCB.
+Here is everything you'll need to assemble your PCB.
 
----
+  - **A YGN Effects PCB:** The foundation of your build\!
+  - **Solder Paste Stencil:** This is essential for applying the paste accurately. You can have one professionally fabricated using the Gerber files for your board, or you can mill your own by following our guide [here](https://www.google.com/search?q).
+  - **Solder Paste:** We highly recommend **Chipquik SMD291SNL50T3**. It's just great: it has a long shelf life, is perfectly usable even past its expiration date, doesn't need to be refrigerated and is truly "no-clean."
+  - **Squeegee:** You need something flat and firm to spread the paste. An old credit card works perfectly for this.
+  - **Stencil Jig:** Our custom-designed, 3D-printed stencil holder will make the process much easier.
+  - **Tweezers:** You'll need these to place the components. It's best to have a few different sizes and head types. Small, pointy tweezers are great for tiny resistors and capacitors, while larger ones can be better for handling ICs. Finding the right tweezers is a very personal choice and may take some trial and error.
+  - **Reflow Hot Plate:** This is what will heat the board and melt the solder. Many commercial and DIY versions are available in various sizes.
+  - **Isopropyl Alcohol (IPA) and Paper Towels:** For cleaning the stencil and any accidental messes.
 
-## 2. Tools & Consumables {#tools}
+## Applying the Solder Paste {#paste}
 
-Below is a quick‑glance checklist of everything you’ll want within arm’s reach before the paste hits the pads:
+With our workspace ready, it's time for the most crucial step. Take your time here—a good paste application makes the rest of the process a breeze.
 
-| Item | Purpose | YGN Notes |
-| --- | --- | --- |
-| **Blank PCB** | The canvas that holds your circuit. | This document applies to any typoe or size. |
-| **Stencil** | Deposits controlled volumes of solder‑paste in one shot. | Make your own or have it fabbed. Gerber files are included in every effect or project repo. |
-| **Solder paste** | Mix of solder balls and flux to join the SMD components to the board.| We use Chip Quik SMD291SNL50T3. No refrigeration required, works even months past its printed expiry and doesn't require cleanup. |
-| **Paste squeegee** | Spreads paste evenly across stencil apertures. | Any flexible plastic card works; keep one edge crisp and clean. |
-| **Stencil‑holder jig** | Locks PCB and stencil in perfect registration. | Use our 3D‑printed holders for all YGN boards sizes with alignment pins. |
-| **Tweezers** | Precise pickup & placement of components. | Fine‑point for 0603 passives; wider or angled for ICs. Personal preference matters—experiment! |
-| **Reflow hot plate** | Brings the whole board through the reflow curve evenly. | We use a stock budget 200 × 200 mm digital plate. Open‑source PID mods or alternatives abound if you want upgrades. |
+1. **Clean the board and stencil.** Before you begin, **give** the PCB and the stencil a quick wipe with Isopropyl Alcohol (IPA) and a paper towel. This removes any oils or dust and ensures the paste sticks only where it should.
+2. **Prepare the paste.** **Scoop** a small amount of solder paste out of its container and **spread** a thick line of it along one edge of your squeegee (e.g., a credit card). A toothpick or a small spatula works well for this.
+3. **Spread the paste.** **Press** the card flat against the stencil and **drag** it across the openings to fill them completely. Then, **make** another pass holding the card at a 45° angle. This scrapes the excess paste off the stencil and back onto your card. **Repeat** this process a few times to ensure every pad is perfectly filled.
+4. **Make a final pass.** **Perform** one last, clean pass at a 45° angle to remove as much excess paste from the stencil surface as possible.
+5. **Save the excess.** **Scrape** the remaining solder paste from your card and **return** it to the jar. A little goes a long way\!
+6. **Remove the stencil.** This is a key moment. **Lift** the stencil straight up off the PCB in one smooth, decisive motion. Avoid letting it slide, as this can smear the paste. The goal is a clean "pop-off" that leaves behind perfectly formed paste deposits.
+7. **Clean your tools.** Immediately **clean** your stencil and squeegee with IPA and paper towels. Dried solder paste is much harder to remove.
+8. **Inspect your work.** **Look** closely at the PCB. All the pads should be covered with a uniform, gray deposit of solder paste.
 
-Optional nice‑to‑haves
+> **Tip:** If some pads look thin or you see bridges between pads, don't worry\! You can simply place the PCB back in the jig, lay the stencil back on top (it should snap into place), and repeat the application process. The same "pop-on, pop-off" motion works wonders here.
 
-- **Magnifier or USB microscope**: for inspection, also useful to check the polarity on tiny diodes.
-- **Digital multimeter**: for power‑on checks.
-- **Isopropyl alcohol and paper towel**: solder paste can be messy.
+## Placing the Components {#placement}
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/board-assembly-smd/tools-stencil-holder.webp" alt="" class="doc-img quart">
-  <img src="/assets/images/docs/board-assembly-smd/tools-stencil-holder.webp" alt="" class="doc-img quart">
-  <img src="/assets/images/docs/board-assembly-smd/tools-stencil-holder.webp" alt="" class="doc-img quart">
-</div>
+This is where your circuit starts to come to life\! A bit of organization now will make the whole process much faster and more enjoyable.
 
----
+### Preparation is Key
 
-## 3. Paste Application {#paste}
+1. **Organize Your Components:** Working from cut tapes of tiny components is not practical. We strongly recommend a good storage system. There are many options, from simple trays to multi-drawer bins. We personally use and love the **AideTek BOX-ALL** system, with separate organizers for resistors, capacitors, ICs, etc. A neat, logical organization will significantly speed up your build.
+2. **Know What Goes Where:** While you can use the Bill of Materials (BOM) and the silk screen overlay on the PCB, the small size of the components can sometimes make the overlay hard to read. For a crystal-clear view, we recommend opening the **mechanical layer** file from the effect's repository. This file shows only the component outlines and their designators.
+  > **Tip:** Feel free to print this mechanical layer view and annotate it with component values. There's usually plenty of space, and it creates a perfect "map" for your build.
+3. **Clean Your Tweezers:** Your tweezers must be perfectly clean and have sharp, well-aligned tips. Tiny 0603 components are so light that any residue or slight deformation on the tweezer tips can cause the part to stick or be misplaced.
 
-Laying down perfect, even pads of solder paste is critical for them to wick up into smooth fillets during reflow.
+### The Placement Process
 
-1. **Prep & Clean**
-  - Secure the PCB in the jig. Ensure it sits flush with no wobble.
-  - Dampen a lint‑free wipe with IPA and **wipe both the board copper and the underside of the stencil** to remove fingerprints and dust. Allow to air‑dry (≈30 s).
-  - Stir the paste thoroughly for 2-3 minutes. It tends to dry up a bit when not refrigerated.
+1. **Place the components.** With your parts organized and your placement map ready, it's time to start. The general strategy is to work from the smallest components up to the largest.**Note:** Don't stress about getting the placement absolutely perfect\! The magic of the reflow process is that the surface tension of the molten solder (capillary action) will pull most components into precise alignment. Just get them reasonably centered on their pads.
 
-2. **Load the Squeegee**
-  - Scoop a pea‑sized blob of SMD291SNL50T3 and **smear it evenly along one edge of your credit card**—use a toothpick to get a continuous bead.
+    A good workflow is:
+      - **Start with 0603 resistors.** Pick one value (e.g., 10kΩ), and **place** all of them on the board. Move to the next value and repeat.
+      - **Move to 0603 capacitors.** Follow the same process.
+      - **Continue with larger passives** (0805, 1206, etc.).
+      - Next, **place** diodes and transistors, from smallest to largest. Pay close attention to their orientation\!
+      - Then, **place** the Integrated Circuits (ICs).
+      -  Finally, **place** the "big stuff" like electrolytic capacitors, relays, or other bulky parts.
 
-3. **Fill the Apertures**
-  - Holding the card **flat against the stencil**, slide it across the apertures with firm, even pressure. This forces paste into every cavity.
-  - Lift the card, **tilt it to ≈45° and slide it** along the same path. Excess paste jumps back onto the card edge.
-  - **Repeat flat‑then‑45° passes** 2–3 × until you see paste flush with the stencil surface and very little residue on top.
+## The Reflow Process {#reflow}
 
-4. **Recover & Tidy**
-  - Make one final **45° cleaning pass** to leave only a whisper‑thin film on the stencil.
-  - Scrape excess paste from the card back into the jar and close the lid.
+This is the magic moment where all the separate parts become one solid circuit.
 
-5. **Stencil Release**
-  - Gripping the stencil by its frame, **snap it upward in a single, quick “book‑opening” motion**—the hinge on the jig helps lift vertically first, then away. Aim for a smooth, decisive pop to avoid smearing.
+### Understanding the Reflow Profile
 
-6. **Clean‑Up**
-  - Swab the stencil and card with fresh IPA; dry with paper towel. Store the stencil flat.
+Solder paste manufacturers provide a "reflow profile," which is a graph of temperature over time. It's designed to ensure a strong and reliable solder joint.
+The process has three main stages:
 
-7. **Inspect & Re‑do if Needed**
-  - Hold the board under strong light or a microscope. **Every pad should have a neat, mesas‑flat deposit**—no bald spots, bridges, or smears.
-  - If you spot voids or over‑paste, it is possible to drop the stencil back into the jig and repeat the flat‑plus‑45° routine. Again, just aim for a smooth, precise and decisive pop on/off motion to avoid smearing.
+1. **Ramp-up (or Pre-heat):** The temperature slowly rises to activate the flux in the solder paste. The flux cleans the metal surfaces of the components and pads.
+2. **Soak:** The temperature is held steady. This allows the flux to spread and ensures the entire board and all its components reach a uniform temperature.
+3. **Reflow:** The temperature is quickly raised above the solder's melting point. The solder liquefies, flows, and forms permanent connections.
 
-> **Tip:** Work briskly but not frantically—the Chip Quik paste’s long open‑time means it won’t dry out mid‑session.
+We will follow this profile closely for the first two phases. For the final reflow phase, we'll rely on visual cues, as most hobbyist hot plates can't precisely match the steep temperature curves.
 
----
+### Let's Reflow\!
 
-## 4. Component Placement {#placement}
+1. **Prepare for landing.** Before you start heating, **plan** how you will remove the hot PCB from the plate. You'll need a tool (like flat pliers or sturdy tweezers) and a heat-resistant surface (like a piece of scrap wood or a copper sheet) for the board to cool on. **Rehearse** the motion of picking up the board and placing it on the cooling spot. The solder will be liquid, so a smooth, steady hand is crucial to avoid dislodging components.
+2. **Place the board.** **Gently place** your populated PCB in the center of the cold hot plate.
+3. **Ramp-up.** **Set** your hot plate to **150°C** and start a timer. **Wait** for approximately 90 seconds.
+4. **Soak.** **Increase** the temperature setting to **180°C**. **Wait** for another 90 seconds. During this phase, you'll see the solder paste change in appearance from a dull gray to a slightly shinier, wet look. You may also see a small amount of smoke as the flux and solvents activate and burn off. This is normal\!
+5. **Reflow\!** **Turn** the hot plate up to its maximum setting (e.g., **250°C**). Now, **watch** the board closely. As the temperature rises past \~240°C, the magic will happen. You'll see the solder paste instantly transform into shiny, liquid silver. **Wait** until you see this happen on every single pad. The pads for larger components (like electrolytic capacitors) will be the last to melt. Once everything is shiny, **execute** your plan: smoothly **lift** the board off the plate and **place** it on your cooling surface.
+6. **Inspect the joints.** After the board has cooled completely (wait at least 5-10 minutes), it's time to inspect your work. Grab a magnifier if you have one and look at the solder joints.
 
-Placing parts is mostly zen‑like repetition—but good **prep** separates a 15‑minute breeze from a 45‑minute slog.
+> **Tip:** A good SMT solder joint, called a "fillet," should be shiny and have a concave shape where the solder has wicked up from the pad onto the component's lead. This indicates a strong, reliable connection. Check for any bridges (solder connecting two pads that shouldn't be) or unsoldered pads.
 
-### Prep & Organization
+## Testing Your Board
 
-| Task | Why it matters | YGN Tips |
-| --- | --- | --- |
-| **Sort & store components** | Cut‑tape strips slide everywhere, waste bench space, and love to flip upside‑down. | We use **AideTek BOX‑ALL** organizers—one each for 0603‑1206 passives, electrolytics, ICs, etc. Any lidded SMD tray or bin works; the key is **one value per cell** so you can grab parts blindfolded. |
-| **Choose your reference** | Reading the tiny silkscreen is slow, and overlay labels are not always placed ideally. | In every YGN repo you’ll find a *mechanical‑layer* PDF—just outlines and designators. Print or view it full‑screen and annotate values with a pen or tablet. Faster than cross‑checking the BOM every part. |
-| **Fresh, sharp tweezers** | 0603 parts weigh milligrams; burrs or dried flux on the tips will make them stick or spring away. | Keep medium‑fine (​\#​3‑5) for 0603/0805 and a wider‑jaw pair for SOIC/QFN. Wipe with IPA before each session. |
+Once all the through-hole components (like headers and connectors) have been soldered, you're ready to power up the board and confirm everything is working correctly.
 
-### Placement Workflow
-
-1. **Start small, work up in size**
-   - 0603 resistors first: pick one value, place *all* of that value, then move to the next.
-   - Repeat for 0603 capacitors, then 0805 and 1206 parts.
-   - Move on to semi-conductors, diodes then transistors and ICs.
-   - Leave tall parts like electrolytic caps, relays and pin headers until last so they don’t shadow smaller footprints.
-2. **Don’t chase micron accuracy**
-   - Surface tension during reflow will pull most passives into perfect alignment. Aim to centre the part roughly within its pads; ±0.2 mm is plenty.
-3. **Tack tricky ICs**
-   - Lightly press a corner of an SOIC/QFN into the paste so it “sticks,” then align opposite corner. You can nudge parts with tweezers while the paste is still soft.
-4. **Quick visual pass**
-   - Before reflow, scan for tombstoned resistors or upside‑down diodes (use board overlay arrows). Fix now while paste is still wet.
-
-> **Tip:** If you drop a component into the wrong footprint, lift it straight up with tweezers—no sideways drag—or use a bit of Kapton tape to peel it off without smearing adjacent pads.
-
-> **Tip:** SMT is surprisingly forgiving. Worried that your 0603s aren’t pixel‑perfect? Relax—the reflow process will pull most parts into place as long as the paste was spread cleanly. Even fine‑pitch MSOP/TSSOP ICs tolerate slight offset or skew. So focus on consistent paste volume and you’ll be amazed how “self‑correcting” the process is.
-
----
-
-## 5. Board reflow {#reflow}
-
-Before we melt any metal, a quick primer: a standard reflow profile has **three main phases**—**Ramp-Up → Soak → Reflow**.
-Following the Chip Quik **SMD291SNL** curve for the first two phases lets the flux do its job; the last phase is mostly visual because our benchtop hot-plate can’t quite hit the datasheet’s 249 °C peak, especially that quickly.
-
-![Chip Quik recommended Sn-Pb profile](ae7da0c2-3f2f-431f-9bb5-0c6a7c5026e6.png)
-
-| Stage | Target Temp & Time | What’s happening |
-|-------|-------------------|------------------|
-| **Ramp-Up** | Room → 150 °C ≈ 90 s | Gentle warm-up drives off solvents without spatter. |
-| **Soak / Activation** | 150 → 180 °C ≈ 90 s | Flux activates, oxides dissolve, paste dulls and begins to “wet.” |
-| **Reflow (Liquidus)** | ≥ 217 °C for ≤ 30 s; practical peak ≈ 245 °C | Solder liquefies; surface tension pulls parts into perfect alignment. |
-
-> **Tip:** Most hobby hot-plates top out at ~245 °C. That’s fine: once every pad flashes from matte grey to mirror-bright, you’re done. Trust your eyes more than the display.
-
-### Gear & Prep
-- **Board lifter:** Flat or duck-bill tweezers let you pinch the PCB edge without crushing parts. Rehearse the pickup while everything’s cold.
-- **Cooling pad:** A piece of copper or thick aluminum sinks heat fast so components don’t “tombstone” while cooling.
-- **Landing zone:** Keep a clear, clutter-free spot to drop the hot board—liquid solder is slippery!
-
-### Step-by-Step
-
-1. **Place the board**
-  - Center it on the hot-plate, parts face up.
-2. **Pre-heat – 150 °C / ≈ 90 s**
-  - Dial the plate to 150 °C. Paste softens but stays grey.
-3. **Soak – 180 °C / ≈ 90 s**
-  - Bump to 180 °C. You’ll see a wisp of smoke as flux activates.
-4. **Reflow – 250 °C set-point**
-  - Crank to 250 °C; surface thermocouples usually read 240–245 °C. Watch: joints turn shiny in rapid succession. The **largest pads** (usually electrolytics) are your tell—once they’ve flowed, **kill the heat**.
-5. **Lift & cool**
-  - In one smooth, hinge-like motion, slide tweezers under a corner, lift straight up, and place the board on the copper slab to cool. Avoid tilting—liquid solder will let parts skate.
-
-### Inspecting the Joints
-
-A proper SMT fillet forms a smooth, concave meniscus that wets both the **land** and the **component termination**:
-
-![Good SMT fillet](93a9a325-5d6f-498d-891a-882cace96903.gif)
-
-Look for:
-
-* **Smooth, concave meniscus**. A dull, grainy surface hints at a cold joint.
-* **Even height** on both sides of each passive. One tall / one thin leg signals tombstoning risk.
-* **No bridging** between adjacent leads.
-
-If you spot a bridge or an incompletely-wetted pad, don’t panic—add a touch of flux and hit it with a quick hot-air pass.
-
----
-
-## 6. Power-On & Functional Tests {#tests}
-
-Once the through-hole parts are soldered and the board has cooled, it’s time to **prove the build**.
-Every YGN PCB ships with clearly labeled **TP\_x** markers in the silkscreen *and* a companion **_test-points.pdf_** inside the repo’s *fabrication-output* folder (right next to the mechanical-layer drawing). The PDF lists each point’s nominal voltage or waveform so you can tick them off one by one.
-
-### Pre-Power Sanity Checks
-
-| Check | How | Pass / Fail |
-|-------|-----|-------------|
-| **Supply rail ≠ GND** | DMM in continuity mode between V\+ and GND. | **Open** (no beep) |
-| **No solder bridges** | 10× loupe or USB microscope around IC pins & switch lugs. | No unintended shorts |
-| **Polarity parts installed correctly** | Visual: electrolytics, diodes, IC notch/dot. | Orientation matches overlay |
-
-### Initial Power-On
-
-1. **Bench supply** → current-limit to ~50 mA.
-2. Clip the **– lead** to any of the **untented edge-vias**—they’re tied to the internal ground-plane and make a rock-solid COM anchor.
-3. Apply the rated voltage (e.g., +9 V).
-4. Verify inrush current stays below the limit.
-
-### Probe the Test Points
-
-Some examples :
-
-| TP label | Expected | Notes |
-|----------|----------|-------|
-| **TP\_5V** | 4.85 – 5.10 V | LDO output; should be steady within ±2 %. |
-| **TP\_VB** | ≈ ½ VCC (bias) | Audio mid-rail; tolerance ±100 mV. |
-| **TP\_IN** | Bypass cap-coupled | Inject 100 mVrms, 1 kHz and scope for clean sine. |
-| *(etc.)* | *see repo PDF* |  |
-
-### Signal & Functional Tests
-1. **Audio pass-through:** Feed a guitar-level sine and listen/ scope the output—no crackles or dropouts.
-2. **Control sweep:** Rotate each pot / flip each switch while watching the output amplitude/frequency response.
-3. **LED & relay check:** Confirm status LED toggles and relay clicks (if fitted) on effect/bypass change.
-
----
-
-🎉 **If every TP lands inside its spec and the audio test sounds clean—you’re done!**
+1. **Locate the Test Points:** The PCB has several designated test points, clearly labeled on the silkscreen overlay (e.g., "TP1", "TP2").
+2. **Find the Expected Values:** To know what you're looking for, refer to the **Test Points document** located in the fabrication output folder within each effect's repository. This document lists each test point and its expected voltage or behavior.
+3. **Measure the Voltages:** Power up the board. To take a measurement, you'll need a multimeter. All of the un-tented vias (the small, exposed copper holes) running along the edges of the board are connected to the ground plane. These make a perfect, stable anchor point for the black COM probe of your multimeter. **Touch** the red probe to each test point and **compare** the reading on your multimeter to the value listed in the documentation. If everything matches, congratulations on a successful build\!
