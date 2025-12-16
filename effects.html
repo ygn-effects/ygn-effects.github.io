@@ -1,52 +1,58 @@
 ---
 layout: default
-permalink: /effects/
+title: Reference Designs
 ---
 
-<!-- Title container -->
-<div class="container mt-4">
-  <!-- Title -->
-  <div class="hero-200 parallax" style="background-image: url('/assets/images/hero-400.png');">
-    <div class="hero-content">
-      <h1 class="mb-3">Blah blah blah discover our effects</h1>
-      <h4>More blah blah blah this stuff is so amazing it's crazy.</h4>
-    </div>
-  </div>
-  <!-- Title -->
-</div>
-<!-- Title container -->
-
-<!-- Effects cards container -->
-<div class="container effects-list">
-  {% assign categories = site.effects | map: 'category' | uniq %}
-  {% for category in categories %}
-    <!-- Category header -->
-    <div class="row">
-      <div class="col-12">
-        <h2 class="effect-section-title">{{ category }}</h2>
+<section class="page-header">
+  <div class="container">
+    <div class="hero-200">
+      <div class="hero-content">
+        <h1>Reference Designs</h1>
+        <p>Proven effect circuits built on the YGN Framework</p>
       </div>
     </div>
-    <!-- Category header -->
+  </div>
+</section>
 
-    <!-- Cards -->
-    <div class="row effect-section">
-      {% for effect in site.effects %}
-        {% if effect.category == category %}
-          <!-- Card -->
-          <div class="col-md-4">
-            <a class="card" href="{{ effect.permalink }}">
-              <img src="{{ effect.images.card }}" alt="{{ effect.title }}" class="card-img-top card-img-effect">
-              <div class="card-body">
-                <h5 class="card-title">{{ effect.title }}</h5>
-                <p class="card-text">{{ effect.excerpt }}</p>
+<section class="effects-list">
+  <div class="container">
+    <div class="row g-4">
+      {% assign all_effects = site.effects | where_exp: "effect", "effect.draft != true" | sort: 'date' | reverse %}
+
+      {% if all_effects.size > 0 %}
+        {% for effect in all_effects %}
+        <div class="col-md-6 col-lg-4">
+          <a href="{{ effect.url }}" class="reference-card-link">
+            <div class="reference-card-list">
+              <div class="reference-image" style="background-image: url('{{ effect.images.card }}');"></div>
+              <div class="reference-body">
+                <span class="reference-category">{{ effect.category }}</span>
+                <h3 class="reference-title">{{ effect.title }}</h3>
+                <p class="reference-excerpt">{{ effect.excerpt }}</p>
               </div>
-            </a>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12">
+          <div class="coming-soon-card">
+            <i class="fas fa-tools"></i>
+            <h3>Designs Coming Soon</h3>
+            <p>Reference designs are currently in development and will be published as they're completed.</p>
           </div>
-          <!-- Card -->
-        {% endif %}
-      {% endfor %}
+        </div>
+      {% endif %}
     </div>
-    <!-- Cards -->
-  {% endfor %}
-</div>
-<!-- Effects cards container -->
+
+    {% if all_effects.size > 0 %}
+    <div class="mt-5 text-center">
+      <div class="alert alert-info d-inline-block">
+        <i class="fas fa-info-circle me-2"></i>
+        All design files, schematics, and BOMs are available in the
+        <a href="https://github.com/ygn-effects" target="_blank">GitHub repository</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>

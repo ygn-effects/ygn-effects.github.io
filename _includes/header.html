@@ -1,49 +1,35 @@
-  <header>
-    <!-- Navbar container -->
-    <div class="container mt-3">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg sticky-top navbar-dark rounded-9 shadow-2-strong">
-        <!-- Container wrapper -->
-        <div class="container-fluid">
-          <!-- Toggle button -->
-          <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
-            <i class="fas fa-bars"></i>
-          </button>
+<header>
+  <div class="container mt-3">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <a class="navbar-brand" href="/">
+          <img src="{{ '/assets/images/logo.png' | relative_url }}" height="35" alt="YGN Effects Logo"/>
+        </a>
 
-          <!-- Collapsible wrapper -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Navbar brand -->
-            <div class="navbar-brand mt-1 mb-1 ms-3">
-              <!-- Logo -->
-              <img src="{{ '/assets/images/logo.png' | relative_url }}" height="35" alt="YGN Logo"/>
-              <!-- Logo -->
-            </div>
-            <!-- Navbar brand -->
+        <!-- Toggle button for mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mt-1 mb-1">
-              {% for entry in site.data.navigation %}
-                <li class="nav-item ms-1 me-1 mb-1 mt-1">
-                  <a class="nav-link ps-3 pe-3 rounded-9 {% if entry.url == page.url %}active shadow-2-strong{% endif %}" href="{{ entry.url }}">{{ entry.title }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-            <!-- Left links -->
-          </div>
-          <!-- Collapsible wrapper -->
+        <!-- Navigation links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            {% for entry in site.data.navigation %}
+            <li class="nav-item">
+              <a class="nav-link {% if entry.url == page.url %}active{% endif %}" href="{{ entry.url }}">{{ entry.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
 
-          <!-- Right elements -->
-          <div class="d-flex align-items-center">
-            <!-- Icon -->
-            <a class="ms-3 me-3" href="#">
-              <i class="fa-brands fa-github nav-link"></i>
+          <!-- GitHub link -->
+          <div class="d-flex">
+            <a class="nav-link" href="https://github.com/ygn-effects" target="_blank" aria-label="GitHub">
+              <i class="fab fa-github fa-lg"></i>
             </a>
           </div>
-          <!-- Right elements -->
         </div>
-        <!-- Container wrapper -->
-      </nav>
-      <!-- Navbar -->
-    </div>
-    <!-- Navbar container -->
-  </header>
+      </div>
+    </nav>
+  </div>
+</header>

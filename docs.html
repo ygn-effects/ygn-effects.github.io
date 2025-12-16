@@ -1,51 +1,111 @@
 ---
 layout: default
-permalink: /docs/
+title: Documentation
 ---
 
-<!-- Title container -->
-<div class="container mt-4">
-  <!-- Title -->
-  <div class="hero-200 parallax" style="background-image: url('/assets/images/hero-400.png');">
-    <div class="hero-content">
-      <h1 class="mb-3">Blah blah blah check out our docs</h1>
-      <h4>More blah blah blah this stuff is so amazing it's crazy.</h4>
-    </div>
-  </div>
-  <!-- Title -->
-</div>
-<!-- Title container -->
-
-<!-- Effects cards container -->
-<div class="container docs-list">
-  {% assign topics = site.docs | map: 'topic' | uniq %}
-  {% for topic in topics %}
-    <!-- Category header -->
-    <div class="row">
-      <div class="col-12">
-        <h2 class="doc-section-title">{{ topic }}</h2>
+<section class="page-header">
+  <div class="container">
+    <div class="hero-200">
+      <div class="hero-content">
+        <h1>Documentation</h1>
+        <p>Guides and tutorials for building with the YGN Framework</p>
       </div>
     </div>
-    <!-- Category header -->
+  </div>
+</section>
 
-    <!-- Cards -->
-    <div class="row doc-section">
-      {% for doc in site.docs %}
-        {% if doc.topic == topic %}
-          <!-- Card -->
-          <div class="col-md-4">
-            <a class="card" href="{{ doc.permalink }}">
-              <div class="card-body">
-                <h5 class="card-title">{{ doc.title }}</h5>
-                <p class="card-text">{{ doc.excerpt }}</p>
+<section class="docs-list">
+  <div class="container">
+    <!-- Group docs by topic -->
+    {% assign topics = site.docs | map: 'topic' | uniq | sort %}
+
+    {% for topic in topics %}
+      <div class="docs-topic-section mb-5">
+        <h2 class="section-title text-start">{{ topic }}</h2>
+
+        <div class="row g-4">
+          {% assign topic_docs = site.docs | where: 'topic', topic | sort: 'updated' | reverse %}
+          {% for doc in topic_docs %}
+          <div class="col-md-6 col-lg-4">
+            <a href="{{ doc.url }}" class="doc-card-link">
+              <div class="doc-card">
+                <div class="doc-card-header">
+                  <span class="doc-card-topic">{{ doc.topic }}</span>
+                  <span class="doc-card-date">{{ doc.updated | date: "%b %Y" }}</span>
+                </div>
+                <h3 class="doc-card-title">{{ doc.title }}</h3>
+                <p class="doc-card-excerpt">{{ doc.excerpt }}</p>
+                <div class="doc-card-tags">
+                  {% for tag in doc.tags limit: 4 %}
+                  <span class="doc-card-tag">{{ tag }}</span>
+                  {% endfor %}
+                </div>
               </div>
             </a>
           </div>
-          <!-- Card -->
-        {% endif %}
-      {% endfor %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+
+    {% if site.docs.size == 0 %}
+    <div class="coming-soon-card">
+      <i class="fas fa-book"></i>
+      <h3>Documentation Coming Soon</h3>
+      <p>Comprehensive guides are currently being written and will be published as they're completed.</p>
     </div>
-    <!-- Cards -->
-  {% endfor %}
-</div>
-<!-- Effects cards container -->
+    {% endif %}
+  </div>
+</section>
+
+<section class="docs-contribute">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="contribute-card">
+          <h2>Contribute to Documentation</h2>
+          <p>Found an error or want to improve a guide? All documentation is open-source and contributions are welcome!</p>
+          <a href="https://github.com/ygn-effects/ygn-effects.github.io" target="_blank" class="btn btn-primary">
+            <i class="fab fa-github me-2"></i>Contribute on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.page-header {
+  padding: 2rem 0;
+}
+
+.docs-list {
+  padding: 4rem 0;
+}
+
+.docs-topic-section {
+  margin-bottom: 4rem;
+}
+
+.docs-contribute {
+  padding: 4rem 0;
+  background: var(--ygn-surface-0);
+}
+
+.contribute-card {
+  background: var(--ygn-bg);
+  padding: 3rem;
+  border-radius: var(--ygn-radius);
+  box-shadow: var(--ygn-shadow);
+  text-align: center;
+}
+
+.contribute-card h2 {
+  margin-bottom: 1rem;
+}
+
+.contribute-card p {
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+</style>

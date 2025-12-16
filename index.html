@@ -2,170 +2,170 @@
 layout: default
 ---
 
-<!-- Hero container -->
-<div class="container mt-4">
-  <!-- Background image -->
-  <div class="hero-300 parallax" style="background-image: url('/assets/images/hero-400.png');">
-    <!-- Text container -->
-    <div class="hero-content">
-      <h1 class="mb-3">Tone, Tweaked by You: The Open-Source Way</h1>
-      <h4 class="mb-5">Your tone, your rules - because great sound should be open to all.</h4>
-      <!-- Buttons container -->
-      <div class="button-container">
-        <a class="btn btn-primary btn-lg me-4" href="#!" role="button">Start Building Now</a>
-        <a class="btn btn-secondary btn-lg" href="#!" role="button">Why Open Source?</a>
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content-wrapper">
+      <div class="hero-text">
+        <h1 class="hero-title">Build Professional Guitar Effects</h1>
+        <p class="hero-subtitle">Complete open-source hardware framework for DIY pedal builders</p>
+        <div class="hero-buttons">
+          <a href="/docs/" class="btn btn-primary btn-lg">Browse Documentation</a>
+          <a href="#platform" class="btn btn-secondary btn-lg">Learn More</a>
+        </div>
       </div>
-      <!-- Buttons container -->
-    </div>
-    <!-- Text container -->
-  </div>
-  <!-- Background image -->
-</div>
-<!-- Hero container -->
-
-<!-- News cards container -->
-<div class="container news-list">
-  <!-- Header -->
-  <div class="row">
-    <div class="col-12">
-      <h2 class="effect-section-title">News & Launches</h2>
     </div>
   </div>
-  <!-- Header -->
+</section>
 
-  <!-- Cards -->
-  {% assign latest_effects = site.effects | sort: 'date' | reverse %}
-  <div class="row">
-    {% for effect in latest_effects limit: 3 %}
-      <!-- Card -->
+<!-- Platform Overview Section -->
+<section id="platform" class="platform-section">
+  <div class="container">
+    <h2 class="section-title">The YGN Framework</h2>
+    <p class="section-subtitle">A complete hardware ecosystem for building guitar effects pedals</p>
+
+    <div class="row g-4">
+      <!-- PCB Framework Card -->
       <div class="col-md-4">
-        <div class="card">
-          <img src="/assets/images/card-news-3.png" class="card-img-news" alt="Abstract stompbox image"/>
-          <div class="card-body">
-            <h5 class="card-title">{{ effect.title }}</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <div class="platform-card">
+          <div class="platform-icon">
+            <i class="fas fa-microchip"></i>
+          </div>
+          <h3>PCB Framework</h3>
+          <p>Modular board designs with standardized IO, power management, and mounting. All circuits fully documented with schematics and BOMs.</p>
+          <ul class="platform-features">
+            <li>Three board sizes (S/M/L)</li>
+            <li>Unified IO board system</li>
+            <li>SMT-optimized layouts</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Enclosures Card -->
+      <div class="col-md-4">
+        <div class="platform-card">
+          <div class="platform-icon">
+            <i class="fas fa-cube"></i>
+          </div>
+          <h3>Enclosures</h3>
+          <p>Precision-milled aluminum enclosures designed to fit the PCB framework. CNC files and 3D models included for DIY fabrication.</p>
+          <ul class="platform-features">
+            <li>Hammond 1590-compatible</li>
+            <li>FreeCAD source files</li>
+            <li>CNC toolpath included</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Firmware Card -->
+      <div class="col-md-4">
+        <div class="platform-card">
+          <div class="platform-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3>Firmware</h3>
+          <p>Pre-compiled firmware for relay switching, LED control, and power-on state management. Simple one-command flashing.</p>
+          <ul class="platform-features">
+            <li>ATTiny-based control</li>
+            <li>True bypass switching</li>
+            <li>Configurable behavior</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reference Designs Section -->
+<section class="reference-section">
+  <div class="container">
+    <h2 class="section-title">Reference Designs</h2>
+    <p class="section-subtitle">Proven effect circuits built on the YGN Framework</p>
+
+    <div class="row g-4">
+      {% assign published_effects = site.effects | where_exp: "effect", "effect.draft != true" | sort: 'date' | reverse %}
+      {% if published_effects.size > 0 %}
+        {% for effect in published_effects %}
+        <div class="col-md-6 col-lg-4">
+          <a href="{{ effect.url }}" class="reference-card-link">
+            <div class="reference-card">
+              <div class="reference-image" style="background-image: url('{{ effect.images.card }}');"></div>
+              <div class="reference-body">
+                <span class="reference-category">{{ effect.category }}</span>
+                <h3 class="reference-title">{{ effect.title }}</h3>
+                <p class="reference-excerpt">{{ effect.excerpt }}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12">
+          <div class="coming-soon-card">
+            <i class="fas fa-tools"></i>
+            <h3>More Designs Coming Soon</h3>
+            <p>Additional reference designs are currently in development and will be published as they're completed.</p>
           </div>
         </div>
-      </div>
-      <!-- Card -->
-    {% endfor %}
-  </div>
-  <!-- Cards -->
-</div>
-<!-- News cards container -->
-
-<!-- Docs updates container -->
-<div class="container news-list">
-  <!-- Header -->
-  <div class="row">
-    <div class="col-12">
-      <h2 class="effect-section-title">Documentation Updates</h2>
+      {% endif %}
     </div>
   </div>
-  <!-- Header -->
+</section>
 
-  <!-- Cards -->
-  <div class="row">
-    <!-- Card 1 -->
-    <div class="col-md-4">
-      <div class="card">
-        <img src="{{ '/assets/images/card-docs-5.png' | relative_url }}" class="card-img-top card-img-news" alt="Abstract stompbox image"/>
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
+<!-- Documentation Section -->
+<section class="documentation-section">
+  <div class="container">
+    <h2 class="section-title">Latest Documentation</h2>
+    <p class="section-subtitle">Step-by-step guides for building with the YGN Framework</p>
+
+    <div class="row g-4">
+      {% assign latest_docs = site.docs | sort: 'updated' | reverse | limit: 3 %}
+      {% for doc in latest_docs %}
+      <div class="col-md-4">
+        <a href="{{ doc.url }}" class="doc-card-link">
+          <div class="doc-card">
+            <div class="doc-card-header">
+              <span class="doc-card-topic">{{ doc.topic }}</span>
+              <span class="doc-card-date">{{ doc.updated | date: "%b %Y" }}</span>
+            </div>
+            <h3 class="doc-card-title">{{ doc.title }}</h3>
+            <p class="doc-card-excerpt">{{ doc.excerpt }}</p>
+            <div class="doc-card-tags">
+              {% for tag in doc.tags limit: 3 %}
+              <span class="doc-card-tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        </a>
       </div>
+      {% endfor %}
     </div>
-    <!-- Card 1 -->
 
-    <!-- Card 2 -->
-    <div class="col-md-4">
-      <div class="card">
-        <img src="{{ '/assets/images/card-docs-4.png' | relative_url }}" class="card-img-top card-img-news" alt="Abstract stompbox image"/>
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-    <!-- Card 2 -->
-
-    <!-- Card 3 -->
-    <div class="col-md-4">
-      <div class="card">
-        <img src="{{ '/assets/images/card-docs-7.png' | relative_url }}" class="card-img-top card-img-news" alt="Abstract stompbox image"/>
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-    <!-- Card 3 -->
-  </div>
-  <!-- Cards -->
-</div>
-<!-- Docs updates container -->
-
-<!-- Resources container -->
-<div class="container resources-list">
-  <!-- Header -->
-  <div class="row">
-    <div class="col-12">
-      <h2 class="effect-section-title">Resources</h2>
+    <div class="text-center mt-4">
+      <a href="/docs.html" class="btn btn-primary">View All Documentation</a>
     </div>
   </div>
-  <!-- Header -->
+</section>
 
-  <!-- Cards line 1 -->
-  <div class="row resource-section">
-    <!-- Card 1 -->
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
+<!-- Open Source Section -->
+<section class="opensource-section">
+  <div class="container">
+    <div class="opensource-content">
+      <div class="opensource-icon">
+        <i class="fab fa-github"></i>
+      </div>
+      <h2>Fully Open Source</h2>
+      <p>All schematics, PCB layouts, firmware source code, and CAD files are available on GitHub under permissive licenses.</p>
+      <div class="opensource-buttons">
+        <a href="https://github.com/ygn-effects" class="btn btn-primary btn-lg" target="_blank">
+          <i class="fab fa-github me-2"></i>View on GitHub
+        </a>
+      </div>
+      <div class="opensource-badges">
+        <span class="badge">Hardware: CERN-OHL-S</span>
+        <span class="badge">Software: MIT</span>
+        <span class="badge">Docs: CC BY-SA 4.0</span>
       </div>
     </div>
-    <!-- Card 1 -->
-
-    <!-- Card 2 -->
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-    <!-- Card 2 -->
   </div>
-  <!-- Cards line 1 -->
-
-  <!-- Cards line 2 -->
-  <div class="row">
-    <!-- Card 1 -->
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-    <!-- Card 1 -->
-
-    <!-- Card 2 -->
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-    <!-- Card 2 -->
-  </div>
-  <!-- Cards line 2 -->
-</div>
-<!-- Resources container -->
+</section>
