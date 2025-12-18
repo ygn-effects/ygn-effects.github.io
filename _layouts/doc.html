@@ -32,7 +32,7 @@ layout: default
   <div class="doc-wrapper">
     <div class="container">
       <div class="doc-layout">
-        
+
         <!-- Table of Contents -->
         {% if page.toc %}
         <aside class="doc-sidebar">
@@ -60,7 +60,7 @@ layout: default
             <div class="doc-footer-card">
               <h3>Found an Issue?</h3>
               <p>Help improve this documentation by reporting errors or suggesting improvements.</p>
-              <a href="https://github.com/ygn-effects/ygn-effects.github.io/issues" target="_blank" class="btn btn-secondary">
+              <a href="https://github.com/ygn-effects/ygn-effects.github.io/issues" target="_blank" class="btn btn-primary">
                 <i class="fab fa-github me-2"></i>Report on GitHub
               </a>
             </div>
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Active section highlighting
   if (content && tocLinks.length > 0) {
     const headings = content.querySelectorAll('h2[id]');
-    
+
     if (headings.length > 0) {
       const observer = new IntersectionObserver(
         (entries) => {
