@@ -260,6 +260,15 @@ a.ygn-card:hover {
 }
 
 /* =========================================
+  Effect details Specifics
+========================================= */
+.effect-story blockquote {
+  border-left: 3px solid var(--ygn-secondary);
+  padding: 1rem;
+  font-style: italic;
+}
+
+/* =========================================
   Documentation Specifics
 ========================================= */
 .doc-content h2 {

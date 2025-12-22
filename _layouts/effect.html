@@ -32,7 +32,7 @@ layout: default
           </div>
           {% endif %}
           <div class="col-md-{% if page.images.story_1 %}8{% else %}12{% endif %}">
-            <div class="doc-content">
+            <div class="effect-story">
               {{ page.story }}
             </div>
           </div>
@@ -131,25 +131,27 @@ layout: default
       <div class="row g-4">
         <div class="col-md-4">
           <div class="ygn-card text-center p-4">
+            {% assign hardware = page.resources | where:"name", "hardware"  | first %}
             <i class="fab fa-github display-5 text-secondary mb-3"></i>
             <h4 class="h5">Hardware Files</h4>
-            <p class="small opacity-75">Schematics, PCB layouts, and Gerbers</p>
-            <a href="https://github.com/ygn-effects" class="btn btn-sm btn-secondary" target="_blank">View Repository</a>
+            <p class="small opacity-75">Schematics, PCB layouts, BOM and Gerbers</p>
+            <a href="{{ hardware.url }}" class="btn btn-sm btn-secondary" target="_blank">View Repository</a>
           </div>
         </div>
         <div class="col-md-4">
           <div class="ygn-card text-center p-4">
+            {% assign firmware = page.resources | where:"name", "firmware"  | first %}
             <i class="fas fa-microchip display-5 text-secondary mb-3"></i>
             <h4 class="h5">Firmware</h4>
             <p class="small opacity-75">Pre-compiled hex files and source code</p>
-            <a href="/docs/io-board-firmware-flashing/" class="btn btn-sm btn-secondary">Flashing Guide</a>
+            <a href="{{ firmware.url }}" class="btn btn-sm btn-secondary">Flashing Guide</a>
           </div>
         </div>
         <div class="col-md-4">
           <div class="ygn-card text-center p-4">
             <i class="fas fa-list display-5 text-secondary mb-3"></i>
             <h4 class="h5">BOM & Build</h4>
-            <p class="small opacity-75">Complete parts list and assembly docs</p>
+            <p class="small opacity-75">Complete assembly docs</p>
             <a href="/docs/smd-pcb-assembly/" class="btn btn-sm btn-secondary">Assembly Guide</a>
           </div>
         </div>
