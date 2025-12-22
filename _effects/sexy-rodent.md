@@ -15,9 +15,9 @@ images:
   ioboard: /assets/images/effects/sexy-rodent/ioboard.png
 
 story: |
-  I could bore you to death with an history lesson on the Rat, its many incarnations and all its legendary users but, for that, there’s Wikipedia. Instead, you’ll find below an excerpt from Art Thompson’s book “The Stompbox: (…)” that can be found on pages 125-126. The quoted text is from Scott Burnham, designer of the Rat:<br>
+  I could bore you to death with an history lesson on the Rat, its many incarnations and all its legendary users but, for that, there’s Wikipedia. Instead, you’ll find below an excerpt from Art Thompson’s book “The Stompbox: (…)” that can be found on pages 125-126. The quoted text is from Scott Burnham, designer of the Rat:<br><br>
 
-  <blockquote class="quote">
+  <blockquote>
     I was dabbling in modifying pedals, trying to come up with something of my own because I didn’t really like anything that was out there. I liked bits and pieces of different things. The idea for the Rat was to have an input buffer first, then an op-amp to crank it way up. The signal would then be rammed across a couple of parallel diodes that clipped the hell of out it, then sent it through a FET to smooth things out.<br><br>
     I had the basic circuit roughed together and i’d found an op-amp I liked, the LM308N, which was an instrumentation amp used for seismic and medical sensors. I was experimenting with an EQ boost for this op-amp in order to pre-boost the treble so I could use just a passive tone control to cut back the highs. I was bypassing the voltage divider that sets the gain I picked up a resistor, looked at it and thought to myself, “Yellow, violet, brown - thats 470ohm.” I plugged it in expecting to get about 50dB of gain, but when I picked up my strat and hit a string , it went wooooo. I thought, “Holy shit, this is cool. What did I do?”<br><br>
     I looked real closely and realised that I’d plugged a 47ohm resistor instead of a 470ohm resistor. That meant it had somewhere around 70db of gain, which, according to it’s spec sheet was impossible from that op-amp. Trying to set the gain on this thing I had stumbled across a combination of resistors that produced this really weird high-frequency shelving boost that the op-amp couldn’t possibly sustain. It didn’t have enough slew rate to produce that much gain at those frequencies so it drove the op-amp into incredible slewing distortion. This usually is very bad, but in this case it gave the Rat it’s yeowl - I’ve never heard any other stompbox make that sound.”
@@ -62,4 +62,10 @@ tips:
   - name: Stacking
     desc: |
       Hell yeah, the Sexy Rodent loves stacking! Put a mid-hump pedal (Tube Screamer, Blues Breaker...) in front of it to tighten up that low end even more. Stack it into some kind of MIAB to add its signature to your sound, use it as an overdrive in front a mid-scooped Fuzz (any kind of Big Muff)... The possibilities are endless!
+
+resources:
+  - name: hardware
+    url: https://github.com/ygn-effects/effect-sexy-rodent/tree/main/pcb
+  - name: firmware
+    url: https://github.com/ygn-effects/effect-sexy-rodent/tree/main/firmware
 ---
