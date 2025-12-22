@@ -35,7 +35,7 @@
   --bs-secondary-rgb: 103, 58, 183;
 
   --bs-link-color: var(--ygn-primary);
-  --bs-link-hover-color: var(--ygn-primary-dark)
+  --bs-link-hover-color: var(--ygn-primary-dark);
 
   --bs-border-radius: var(--ygn-radius);
   --bs-border-radius-lg: 2rem;
@@ -78,7 +78,7 @@ a.ygn-card {
 
 a.ygn-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--ygn-on-surface);
+  box-shadow: var(--ygn-shadow-lg);
   background-color: var(--ygn-surface-highlight);
 }
 
