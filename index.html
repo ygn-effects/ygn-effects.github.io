@@ -146,7 +146,7 @@ layout: default
           <div class="ygn-card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
               <span class="ygn-tag">{{ doc.topic }}</span>
-              <span class="small text-muted">{{ doc.updated | date: "%b %Y" }}</span>
+              <span class="small opacity-75">{{ doc.updated | date: "%b %Y" }}</span>
             </div>
             <h3 class="h4 mb-2">{{ doc.title }}</h3>
             <p class="small opacity-75 mb-3 flex-grow-1">{{ doc.excerpt }}</p>
@@ -182,9 +182,9 @@ layout: default
         </a>
       </div>
       <div class="d-flex justify-content-center gap-3 flex-wrap">
-        <span class="badge bg-secondary">Hardware: CERN-OHL-S</span>
-        <span class="badge bg-secondary">Software: MIT</span>
-        <span class="badge bg-secondary">Docs: CC BY-SA 4.0</span>
+        <span class="ygn-tag">Hardware: CERN-OHL-S</span>
+        <span class="ygn-tag">Software: MIT</span>
+        <span class="ygn-tag">Docs: CC BY-SA 4.0</span>
       </div>
     </div>
   </div>

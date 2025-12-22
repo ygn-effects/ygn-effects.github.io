@@ -61,7 +61,7 @@ h1, h2, h3, h4, h5, h6 {
 .ygn-card {
   background-color: var(--ygn-surface);
   border: none;
-  border-radius: var(--bs-border-radius);
+  border-radius: var(--ygn-radius);
   box-shadow: var(--ygn-shadow);
   transition: transform var(--ygn-dur) var(--ygn-ease), box-shadow var(--ygn-dur) var(--ygn-ease), background-color var(--ygn-dur);
   height: 100%;
@@ -78,7 +78,7 @@ a.ygn-card {
 
 a.ygn-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--ygn-shadow-lg);
+  box-shadow: var(--ygn-on-surface);
   background-color: var(--ygn-surface-highlight);
 }
 
@@ -102,7 +102,7 @@ a.ygn-card:hover {
 .ygn-hero {
   position: relative;
   background: linear-gradient(135deg, var(--ygn-surface) 0%, var(--ygn-bg) 100%);
-  border-radius: var(--bs-border-radius);
+  border-radius: var(--ygn-radius);
   padding: 4rem 2rem;
   margin-bottom: 3rem;
   overflow: hidden;
@@ -154,7 +154,7 @@ a.ygn-card:hover {
 .navbar {
   background-color: var(--ygn-surface);
   box-shadow: var(--ygn-shadow);
-  border-radius: var(--bs-border-radius);
+  border-radius: var(--ygn-radius);
   padding: 0.75rem 1rem;
 }
 
@@ -163,7 +163,7 @@ a.ygn-card:hover {
 }
 
 .nav-link {
-  border-radius: var(--bs-border-radius);
+  border-radius: var(--ygn-radius);
   transition: all var(--ygn-dur);
   padding: 0.5rem 1rem !important;
   margin: 0 0.25rem;
@@ -176,6 +176,7 @@ a.ygn-card:hover {
 
 .nav-link.active:hover {
   background-color: var(--ygn-primary-dark);
+  color: var(--ygn-on-primary) !important;
 }
 
 .nav-link:hover {
@@ -190,6 +191,7 @@ a.ygn-card:hover {
   padding: 0.75rem 1.5rem;
   font-weight: 600;
   box-shadow: var(--ygn-shadow);
+  border-radius: var(--ygn-radius);
   border: none;
 }
 
@@ -204,7 +206,7 @@ a.ygn-card:hover {
 
 .btn-primary {
   background-color: var(--ygn-primary);
-  color: var(--ygn-bg);
+  color: var(--ygn-on-primary);
 }
 
 .btn-primary:hover {
@@ -244,8 +246,8 @@ a.ygn-card:hover {
 ========================================= */
 .ygn-tag {
   display: inline-block;
-  background-color: var(--bs-secondary);
-  color: #fff;
+  background-color: var(--ygn-secondary);
+  color: var(--ygn-on-secondary);
   padding: 0.25rem 0.75rem;
   border-radius: 2rem;
   font-size: 0.8rem;
@@ -275,7 +277,7 @@ a.ygn-card:hover {
 
 .doc-content img {
   max-width: 100%;
-  border-radius: var(--bs-border-radius);
+  border-radius: var(--ygn-radius);
   box-shadow: var(--ygn-shadow);
   margin: 2rem 0;
 }
@@ -284,7 +286,7 @@ a.ygn-card:hover {
   border-left: 4px solid var(--ygn-primary);
   background: var(--ygn-surface);
   padding: 1rem 1rem 0.3rem 1rem;
-  border-radius: var(--bs-border-radius);
+  border-radius: var(--ygn-radius);
   margin: 2rem 0;
 }
 
@@ -294,7 +296,7 @@ a.ygn-card:hover {
   border-collapse: separate;
   border-spacing: 0;
   background: var(--ygn-surface);
-  border-radius: var(--bs-border-radius);
+  border-radius: var(--ygn-radius);
   overflow: hidden;
 }
 
@@ -314,7 +316,7 @@ a.ygn-card:hover {
   top: 2rem;
   background: var(--ygn-surface);
   padding: 1.5rem;
-  border-radius: var(--bs-border-radius);
+  border-radius: var(--ygn-radius);
 }
 
 .doc-toc-link {
@@ -349,7 +351,7 @@ a.ygn-card:hover {
 .img-overlay img {
   max-width: 90vw;
   max-height: 90vh;
-  border-radius: var(--bs-border-radius);
+  border-radius: var(--ygn-radius);
 }
 
 .doc-img {
