@@ -3,41 +3,41 @@ layout: default
 title: Documentation
 ---
 
-<section class="page-header">
+<section class="mt-4">
   <div class="container">
-    <div class="hero-200">
-      <div class="hero-content">
+    <div class="ygn-hero ygn-hero-sm">
+      <div class="ygn-hero-content">
         <h1>Documentation</h1>
-        <p>Guides and tutorials for building with the YGN Framework</p>
+        <p class="lead mb-0">Guides and tutorials for building with the YGN Framework</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="docs-list">
+<section class="py-5">
   <div class="container">
     <!-- Group docs by topic -->
     {% assign topics = site.docs | map: 'topic' | uniq | sort %}
 
     {% for topic in topics %}
-      <div class="docs-topic-section mb-5">
-        <h2 class="section-title text-start">{{ topic }}</h2>
+      <div class="mb-5">
+        <h2 class="mb-4 pb-2 border-bottom border-secondary" style="display:inline-block;">{{ topic }}</h2>
 
         <div class="row g-4">
           {% assign topic_docs = site.docs | where: 'topic', topic | sort: 'updated' | reverse %}
           {% for doc in topic_docs %}
           <div class="col-md-6 col-lg-4">
-            <a href="{{ doc.url }}" class="doc-card-link">
-              <div class="doc-card">
-                <div class="doc-card-header">
-                  <span class="doc-card-topic">{{ doc.topic }}</span>
-                  <span class="doc-card-date">{{ doc.updated | date: "%b %Y" }}</span>
+            <a href="{{ doc.url }}" class="ygn-card">
+              <div class="ygn-card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <span class="ygn-tag">{{ doc.topic }}</span>
+                  <span class="small text-muted">{{ doc.updated | date: "%b %Y" }}</span>
                 </div>
-                <h3 class="doc-card-title">{{ doc.title }}</h3>
-                <p class="doc-card-excerpt">{{ doc.excerpt }}</p>
-                <div class="doc-card-tags">
+                <h3 class="h4 mb-2">{{ doc.title }}</h3>
+                <p class="small opacity-75 mb-3 flex-grow-1">{{ doc.excerpt }}</p>
+                <div class="d-flex gap-2 flex-wrap">
                   {% for tag in doc.tags limit: 4 %}
-                  <span class="doc-card-tag">{{ tag }}</span>
+                  <span class="ygn-tag ygn-tag-sm">{{ tag }}</span>
                   {% endfor %}
                 </div>
               </div>
@@ -49,22 +49,22 @@ title: Documentation
     {% endfor %}
 
     {% if site.docs.size == 0 %}
-    <div class="coming-soon-card">
-      <i class="fas fa-book"></i>
+    <div class="ygn-card text-center p-5">
+      <i class="fas fa-book display-4 text-secondary mb-3"></i>
       <h3>Documentation Coming Soon</h3>
-      <p>Comprehensive guides are currently being written and will be published as they're completed.</p>
+      <p>Comprehensive guides are currently being written.</p>
     </div>
     {% endif %}
   </div>
 </section>
 
-<section class="docs-contribute">
+<section class="pb-5">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">
-        <div class="contribute-card">
+        <div class="ygn-card text-center p-5">
           <h2>Contribute to Documentation</h2>
-          <p>Found an error or want to improve a guide? All documentation is open-source and contributions are welcome!</p>
+          <p class="mb-4">Found an error or want to improve a guide? All documentation is open-source and contributions are welcome!</p>
           <a href="https://github.com/ygn-effects/ygn-effects.github.io" target="_blank" class="btn btn-primary">
             <i class="fab fa-github me-2"></i>Contribute on GitHub
           </a>

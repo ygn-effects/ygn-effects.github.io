@@ -4,139 +4,69 @@ layout: default
 
 <div class="doc-page">
   <!-- Doc Header -->
-  <div class="doc-header">
+  <div class="bg-surface border-bottom border-secondary pt-5 pb-5 mb-5">
     <div class="container">
-      <div class="doc-header-content">
-        <span class="doc-topic-badge">{{ page.topic }}</span>
-        <h1 class="doc-page-title">{{ page.title }}</h1>
-        <p class="doc-page-excerpt">{{ page.excerpt }}</p>
-        <div class="doc-meta-info">
-          <span class="doc-meta-item">
-            <i class="fas fa-calendar"></i>
-            Updated {{ page.updated | default: page.date | date: "%B %d, %Y" }}
-          </span>
-          {% if page.tags %}
-          <span class="doc-meta-item">
-            <i class="fas fa-tags"></i>
-            {% for tag in page.tags limit: 3 %}
-              <span class="doc-meta-tag">{{ tag }}</span>{% unless forloop.last %}, {% endunless %}
-            {% endfor %}
-          </span>
-          {% endif %}
+      <div class="row">
+        <div class="col-lg-8">
+          <span class="ygn-tag mb-3">{{ page.topic }}</span>
+          <h1 class="display-4 fw-bold mb-3">{{ page.title }}</h1>
+          <p class="lead opacity-75 mb-4">{{ page.excerpt }}</p>
+          <div class="d-flex gap-4 small">
+            <span>
+              <i class="fas fa-calendar me-2"></i>
+              Updated {{ page.updated | default: page.date | date: "%B %d, %Y" }}
+            </span>
+            {% if page.tags %}
+            <span>
+              <i class="fas fa-tags me-2"></i>
+              {% for tag in page.tags limit: 3 %}
+                <span class="me-1">{{ tag }}</span>{% unless forloop.last %}, {% endunless %}
+              {% endfor %}
+            </span>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Doc Content -->
-  <div class="doc-wrapper">
-    <div class="container">
-      <div class="doc-layout">
-
-        <!-- Table of Contents -->
-        {% if page.toc %}
+  <div class="container pb-5">
+    <div class="row">
+      <!-- Sidebar TOC -->
+      {% if page.toc %}
+      <div class="col-lg-3 mb-4">
         <aside class="doc-sidebar">
-          <div class="doc-toc-wrapper">
-            <button class="doc-toc-toggle" id="doc-toc-toggle">
-              <i class="fas fa-bars"></i>
-              <span>Table of Contents</span>
-            </button>
-            <nav class="doc-toc" id="doc-toc">
-              <h3 class="doc-toc-title">Contents</h3>
-              {% for item in page.toc %}
-              <a href="{{ item.href }}" class="doc-toc-link">{{ item.label }}</a>
-              {% endfor %}
-            </nav>
-          </div>
+          <h5 class="mb-3 text-secondary fw-bold">Contents</h5>
+          <nav id="doc-toc">
+            {% for item in page.toc %}
+            <a href="{{ item.href }}" class="doc-toc-link">{{ item.label }}</a>
+            {% endfor %}
+          </nav>
         </aside>
-        {% endif %}
-
-        <!-- Main Content -->
-        <article class="doc-main-content">
-          {{ content }}
-
-          <!-- Doc Footer -->
-          <div class="doc-footer">
-            <div class="doc-footer-card">
-              <h3>Found an Issue?</h3>
-              <p>Help improve this documentation by reporting errors or suggesting improvements.</p>
-              <a href="https://github.com/ygn-effects/ygn-effects.github.io/issues" target="_blank" class="btn btn-primary">
-                <i class="fab fa-github me-2"></i>Report on GitHub
-              </a>
-            </div>
-          </div>
-        </article>
-
       </div>
+      {% endif %}
+
+      <!-- Main Content -->
+      <article class="col-lg-{% if page.toc %}9{% else %}12{% endif %}">
+        <div class="doc-content">
+          {{ content }}
+        </div>
+
+        <!-- Doc Footer -->
+        <div class="mt-5 pt-5 border-top border-secondary">
+          <div class="ygn-card text-center p-4">
+            <h3 class="h5 mb-2">Found an Issue?</h3>
+            <p class="small opacity-75 mb-3">Help improve this documentation by reporting errors or suggesting improvements.</p>
+            <a href="https://github.com/ygn-effects/ygn-effects.github.io/issues" target="_blank" class="btn btn-sm btn-secondary">
+              <i class="fab fa-github me-2"></i>Report on GitHub
+            </a>
+          </div>
+        </div>
+      </article>
+
     </div>
   </div>
 </div>
 
-<script>
-// Table of Contents functionality
-document.addEventListener('DOMContentLoaded', () => {
-  const content = document.querySelector('.doc-main-content');
-  const tocLinks = document.querySelectorAll('.doc-toc-link');
-  const toggle = document.getElementById('doc-toc-toggle');
-  const toc = document.getElementById('doc-toc');
-
-  // Mobile TOC toggle
-  if (toggle && toc) {
-    toggle.addEventListener('click', () => {
-      toc.classList.toggle('show');
-      toggle.classList.toggle('active');
-    });
-
-    // Close TOC when clicking a link on mobile
-    tocLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth < 992) {
-          toc.classList.remove('show');
-          toggle.classList.remove('active');
-        }
-      });
-    });
-  }
-
-  // Active section highlighting
-  if (content && tocLinks.length > 0) {
-    const headings = content.querySelectorAll('h2[id]');
-
-    if (headings.length > 0) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const id = entry.target.id;
-              tocLinks.forEach(link => {
-                const isActive = link.getAttribute('href') === `#${id}`;
-                link.classList.toggle('active', isActive);
-              });
-            }
-          });
-        },
-        {
-          rootMargin: '-20% 0px -70% 0px',
-          threshold: 0.1
-        }
-      );
-
-      headings.forEach(heading => observer.observe(heading));
-    }
-  }
-
-  // Image zoom functionality
-  const docImages = document.querySelectorAll('.doc-img');
-  docImages.forEach(img => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => {
-      const overlay = document.createElement('div');
-      overlay.className = 'img-overlay';
-      overlay.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
-      overlay.style.cursor = 'zoom-out';
-      overlay.addEventListener('click', () => overlay.remove());
-      document.body.appendChild(overlay);
-    });
-  });
-});
-</script>
+<script src="{{ '/assets/js/doc.js' | relative_url }}"></script>

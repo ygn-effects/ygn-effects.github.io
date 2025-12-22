@@ -3,18 +3,18 @@ layout: default
 title: Reference Designs
 ---
 
-<section class="page-header">
+<section class="mt-4">
   <div class="container">
-    <div class="hero-200">
-      <div class="hero-content">
+    <div class="ygn-hero ygn-hero-sm">
+      <div class="ygn-hero-content">
         <h1>Reference Designs</h1>
-        <p>Proven effect circuits built on the YGN Framework</p>
+        <p class="lead mb-0">Proven effect circuits built on the YGN Framework</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="effects-list">
+<section class="py-5">
   <div class="container">
     <div class="row g-4">
       {% assign all_effects = site.effects | where_exp: "effect", "effect.draft != true" | sort: 'date' | reverse %}
@@ -22,24 +22,24 @@ title: Reference Designs
       {% if all_effects.size > 0 %}
         {% for effect in all_effects %}
         <div class="col-md-6 col-lg-4">
-          <a href="{{ effect.url }}" class="reference-card-link">
-            <div class="reference-card-list">
-              <div class="reference-image" style="background-image: url('{{ effect.images.card }}');"></div>
-              <div class="reference-body">
-                <span class="reference-category">{{ effect.category }}</span>
-                <h3 class="reference-title">{{ effect.title }}</h3>
-                <p class="reference-excerpt">{{ effect.excerpt }}</p>
+          <a href="{{ effect.url }}" class="ygn-card">
+            <div class="ygn-card-img" style="background-image: url('{{ effect.images.card }}');"></div>
+            <div class="ygn-card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="ygn-tag">{{ effect.category }}</span>
               </div>
+              <h3 class="h4 mb-2">{{ effect.title }}</h3>
+              <p class="small opacity-75 mb-0">{{ effect.excerpt }}</p>
             </div>
           </a>
         </div>
         {% endfor %}
       {% else %}
         <div class="col-12">
-          <div class="coming-soon-card">
-            <i class="fas fa-tools"></i>
+          <div class="ygn-card text-center p-5">
+            <i class="fas fa-tools display-4 text-secondary mb-3"></i>
             <h3>Designs Coming Soon</h3>
-            <p>Reference designs are currently in development and will be published as they're completed.</p>
+            <p>Reference designs are currently in development.</p>
           </div>
         </div>
       {% endif %}
@@ -47,10 +47,10 @@ title: Reference Designs
 
     {% if all_effects.size > 0 %}
     <div class="mt-5 text-center">
-      <div class="alert alert-info d-inline-block">
-        <i class="fas fa-info-circle me-2"></i>
+      <div class="col-md-6">
+        <i class="fas fa-info-circle me-2 text-primary"></i>
         All design files, schematics, and BOMs are available in the
-        <a href="https://github.com/ygn-effects" target="_blank">GitHub repository</a>
+        <a href="https://github.com/ygn-effects" target="_blank" class="text-primary fw-bold text-decoration-none">GitHub repository</a>
       </div>
     </div>
     {% endif %}

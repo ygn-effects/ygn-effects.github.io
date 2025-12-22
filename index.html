@@ -3,14 +3,14 @@ layout: default
 ---
 
 <!-- Hero Section -->
-<section class="hero-section">
+<section class="mt-4">
   <div class="container">
-    <div class="hero-content-wrapper">
-      <div class="hero-text">
-        <h1 class="hero-title">Build Professional Guitar Effects</h1>
-        <p class="hero-subtitle">Complete open-source hardware framework for DIY pedal builders</p>
-        <div class="hero-buttons">
-          <a href="/docs/" class="btn btn-primary btn-lg">Browse Documentation</a>
+    <div class="ygn-hero">
+      <div class="ygn-hero-content">
+        <h1 class="display-4 fw-bold mb-3">Build Professional Guitar Effects</h1>
+        <p class="lead mb-4 opacity-75">Complete open-source hardware framework for DIY pedal builders</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+          <a href="/docs.html" class="btn btn-primary btn-lg">Browse Documentation</a>
           <a href="#platform" class="btn btn-secondary btn-lg">Learn More</a>
         </div>
       </div>
@@ -19,120 +19,140 @@ layout: default
 </section>
 
 <!-- Platform Overview Section -->
-<section id="platform" class="platform-section">
+<section id="platform" class="py-5">
   <div class="container">
-    <h2 class="section-title">The YGN Framework</h2>
-    <p class="section-subtitle">A complete hardware ecosystem for building guitar effects pedals</p>
+    <div class="mb-5">
+      <h2 class="section-title">The YGN Framework</h2>
+      <p class="section-subtitle">A complete hardware ecosystem for building guitar effects pedals</p>
+    </div>
 
     <div class="row g-4">
-      <!-- PCB Framework Card -->
+      <!-- PCB Framework -->
       <div class="col-md-4">
-        <div class="platform-card">
-          <div class="platform-icon">
-            <i class="fas fa-microchip"></i>
+        <div class="ygn-card">
+          <div class="ygn-card-body">
+            <div class="text-primary mb-3 display-5">
+              <i class="fas fa-microchip"></i>
+            </div>
+            <h3>PCB Framework</h3>
+            <p>Modular board designs with standardized IO, power management, and mounting. All circuits fully documented.</p>
+            <ul class="list-unstyled">
+              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>Three board sizes (S/M/L)</li>
+              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>Unified IO board system</li>
+              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>SMT-optimized layouts</li>
+            </ul>
           </div>
-          <h3>PCB Framework</h3>
-          <p>Modular board designs with standardized IO, power management, and mounting. All circuits fully documented with schematics and BOMs.</p>
-          <ul class="platform-features">
-            <li>Three board sizes (S/M/L)</li>
-            <li>Unified IO board system</li>
-            <li>SMT-optimized layouts</li>
-          </ul>
         </div>
       </div>
 
-      <!-- Enclosures Card -->
+      <!-- Enclosures -->
       <div class="col-md-4">
-        <div class="platform-card">
-          <div class="platform-icon">
-            <i class="fas fa-cube"></i>
+        <div class="ygn-card">
+          <div class="ygn-card-body">
+            <div class="text-primary mb-3 display-5">
+              <i class="fas fa-cube"></i>
+            </div>
+            <h3>Enclosures</h3>
+            <p>Precision-milled aluminum enclosures designed to fit the PCB framework. CNC files and 3D models included.</p>
+            <ul class="list-unstyled">
+              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>Hammond 1590-compatible</li>
+              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>FreeCAD source files</li>
+              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>CNC toolpath included</li>
+            </ul>
           </div>
-          <h3>Enclosures</h3>
-          <p>Precision-milled aluminum enclosures designed to fit the PCB framework. CNC files and 3D models included for DIY fabrication.</p>
-          <ul class="platform-features">
-            <li>Hammond 1590-compatible</li>
-            <li>FreeCAD source files</li>
-            <li>CNC toolpath included</li>
-          </ul>
         </div>
       </div>
 
-      <!-- Firmware Card -->
+      <!-- Firmware -->
       <div class="col-md-4">
-        <div class="platform-card">
-          <div class="platform-icon">
-            <i class="fas fa-code"></i>
+        <div class="ygn-card">
+          <div class="ygn-card-body">
+            <div class="text-primary mb-3 display-5">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3>Firmware</h3>
+            <p>Pre-compiled firmware for relay switching, LED control, and power-on state management.</p>
+            <ul class="list-unstyled">
+              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>ATTiny-based control</li>
+              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>True bypass switching</li>
+              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>Simple one-command flashing</li>
+            </ul>
           </div>
-          <h3>Firmware</h3>
-          <p>Pre-compiled firmware for relay switching, LED control, and power-on state management. Simple one-command flashing.</p>
-          <ul class="platform-features">
-            <li>ATTiny-based control</li>
-            <li>True bypass switching</li>
-            <li>Configurable behavior</li>
-          </ul>
         </div>
       </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="/framework.html" class="btn btn-primary">The framework explained</a>
     </div>
   </div>
 </section>
 
 <!-- Reference Designs Section -->
-<section class="reference-section">
+<section class="py-5">
   <div class="container">
-    <h2 class="section-title">Reference Designs</h2>
-    <p class="section-subtitle">Proven effect circuits built on the YGN Framework</p>
+    <div class="mb-5">
+      <h2 class="section-title">Reference Designs</h2>
+      <p class="section-subtitle">Proven effect circuits built on the YGN Framework</p>
+    </div>
 
     <div class="row g-4">
       {% assign published_effects = site.effects | where_exp: "effect", "effect.draft != true" | sort: 'date' | reverse %}
       {% if published_effects.size > 0 %}
         {% for effect in published_effects %}
         <div class="col-md-6 col-lg-4">
-          <a href="{{ effect.url }}" class="reference-card-link">
-            <div class="reference-card">
-              <div class="reference-image" style="background-image: url('{{ effect.images.card }}');"></div>
-              <div class="reference-body">
-                <span class="reference-category">{{ effect.category }}</span>
-                <h3 class="reference-title">{{ effect.title }}</h3>
-                <p class="reference-excerpt">{{ effect.excerpt }}</p>
+          <a href="{{ effect.url }}" class="ygn-card">
+            <div class="ygn-card-img" style="background-image: url('{{ effect.images.card }}');"></div>
+            <div class="ygn-card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="ygn-tag">{{ effect.category }}</span>
               </div>
+              <h3 class="h4 mb-2">{{ effect.title }}</h3>
+              <p class="small opacity-75 mb-0">{{ effect.excerpt }}</p>
             </div>
           </a>
         </div>
         {% endfor %}
       {% else %}
         <div class="col-12">
-          <div class="coming-soon-card">
-            <i class="fas fa-tools"></i>
+          <div class="ygn-card text-center p-5">
+            <i class="fas fa-tools display-4 text-secondary mb-3"></i>
             <h3>More Designs Coming Soon</h3>
-            <p>Additional reference designs are currently in development and will be published as they're completed.</p>
+            <p>Additional reference designs are currently in development.</p>
           </div>
         </div>
       {% endif %}
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="/effects.html" class="btn btn-primary">Browse all designs</a>
     </div>
   </div>
 </section>
 
 <!-- Documentation Section -->
-<section class="documentation-section">
+<section class="py-5">
   <div class="container">
-    <h2 class="section-title">Latest Documentation</h2>
-    <p class="section-subtitle">Step-by-step guides for building with the YGN Framework</p>
+    <div class="mb-5">
+      <h2 class="section-title">Latest Documentation</h2>
+      <p class="section-subtitle">Step-by-step guides for building with the YGN Framework</p>
+    </div>
 
     <div class="row g-4">
       {% assign latest_docs = site.docs | sort: 'updated' | reverse | limit: 3 %}
       {% for doc in latest_docs %}
       <div class="col-md-4">
-        <a href="{{ doc.url }}" class="doc-card-link">
-          <div class="doc-card">
-            <div class="doc-card-header">
-              <span class="doc-card-topic">{{ doc.topic }}</span>
-              <span class="doc-card-date">{{ doc.updated | date: "%b %Y" }}</span>
+        <a href="{{ doc.url }}" class="ygn-card">
+          <div class="ygn-card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="ygn-tag">{{ doc.topic }}</span>
+              <span class="small text-muted">{{ doc.updated | date: "%b %Y" }}</span>
             </div>
-            <h3 class="doc-card-title">{{ doc.title }}</h3>
-            <p class="doc-card-excerpt">{{ doc.excerpt }}</p>
-            <div class="doc-card-tags">
+            <h3 class="h4 mb-2">{{ doc.title }}</h3>
+            <p class="small opacity-75 mb-3 flex-grow-1">{{ doc.excerpt }}</p>
+            <div class="d-flex gap-2 flex-wrap">
               {% for tag in doc.tags limit: 3 %}
-              <span class="doc-card-tag">{{ tag }}</span>
+              <span class="ygn-tag ygn-tag-sm">{{ tag }}</span>
               {% endfor %}
             </div>
           </div>
@@ -141,30 +161,30 @@ layout: default
       {% endfor %}
     </div>
 
-    <div class="text-center mt-4">
+    <div class="text-center mt-5">
       <a href="/docs.html" class="btn btn-primary">View All Documentation</a>
     </div>
   </div>
 </section>
 
 <!-- Open Source Section -->
-<section class="opensource-section">
+<section class="py-5">
   <div class="container">
-    <div class="opensource-content">
-      <div class="opensource-icon">
+    <div class="ygn-card text-center p-5">
+      <div class="text-primary display-3 mb-3">
         <i class="fab fa-github"></i>
       </div>
-      <h2>Fully Open Source</h2>
-      <p>All schematics, PCB layouts, firmware source code, and CAD files are available on GitHub under permissive licenses.</p>
-      <div class="opensource-buttons">
+      <h2 class="mb-3">Fully Open Source</h2>
+      <p class="lead mb-4 mx-auto" style="max-width: 700px;">All schematics, PCB layouts, firmware source code, and CAD files are available on GitHub under permissive licenses.</p>
+      <div class="mb-4">
         <a href="https://github.com/ygn-effects" class="btn btn-primary btn-lg" target="_blank">
           <i class="fab fa-github me-2"></i>View on GitHub
         </a>
       </div>
-      <div class="opensource-badges">
-        <span class="badge">Hardware: CERN-OHL-S</span>
-        <span class="badge">Software: MIT</span>
-        <span class="badge">Docs: CC BY-SA 4.0</span>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <span class="badge bg-secondary">Hardware: CERN-OHL-S</span>
+        <span class="badge bg-secondary">Software: MIT</span>
+        <span class="badge bg-secondary">Docs: CC BY-SA 4.0</span>
       </div>
     </div>
   </div>
