@@ -1,6 +1,6 @@
 // Table of Contents functionality
 document.addEventListener('DOMContentLoaded', () => {
-  const content = document.querySelector('.doc-main-content');
+  const content = document.querySelector('.doc-content');
   const tocLinks = document.querySelectorAll('.doc-toc-link');
   const toggle = document.getElementById('doc-toc-toggle');
   const toc = document.getElementById('doc-toc');
