@@ -12,12 +12,12 @@ layout: default
           <h1 class="display-4 fw-bold mb-3">{{ page.title }}</h1>
           <p class="lead opacity-75 mb-4">{{ page.excerpt }}</p>
           <div class="d-flex gap-4 small">
-            <span>
+            <span class="ygn-tag ygn-tag-sm">
               <i class="fas fa-calendar me-2"></i>
               Updated {{ page.updated | default: page.date | date: "%B %d, %Y" }}
             </span>
             {% if page.tags %}
-            <span>
+            <span class="ygn-tag ygn-tag-sm">
               <i class="fas fa-tags me-2"></i>
               {% for tag in page.tags limit: 3 %}
                 <span class="me-1">{{ tag }}</span>{% unless forloop.last %}, {% endunless %}
@@ -58,9 +58,11 @@ layout: default
           <div class="ygn-card text-center p-4">
             <h3 class="h5 mb-2">Found an Issue?</h3>
             <p class="small opacity-75 mb-3">Help improve this documentation by reporting errors or suggesting improvements.</p>
-            <a href="https://github.com/ygn-effects/ygn-effects.github.io/issues" target="_blank" class="btn btn-sm btn-secondary">
-              <i class="fab fa-github me-2"></i>Report on GitHub
-            </a>
+            <div class="text-center">
+              <a href="https://github.com/ygn-effects/ygn-effects.github.io/issues" target="_blank" class="btn btn-sm btn-secondary">
+                <i class="fab fa-github me-2"></i>Report on GitHub
+              </a>
+            </div>
           </div>
         </div>
       </article>

@@ -297,6 +297,7 @@ a.ygn-card:hover {
   padding: 1rem 1rem 0.3rem 1rem;
   border-radius: var(--ygn-radius);
   margin: 2rem 0;
+  font-style: italic;
 }
 
 .doc-content table {
@@ -337,10 +338,22 @@ a.ygn-card:hover {
   transition: all 0.2s;
 }
 
-.doc-toc-link:hover, .doc-toc-link.is-active {
+.doc-toc-link.active {
   opacity: 1;
   color: var(--ygn-primary);
   transform: translateX(5px);
+  font-weight: 600;
+}
+
+.doc-toc-link:hover.active {
+  color: var(--ygn-primary-dark);
+}
+
+.doc-toc-link:hover {
+  opacity: 1;
+  color: var(--ygn-secondary);
+  transform: translateX(5px);
+  font-weight: 600;
 }
 
 /* =========================================
