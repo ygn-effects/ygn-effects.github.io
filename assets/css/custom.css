@@ -256,6 +256,7 @@ a.ygn-card:hover {
 
 .ygn-tag-sm {
   background-color: rgba(255,255,255,0.1);
+  color: var(--ygn-on-surface);
   font-size: 0.75rem;
 }
 
@@ -281,14 +282,14 @@ a.ygn-card:hover {
 
 .doc-content h3 {
   color: var(--ygn-secondary);
-  margin-top: 2.5rem;
+  margin-top: 2rem;
 }
 
 .doc-content img {
   max-width: 100%;
   border-radius: var(--ygn-radius);
   box-shadow: var(--ygn-shadow);
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 .doc-content blockquote {
@@ -319,6 +320,12 @@ a.ygn-card:hover {
 .doc-content td {
   padding: 1rem;
   border-top: 1px solid var(--ygn-surface-highlight);
+}
+
+.doc-content code {
+  color: var(--ygn-on-secondary);
+  font-size: medium;
+  font-weight: bold;
 }
 
 .doc-sidebar {
@@ -384,5 +391,5 @@ a.ygn-card:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
