@@ -15,16 +15,22 @@ images:
   ioboard: /assets/images/effects/sexy-rodent/ioboard.png
 
 story: |
-  I could bore you to death with an history lesson on the Rat, its many incarnations and all its legendary users but, for that, there’s Wikipedia. Instead, you’ll find below an excerpt from Art Thompson’s book “The Stompbox: (…)” that can be found on pages 125-126. The quoted text is from Scott Burnham, designer of the Rat:<br><br>
+  <strong>Let’s be real: you don’t need another history lesson on the Rat.</strong><br><br>
 
-  <blockquote>
-    I was dabbling in modifying pedals, trying to come up with something of my own because I didn’t really like anything that was out there. I liked bits and pieces of different things. The idea for the Rat was to have an input buffer first, then an op-amp to crank it way up. The signal would then be rammed across a couple of parallel diodes that clipped the hell of out it, then sent it through a FET to smooth things out.<br><br>
-    I had the basic circuit roughed together and i’d found an op-amp I liked, the LM308N, which was an instrumentation amp used for seismic and medical sensors. I was experimenting with an EQ boost for this op-amp in order to pre-boost the treble so I could use just a passive tone control to cut back the highs. I was bypassing the voltage divider that sets the gain I picked up a resistor, looked at it and thought to myself, “Yellow, violet, brown - thats 470ohm.” I plugged it in expecting to get about 50dB of gain, but when I picked up my strat and hit a string , it went wooooo. I thought, “Holy shit, this is cool. What did I do?”<br><br>
-    I looked real closely and realised that I’d plugged a 47ohm resistor instead of a 470ohm resistor. That meant it had somewhere around 70db of gain, which, according to it’s spec sheet was impossible from that op-amp. Trying to set the gain on this thing I had stumbled across a combination of resistors that produced this really weird high-frequency shelving boost that the op-amp couldn’t possibly sustain. It didn’t have enough slew rate to produce that much gain at those frequencies so it drove the op-amp into incredible slewing distortion. This usually is very bad, but in this case it gave the Rat it’s yeowl - I’ve never heard any other stompbox make that sound.”
-  </blockquote>
+  You know the sound. It’s the "happy accident" of the late 70s: a circuit that generated distortion not just by using clipping diodes, but by pushing an op-amp so hard it physically couldn't slew fast enough to keep up. That specific, primitive failure mode is what gives this circuit its legendary "yeowl." It’s dirty, it’s aggressive, and it’s perfect.<br><br>
 
-  And, well, that’s about it really. From this happy accident in the late 70’s to countless use in many legendary records to appearing in Blur’s “Song 2” video and thru the many different versions of the design, it’s still rocking 40 years later. That’s as classic as it gets for an effect pedal.
-  The Sexy Rodent is built on this legacy, staying true to the original circuit’s topology while picking options from the various embodiment the pedal had and incorporating popular mods. The Sexy Rodent is designed to unleash the full potential of this awesome effect.
+  <strong>So why build another one?</strong> <br><br>
+
+  Because as good as the original is, it has limits. The Sexy Rodent is our attempt to take that classic topology and uncage it. We kept the core "slewing" gain stage that defines the sound, but ripped out the restrictions.<br><br>
+
+  The stock circuit is notorious for strangling your low end. We fixed that with the Sweep control (a fully variable implementation of the classic "Ruetz" mod). This lets you alter the frequency response of the gain stage directly, moving from the tight, mid-focused bite of the 80s to a massive, blown-out fuzz tone that shakes the floor.<br><br>
+
+  We also wanted texture options without the hassle. The Clip switch lets you toggle between the classic Silicon crunch, the compressed, spongy feel of Germanium, or the loud, open roar of LEDs.<br><br>
+
+  <strong>The Open-Source Philosophy</strong><br><br>
+
+  Like everything at YGN, the Sexy Rodent is built on our Open Source Framework. This pedal is actually the "Reference Build" of the Framework, assembled by us to show exactly what the platform is capable of. We make these because we love the sound, but we also build them to show you what you can achieve. Whether you buy this pedal or download the files to make your own, the goal is the same: make it loud, and make it yours.
+
 knobs-image: sexyrodent-knobs.png
 knobs:
   - name: Volume
@@ -50,18 +56,36 @@ ioboard:
     desc: This trimpot allows you to set the brightness of the status LED.
 
 tips:
-  - name: Gain and clipping
+  - name: Clipping vs. Headroom
     desc: |
-      Think of the clipping selector as an amplitude limiter, that's all it does really. The lower the clipping threshold (in that order Ge < Si < LED), the more compressed the signal becomes while also lowering the output volume.<br>
-      Now let's say i'm playing a high headroom clean amp i would go for a lower threshold (Ge or Si) to get all that saturated goodness out of the pedal. On the other hand, with a dirty or slightly broken up amp i could go with the highest clipping threshold (LED) to get a better dynamic response out of my playing, raise the output volume and drive my pre-amp tubes harder. In that case the pedal would add its character to the amp of my choice.
-  - name: Frequency response
+      Think of the Clip switch as an adjustable ceiling.
+      <ul>
+        <li>
+          <strong>Germanium diodes</strong> have the lowest ceiling. They compress early, giving you rich saturation and a lower output volume. It typically won't push your amp very hard.
+        </li>
+        <li>
+          <strong>LEDs</strong> on the other hand have a very high ceiling. They allow for huge signal swings before clipping. Use this mode if you want to use the pedal as a dirty boost to drive your tube amp's preamp into natural saturation.
+        </li>
+        <li>
+          <strong>Silicon diodes</strong> sit in the middle ground, though still on the lower side of the headroom ceiling. This is the diode flavor found in most stock RATs.
+        </li>
+      </ul>
+      This selection of clipping diodes is based on various iterations of the effect over the years and gives the Sexy Rodent a lot of versatility, allowing it to slot naturally into most rigs.
+  - name: Dialing in the "Sweep"
     desc: |
-      Pretty basically, the stock Rat frequency response is very much "Tube Screamer like", emphasizing the mids while severely cutting the lows and giving you some control over the highs. The Sexy Rodent goes a bit farther than that.<br>
-      The Tone knob on the Sexy Rodent is similar to the Rat's : it's a backward guitar tone control. It will filter out more and more highs as it goes clockwise, nothing magic about it. It's a set to taste thing.<br>
-      The Sweep control is more interesting, unlike a basic tone control, it will work by changing the frequency response of the gain stage. As i mentioned the stock circuit favors the mids and highs while severely cutting the lower frequencies, the Sweep control allows you to change that behavior and bring more bass in.
-  - name: Stacking
+      The <strong>Sweep</strong> control is interactive. As you turn it up (clockwise) to add bass, you are also increasing the overall gain of the op-amp. You might find that as you increase the Sweep, you need to back off the <strong>Tone</strong> knob slightly to keep the definition, or lower the <strong>Gain</strong> knob to maintain clarity. This is of course also dependent on the clipping mode used.
+  - name: Stacking Strategy
     desc: |
-      Hell yeah, the Sexy Rodent loves stacking! Put a mid-hump pedal (Tube Screamer, Blues Breaker...) in front of it to tighten up that low end even more. Stack it into some kind of MIAB to add its signature to your sound, use it as an overdrive in front a mid-scooped Fuzz (any kind of Big Muff)... The possibilities are endless!
+      The Sexy Rodent plays well with others.
+      <ul>
+        <li>
+          <strong>Tighten the lows:</strong> Put a mid-hump drive (like a Tube Screamer or Klon-style circuit) before the Rodent. This cuts the bass before it hits the distortion stage, keeping things tight even with the Gain cranked.
+        </li>
+        <li>
+          <strong>The Doom Stack:</strong> Run the Rodent into a mid-scooped fuzz (like a Big Muff). Use the Rodent's mid-focus to punch through the mix, adding a gnarly texture to the smooth wall of fuzz.
+        </li>
+      </ul>
+      The Rodent also stacks very well with itself. With one set as a dirty boost and one set as an overdrive or a distortion, it might be all you need!
 
 resources:
   - name: hardware
