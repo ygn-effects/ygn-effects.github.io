@@ -1,0 +1,270 @@
+---
+layout: default
+---
+
+<!-- Hero Section -->
+<section class="mt-4">
+  <div class="container">
+    <div class="ygn-hero">
+      <div class="ygn-hero-content">
+        <h1 class="display-4 fw-bold mb-3">Industrial-Grade Standards</h1>
+        <p class="lead mb-0 opacity-75">Bridging the gap between "hacky DIY" and mass production.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 01. Philosophy -->
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-title text-primary">Why We Standardize</h2>
+        <p class="section-subtitle">To some, standardization sounds boring. To us, it’s the only way to truly be creative.</p>
+        <div class="doc-content text-start">
+          <p>
+            The biggest friction in building pedals isn't the circuit design, it's the physical reality. It's the
+            off-board wiring that looks like a rat's nest. It's drilling enclosures slightly off-center. It's trying
+            to fit a complex circuit into a generic box.
+          </p>
+          <p>
+            We built the YGN Framework to bridge the gap between DIY and mass production ready.
+            We have a borderline obsessive passion for uniformization. We believe that if you solve the mechanical
+            and structural problems <em>once</em>, you gain the freedom to experiment endlessly with the electronics.
+          </p>
+          <blockquote>
+            <strong>Our Core Belief:</strong> Everything is open source and under permissive license.
+            Always. Hardware, software, firmware and mechanicals. It’s not just a product; it’s a public standard.
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02. Architecture -->
+<section class="py-5 bg-surface-0">
+  <div class="container">
+    <div class="mb-5 text-center">
+      <h2 class="section-title text-primary">The Architecture</h2>
+      <p class="section-subtitle">A modular "Separation of Concerns" system with 3 distinct modules.</p>
+    </div>
+    <div class="row g-4 mb-5">
+    <div class="col-md-4">
+      <div class="ygn-card h-100">
+        <div class="ygn-card-body text-center">
+          <div class="text-secondary mb-3 display-5"><i class="fas fa-cube"></i></div>
+          <h3 class="h5">The Enclosure</h3>
+          <p class="opacity-75">A standardized, two-piece bent aluminum chassis.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="ygn-card h-100">
+        <div class="ygn-card-body text-center">
+          <div class="text-secondary mb-3 display-5"><i class="fas fa-plug"></i></div>
+          <h3 class="h5">The IO Board</h3>
+          <p class="opacity-75">Handles power, switching, and external connections.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="ygn-card h-100">
+        <div class="ygn-card-body text-center">
+          <div class="text-secondary mb-3 display-5"><i class="fas fa-wave-square"></i></div>
+          <h3 class="h5">The Effect Board</h3>
+          <p class="opacity-75">The heart of the pedal where the audio circuit lives.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ygn-card p-4">
+    <h4 class="text-secondary mb-3">Scalable Form Factors</h4>
+    <div class="row">
+      <div class="col-md-4 mb-3 mb-md-0">
+        <h5 class="fw-bold">Size S</h5>
+        <h6 class="mb-1">126x41x70mm</h6>
+        <p class="opacity-75 mb-0">The standard single unit. One IO, one Effect board.</p>
+      </div>
+      <div class="col-md-4 mb-3 mb-md-0">
+        <h5 class="fw-bold">Size M</h5>
+        <h6 class="mb-1">126x41x140mm</h6>
+        <p class="opacity-75 mb-0">Double width. Holds two Size S PCBs side-by-side. Perfect for dual pedals with our Size M IO Board.</p>
+      </div>
+      <div class="col-md-4">
+        <h5 class="fw-bold">Size L</h5>
+        <p class="opacity-75 mb-0">Dedicated Digital Platform (DSP). Currently in development.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03. Smart IO Board -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6 p-5">
+        <h2 class="text-secondary mb-4">The Smart IO Board</h2>
+        <p class="lead mb-4">Not just a breakout board. An intelligent power plant.</p>
+        <ul class="list-unstyled">
+          <li class="mb-3 d-flex">
+            <i class="fas fa-microchip text-secondary mt-1 me-3"></i>
+            <div>
+              <strong>Intelligent Switching:</strong> AVR microcontroller + DPDT relay + optocoupler muting. Silence, no pops.
+            </div>
+          </li>
+          <li class="mb-3 d-flex">
+            <i class="fas fa-shield-alt text-secondary mt-1 me-3"></i>
+            <div>
+              <strong>Bulletproof Power:</strong> Filtered input, over-voltage & reverse polarity protection.
+            </div>
+          </li>
+          <li class="mb-3 d-flex">
+            <i class="fas fa-bolt text-secondary mt-1 me-3"></i>
+            <div>
+              <strong>Voltage Flexibility:</strong> Optional charge pump for -9V, 18V or ±15V operations.
+            </div>
+          </li>
+          <li class="mb-3 d-flex">
+            <i class="fas fa-sliders-h text-secondary mt-1 me-3"></i>
+            <div>
+              <strong>QoL Features:</strong> Dip switch for default power-on state and LED brightness trimpot.
+            </div>
+          </li>
+          <li class="d-flex">
+            <i class="fas fa-link text-secondary mt-1 me-3"></i>
+            <div>
+              <strong>Ribbon Connection:</strong> 10-pin JST PH cable to the effect board. No soldering wires to lugs.
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-6 p-5"><!-- Placeholder for IO Board Image if available, otherwise generic tech illustration -->
+        <img src="/assets/images/framework/io-boars-s.jpg" alt="{{ page.title }}" class="img-fluid rounded">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 & 05. Enclosure & Effect Board -->
+<section class="py-5 bg-surface-0">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Enclosure -->
+      <div class="col-lg-6">
+        <div class="ygn-card p-4 h-100">
+          <h2 class="text-primary mb-3">04. The Enclosure</h2>
+          <p class="mb-3">We stepped away from die-cast boxes for a <strong>two-piece bent sheet aluminum</strong> design.</p>
+          <ul class="list-unstyled small opacity-75 mb-0">
+            <li class="mb-2">
+              <i class="fas fa-check text-secondary me-2"></i>
+              <strong>Bent Steel Aesthetic:</strong> Distinct industrial look.
+            </li>
+            <li class="mb-2">
+              <i class="fas fa-check text-secondary me-2"></i>
+              <strong>Superior Access:</strong> Two-part construction makes assembly easy.
+            </li>
+            <li class="mb-2">
+              <i class="fas fa-check text-secondary me-2"></i>
+              <strong>DIY Friendly:</strong> Print our bending jigs to make them in your garage.
+            </li>
+            <li>
+              <i class="fas fa-check text-secondary me-2"></i>
+              <strong>Modular Faceplate:</strong> Use engraved ABS, PCB material, or etched aluminum.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Effect Board -->
+      <div class="col-lg-6">
+        <div class="ygn-card p-4 h-100">
+          <h2 class="text-primary mb-3">05. The Effect Board</h2>
+          <p class="mb-3">Pure "free real estate" for your circuit design (72mm x 63mm for Size S).</p>
+          <ul class="list-unstyled small opacity-75 mb-0">
+            <li class="mb-2">
+              <i class="fas fa-check text-secondary me-2"></i>
+              <strong>Standard Connectors:</strong> JST PH headers for IO, Footswitch, and LED.
+            </li>
+            <li class="mb-2">
+              <i class="fas fa-check text-secondary me-2"></i>
+              <strong>Aligned Controls:</strong> Templates define placements for up to 6 pots/switches.
+            </li>
+            <li class="mb-2">
+              <i class="fas fa-check text-secondary me-2"></i>
+              <strong>Plug & Play:</strong> No off-board wiring. Route to the connector, plug it in.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06. Tooling -->
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">06. Garage Industrialization</h2>
+      <p class="section-subtitle">We give you the files for the machines that make the thing.</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="doc-content">
+          <p>Our goal is "Micro-Industrialization." Achieve factory-level consistency using affordable tools like an Ender 3 or a generic 3018 CNC.</p>
+          <h4 class="mt-4">The Jigs</h4>
+          <div class="row g-3 mt-2">
+            <div class="col-md-4">
+              <div class="ygn-card p-3 text-center">
+                <i class="fas fa-border-all fa-2x text-primary mb-2"></i>
+                <h5 class="h6">Stencil Alignment</h5>
+                <p class="small opacity-75 mb-0">Perfect paste application every time with our printable jig.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="ygn-card p-3 text-center">
+                <i class="fas fa-pencil-ruler fa-2x text-primary mb-2"></i>
+                <h5 class="h6">DIY Stencils</h5>
+                <p class="small opacity-75 mb-0">CAM paths to mill your own stencils from plastic sheets.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="ygn-card p-3 text-center">
+                <i class="fas fa-toolbox fa-2x text-primary mb-2"></i>
+                <h5 class="h6">Bending Brakes</h5>
+                <p class="small opacity-75 mb-0">Printable attachments to bend aluminum sheets with precision.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 & 08. Footer Info -->
+<section class="py-5 bg-surface-0">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-6">
+        <h3 class="h4 text-secondary mb-3">07. Licenses & Docs</h3>
+        <p class="small opacity-75">We don't just dump a ZIP file. We document the process.</p>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <strong class="text-primary">Hardware (CC0):</strong> Public Domain. Use it, sell it.
+          </li>
+          <li class="mb-2">
+            <strong class="text-primary">Documentation (Apache 2.0):</strong> Free to share.
+          </li>
+        </ul>
+        <a href="/docs.html" class="btn btn-sm btn-secondary mt-2">Read the Docs</a>
+      </div>
+      <div class="col-lg-6"><h3 class="h4 text-secondary mb-3">08. Roadmap</h3>
+        <p class="small opacity-75"><strong>Size L (Digital Platform)</strong> is in Alpha. Built around the FV-1 chip with MIDI and custom VSCode tools.</p>
+        <div class="alert alert-dark border-secondary d-inline-block py-2 px-3">
+          <small><i class="fas fa-circle text-warning me-2" style="font-size: 8px; vertical-align: middle;"></i> Current Status: Alpha</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
