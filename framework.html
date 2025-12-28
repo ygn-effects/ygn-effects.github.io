@@ -100,8 +100,8 @@ layout: default
   </div>
 </section>
 
-<!-- 03. Smart IO Board -->
-<section class="py-5">
+<!-- Enclosure -->
+<section>
   <div class="container">
     <div class="row g-5 align-items-center">
       <div class="col-lg-6 p-5">
@@ -141,7 +141,54 @@ layout: default
         </ul>
       </div>
       <div class="col-lg-6 p-5"><!-- Placeholder for IO Board Image if available, otherwise generic tech illustration -->
+        <img src="/assets/images/framework/enclosure.jpg" alt="{{ page.title }}" class="img-fluid rounded">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03. Smart IO Board -->
+<section>
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6 p-5"><!-- Placeholder for IO Board Image if available, otherwise generic tech illustration -->
         <img src="/assets/images/framework/io-boars-s.jpg" alt="{{ page.title }}" class="img-fluid rounded">
+      </div>
+      <div class="col-lg-6 p-5">
+        <h2 class="text-secondary mb-4">The Smart IO Board</h2>
+        <p class="lead mb-4">Not just a breakout board. An intelligent power plant.</p>
+        <ul class="list-unstyled">
+          <li class="mb-3 d-flex">
+            <i class="fas fa-microchip text-secondary mt-1 me-3"></i>
+            <div>
+              <strong>Intelligent Switching:</strong> AVR microcontroller + DPDT relay + optocoupler muting. Silence, no pops.
+            </div>
+          </li>
+          <li class="mb-3 d-flex">
+            <i class="fas fa-shield-alt text-secondary mt-1 me-3"></i>
+            <div>
+              <strong>Bulletproof Power:</strong> Filtered input, over-voltage & reverse polarity protection.
+            </div>
+          </li>
+          <li class="mb-3 d-flex">
+            <i class="fas fa-bolt text-secondary mt-1 me-3"></i>
+            <div>
+              <strong>Voltage Flexibility:</strong> Optional charge pump for -9V, 18V or ±15V operations.
+            </div>
+          </li>
+          <li class="mb-3 d-flex">
+            <i class="fas fa-sliders-h text-secondary mt-1 me-3"></i>
+            <div>
+              <strong>QoL Features:</strong> Dip switch for default power-on state and LED brightness trimpot.
+            </div>
+          </li>
+          <li class="d-flex">
+            <i class="fas fa-link text-secondary mt-1 me-3"></i>
+            <div>
+              <strong>Ribbon Connection:</strong> 10-pin JST PH cable to the effect board. No soldering wires to lugs.
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
