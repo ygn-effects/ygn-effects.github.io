@@ -11,7 +11,6 @@ images:
   hero: /assets/images/effects/shining-pig/hero.png
   story_1: /assets/images/effects/shining-pig/story-1.png
   knobs: /assets/images/effects/shining-pig/knobs.png
-  internals: /assets/images/effects/shining-pig/internals.png
   ioboard: /assets/images/effects/shining-pig/ioboard.png
 
 story: |
@@ -31,7 +30,6 @@ story: |
 
   For builders, this is the perfect entry point into the YGN Framework. The circuit is simple but sensitive, allowing you to figure out the importance of biasing and power rails. And because the PCB is a straightforward layout, you aren't locked in: swap a few values and add a few traces to convert it to the 9V Overdriver spec, or keep it 18V for the full experience.
 
-knobs-image: sexyrodent-knobs.png
 knobs:
   - name: Volume
     desc: Adjusts the output volume of the effect.
@@ -46,9 +44,6 @@ knobs:
 
 
 internals:
-  - name: Mellow
-    desc: Setting this on will tame the beast a little. It will filter some higher frequencies out at the clipping stage resulting in a slightly less aggressive, smoother sound.
-
 ioboard:
   - name: Mode
     desc: This jumper allows you to set the power-on state of the pedal. With the jumper present it will stay off and without the jumper it will switch on upon powering.
