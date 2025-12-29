@@ -11,7 +11,7 @@ layout: default
         <p class="lead mb-4 opacity-75">Complete open-source hardware framework for DIY pedal builders</p>
         <div class="d-flex gap-3 justify-content-center flex-wrap">
           <a href="/docs.html" class="btn btn-primary btn-lg">Browse Documentation</a>
-          <a href="#platform" class="btn btn-secondary btn-lg">Learn More</a>
+          <a href="/framework/" class="btn btn-secondary btn-lg">Learn More</a>
         </div>
       </div>
     </div>
@@ -26,57 +26,42 @@ layout: default
       <p class="section-subtitle">A complete hardware ecosystem for building guitar effects pedals</p>
     </div>
 
-    <div class="row g-4">
+    <div class="row g-4 mb-5">
       <!-- PCB Framework -->
       <div class="col-md-4">
-        <div class="ygn-card">
-          <div class="ygn-card-body">
-            <div class="text-primary mb-3 display-5">
+        <div class="ygn-card h-100">
+          <div class="ygn-card-body text-center">
+            <div class="text-secondary mb-3 display-5">
               <i class="fas fa-microchip"></i>
             </div>
-            <h3>PCB Framework</h3>
-            <p>Modular board designs with standardized IO, power management, and mounting. All circuits fully documented.</p>
-            <ul class="list-unstyled">
-              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>Three board sizes (S/M/L)</li>
-              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>Unified IO board system</li>
-              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>SMT-optimized layouts</li>
-            </ul>
+            <h3>Modular PCBs</h3>
+            <p class="opacity-75">Standardized IO and Effect boards that separate power management from your audio circuit.</p>
           </div>
         </div>
       </div>
 
       <!-- Enclosures -->
       <div class="col-md-4">
-        <div class="ygn-card">
-          <div class="ygn-card-body">
-            <div class="text-primary mb-3 display-5">
+        <div class="ygn-card h-100">
+          <div class="ygn-card-body text-center">
+            <div class="text-secondary mb-3 display-5">
               <i class="fas fa-cube"></i>
             </div>
-            <h3>Enclosures</h3>
-            <p>Precision-milled aluminum enclosures designed to fit the PCB framework. CNC files and 3D models included.</p>
-            <ul class="list-unstyled">
-              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>Hammond 1590-compatible</li>
-              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>FreeCAD source files</li>
-              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>CNC toolpath included</li>
-            </ul>
+            <h3>Precision Enclosures</h3>
+            <p class="opacity-75">Two-piece aluminum chassis designs with CNC-ready files for a perfect fit every time.</p>
           </div>
         </div>
       </div>
 
       <!-- Firmware -->
       <div class="col-md-4">
-        <div class="ygn-card">
-          <div class="ygn-card-body">
-            <div class="text-primary mb-3 display-5">
+        <div class="ygn-card h-100">
+          <div class="ygn-card-body text-center">
+            <div class="text-secondary mb-3 display-5">
               <i class="fas fa-code"></i>
             </div>
-            <h3>Firmware</h3>
-            <p>Pre-compiled firmware for relay switching, LED control, and power-on state management.</p>
-            <ul class="list-unstyled">
-              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>ATTiny-based control</li>
-              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>True bypass switching</li>
-              <li class="mb-2"><i class="fas fa-check text-secondary me-2"></i>Simple one-command flashing</li>
-            </ul>
+            <h3>Smart Control</h3>
+            <p class="opacity-75">Relay-based true bypass switching and intelligent power management powered by AVR.</p>
           </div>
         </div>
       </div>
@@ -89,7 +74,7 @@ layout: default
 </section>
 
 <!-- Reference Designs Section -->
-<section class="py-5">
+<section class="py-5 bg-surface-0">
   <div class="container">
     <div class="mb-5">
       <h2 class="section-title">Reference Designs</h2>
@@ -125,7 +110,7 @@ layout: default
     </div>
 
     <div class="text-center mt-5">
-      <a href="/effects.html" class="btn btn-primary">Browse all designs</a>
+      <a href="/effects.html" class="btn btn-primary">View All Designs</a>
     </div>
   </div>
 </section>
@@ -146,7 +131,7 @@ layout: default
           <div class="ygn-card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
               <span class="ygn-tag">{{ doc.topic }}</span>
-              <span class="small opacity-75">{{ doc.updated | date: "%b %Y" }}</span>
+              <span class="small text-muted">{{ doc.updated | date: "%b %Y" }}</span>
             </div>
             <h3 class="h4 mb-2">{{ doc.title }}</h3>
             <p class="small opacity-75 mb-3 flex-grow-1">{{ doc.excerpt }}</p>
@@ -171,7 +156,7 @@ layout: default
 <section class="py-5">
   <div class="container">
     <div class="ygn-card text-center p-5">
-      <div class="text-primary display-3 mb-3">
+      <div class="text-secondary display-3 mb-3">
         <i class="fab fa-github"></i>
       </div>
       <h2 class="mb-3">Fully Open Source</h2>
@@ -182,9 +167,9 @@ layout: default
         </a>
       </div>
       <div class="d-flex justify-content-center gap-3 flex-wrap">
-        <span class="ygn-tag">Hardware: CERN-OHL-S</span>
-        <span class="ygn-tag">Software: MIT</span>
-        <span class="ygn-tag">Docs: CC BY-SA 4.0</span>
+        <span class="badge bg-secondary">Hardware: CC0</span>
+        <span class="badge bg-secondary">Software: CC0</span>
+        <span class="badge bg-secondary">Docs: Apache 2.0</span>
       </div>
     </div>
   </div>
