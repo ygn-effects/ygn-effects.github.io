@@ -209,7 +209,7 @@ a.ygn-card:hover {
   color: var(--ygn-on-primary);
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary:not(:disabled):not(:disabled):active {
   background-color: var(--ygn-primary-dark);
   color: var(--ygn-on-primary);
 }
@@ -219,7 +219,7 @@ a.ygn-card:hover {
   color: var(--ygn-on-secondary);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover, .btn-secondary:not(:disabled):not(:disabled):active {
   background-color: var(--ygn-secondary-dark);
   color: var(--ygn-on-secondary);
 }
