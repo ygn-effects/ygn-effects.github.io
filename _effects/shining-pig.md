@@ -28,19 +28,15 @@ story: |
 
   <strong>The Gateway Build</strong><br><br>
 
-  For builders, this is the perfect entry point into the YGN Framework. The circuit is simple but sensitive, allowing you to figure out the importance of biasing and power rails. And because the PCB is a straightforward layout, you aren't locked in: swap a few values and add a few traces to convert it to the 9V Overdriver spec, or keep it 18V for the full experience.
+  For builders, this is the perfect entry point into the YGN Framework. The circuit is simple but sensitive, allowing you to figure out the importance of biasing and power rails. And because the PCB is a straightforward layout, you aren't locked in: swap a few values, add a few traces and eventually add biasing trimpots on the rails to convert it to the 9V Overdriver, tweak the EQ stage values or keep it its original 18V specs for the full original experience.
 
 knobs:
   - name: Volume
-    desc: Adjusts the output volume of the effect.
+    desc: This is the Master Volume the original never had. It sits at the very end of the circuit, allowing you to crank the Gain and EQ to get the transistors cooking while keeping the actual output level reasonable.
   - name: Gain
-    desc: Sets the amount of distortion. The range of this control is pretty wide, it covers ground from mild overdrive to straight-up fuzz. This is also dependent on the selected clipping option.
-  - name: Tone
-    desc: Adjusts the cut-off frequency. Turning this knob clockwise will filter more higher frequencies out.
-  - name: Sweep
-    desc: Adjusts the frequency response of the op-amp gain stage. Turning this knob clockwise will allow more low end to be clipped. Fully counter-clockwise is equivalent to the stock  value.
-  - name: Clip
-    desc: Selects the clipping mode between LED, silicon and germanium diodes. Each will have their own threshold and will give a different character to the distortion.
+    desc: Controls the amount of drive using our custom taper. It covers a massive range from a high-headroom clean boost at minimum, through a wide edge-of-breakup texture in the middle and all the way to a gated, vintage silicon fuzz when fully cranked.
+  - name: EQ (Bass / Treble)
+    desc: A powerful, active 2-band EQ based on the Baxandall topology. The Bass control adds massive body and thump, while the Treble adds glass and slice. These controls are somewhat interactive. Boosting one will affect the behavior of the other.
 
 
 internals:
@@ -51,36 +47,26 @@ ioboard:
     desc: This trimpot allows you to set the brightness of the status LED.
 
 tips:
-  - name: Clipping vs. Headroom
+  - name: The "Hair" Control
     desc: |
-      Think of the Clip switch as an adjustable ceiling.
+      We modified the Gain pot (using a 1kB value) to give you fine control over the onset of distortion. You might notice a small "dead spot" at the very bottom of the range—this is intentional. It allows us to stretch out the transition point where the transistors just start to clip. This is where this pedal lives: adding "hair" and sparkle to a clean amp without fully taking over the tone.
+  - name: The Secret Life of the EQ
+    desc: |
+      Don't let the labels fool you, this isn't your standard amp tone stack.<br>
+      The Bass control is wide, affecting frequencies starting around 300Hz and extending all the way down to sub-guitar frequencies (with a massive bump at around 60Hz when maxed). It doesn't just add bass, it pushes the low-mids into distortion.<br>
+      The Treble control actually starts working around 200Hz, meaning it acts more like a high-mid presence control than a simple brightness knob. Because these ranges overlap in the midrange, tweaking one changes the character of the other. Start with both at noon and make small moves.
+  - name: Placement
+    desc: |
+      This circuit is surprisingly versatile regarding placement.
       <ul>
         <li>
-          <strong>Germanium diodes</strong> have the lowest ceiling. They compress early, giving you rich saturation and a lower output volume. It typically won't push your amp very hard.
+          <strong>First in chain:</strong> If you want that classic, touch-sensitive interaction with your guitar's volume knob, put it first. The low input impedance loads your pickups slightly, giving you a dynamic feel that cleans up beautifully.
         </li>
         <li>
-          <strong>LEDs</strong> on the other hand have a very high ceiling. They allow for huge signal swings before clipping. Use this mode if you want to use the pedal as a dirty boost to drive your tube amp's preamp into natural saturation.
-        </li>
-        <li>
-          <strong>Silicon diodes</strong> sit in the middle ground, though still on the lower side of the headroom ceiling. This is the diode flavor found in most stock RATs.
+          <strong>End of chain:</strong> Unlike some vintage fuzzes the Shining Pig handles buffered, low-impedance signals perfectly well. Try placing it at the very end of your drive section as an always-on sweetener, adding that 18V headroom and a final dusting of hair to your entire signal chain.
         </li>
       </ul>
-      This selection of clipping diodes is based on various iterations of the effect over the years and gives the Sexy Rodent a lot of versatility, allowing it to slot naturally into most rigs.
-  - name: Dialing in the "Sweep"
-    desc: |
-      The <strong>Sweep</strong> control is interactive. As you turn it up (clockwise) to add bass, you are also increasing the overall gain of the op-amp. You might find that as you increase the Sweep, you need to back off the <strong>Tone</strong> knob slightly to keep the definition, or lower the <strong>Gain</strong> knob to maintain clarity. This is of course also dependent on the clipping mode used.
-  - name: Stacking Strategy
-    desc: |
-      The Sexy Rodent plays well with others.
-      <ul>
-        <li>
-          <strong>Tighten the lows:</strong> Put a mid-hump drive (like a Tube Screamer or Klon-style circuit) before the Rodent. This cuts the bass before it hits the distortion stage, keeping things tight even with the Gain cranked.
-        </li>
-        <li>
-          <strong>The Doom Stack:</strong> Run the Rodent into a mid-scooped fuzz (like a Big Muff). Use the Rodent's mid-focus to punch through the mix, adding a gnarly texture to the smooth wall of fuzz.
-        </li>
-      </ul>
-      The Rodent also stacks very well with itself. With one set as a dirty boost and one set as an overdrive or a distortion, it might be all you need!
+      This circuit is surprisingly versatile regarding placement.
 
 resources:
   - name: hardware
