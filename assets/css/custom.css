@@ -35,7 +35,9 @@
   --bs-secondary-rgb: 103, 58, 183;
 
   --bs-link-color: var(--ygn-primary);
+  --bs-link-color-rgb: 224, 224, 224;
   --bs-link-hover-color: var(--ygn-primary-dark);
+  --bs-link-hover-color-rgb: 255, 193, 7;
 
   --bs-border-radius: var(--ygn-radius);
   --bs-border-radius-lg: 2rem;
@@ -48,6 +50,12 @@
 body {
   font-family: 'Questrial', sans-serif;
   line-height: 1.6;
+}
+
+strong {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 105%;
 }
 
 h1, h2, h3, h4, h5, h6 {
