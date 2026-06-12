@@ -1,6 +1,8 @@
 - title: Home
   url: /
+- title: Framework
+  url: /framework/
 - title: Designs
-  url: /effects.html
+  url: /designs/
 - title: Documentation
-  url: /docs.html
+  url: /docs/

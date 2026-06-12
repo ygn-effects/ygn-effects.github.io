@@ -1,7 +1,7 @@
 ---
 title: Sexy Rodent
 layout: effect
-permalink: /effects/sexy-rodent/
+permalink: /designs/sexy-rodent/
 category: Distortion
 date: 2023-11-21
 excerpt: A hot-rodded Rat with LED/Si/Ge clipping and wide-range Sweep control.

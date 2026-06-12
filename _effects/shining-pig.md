@@ -1,7 +1,7 @@
 ---
 title: Shining Pig
 layout: effect
-permalink: /effects/shining-pig/
+permalink: /designs/shining-pig/
 category: Boost
 date: 2025-12-23
 excerpt: A civilized 18V Powerboost with Master Volume and refined gain taper.
