@@ -84,7 +84,7 @@ layout: default
     <div class="row g-4">
       {% assign published_effects = site.effects | where_exp: "effect", "effect.draft != true" | sort: 'date' | reverse %}
       {% if published_effects.size > 0 %}
-        {% for effect in published_effects %}
+        {% for effect in published_effects limit: 3 %}
         <div class="col-md-6 col-lg-4">
           <a href="{{ effect.url }}" class="ygn-card">
             <div class="ygn-card-img" style="background-image: url('{{ effect.images.card }}');"></div>
@@ -124,8 +124,8 @@ layout: default
     </div>
 
     <div class="row g-4">
-      {% assign latest_docs = site.docs | sort: 'updated' | reverse | limit: 3 %}
-      {% for doc in latest_docs %}
+      {% assign latest_docs = site.docs | sort: 'updated' | reverse %}
+      {% for doc in latest_docs limit: 3 %}
       <div class="col-md-4">
         <a href="{{ doc.url }}" class="ygn-card">
           <div class="ygn-card-body">
