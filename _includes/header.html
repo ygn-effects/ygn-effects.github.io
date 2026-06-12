@@ -17,7 +17,7 @@
           <ul class="navbar-nav me-auto">
             {% for entry in site.data.navigation %}
             <li class="nav-item">
-              <a class="nav-link {% if entry.url == page.url %}active{% endif %}" href="{{ entry.url }}">{{ entry.title }}</a>
+              <a class="nav-link {% if entry.url == "/" %}{% if page.url == "/" %}active{% endif %}{% elsif page.url contains entry.url %}active{% endif %}" href="{{ entry.url }}">{{ entry.title }}</a>
             </li>
             {% endfor %}
           </ul>
