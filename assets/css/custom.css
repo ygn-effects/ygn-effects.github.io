@@ -275,6 +275,13 @@ a.ygn-card:hover {
 /* =========================================
   Documentation Specifics
 ========================================= */
+.doc-hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--ygn-surface) 0%, var(--ygn-bg) 100%);
+  border-radius: var(--ygn-radius);
+  padding: 2rem 2rem;
+  overflow: hidden;
+}
 .doc-content h2 {
   color: var(--ygn-primary);
   margin-top: 3rem;
