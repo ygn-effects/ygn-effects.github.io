@@ -9,7 +9,7 @@ layout: default
       <div class="ygn-hero-overlay">
         <div class="ygn-hero-content text-start text-white position-absolute">
           <span class="ygn-tag mb-2">{{ page.category }}</span>
-          <h1 class="display-3 fw-bold">{{ page.title }}</h1>
+          <h1 class="display-3">{{ page.title }}</h1>
           <p class="lead mb-0 opacity-75">{{ page.excerpt }}</p>
         </div>
       </div>
@@ -57,7 +57,7 @@ layout: default
           <div class="col-md-{% if page.images.knobs %}7{% else %}12{% endif %}">
             {% for knob in page.knobs %}
             <div class="mb-3 ps-3 border-start border-3 border-secondary">
-              <h4 class="h5 fw-bold mb-1">{{ knob.name }}</h4>
+              <h4 class="h5 mb-1">{{ knob.name }}</h4>
               <p class="mb-0 opacity-75">{{ knob.desc }}</p>
             </div>
             {% endfor %}
@@ -78,10 +78,10 @@ layout: default
           </div>
           {% endif %}
           <div class="col-md-{% if page.images.internals %}8{% else %}12{% endif %}">
-            <h4 class="text-uppercase small fw-bold mb-3">Effect Board</h4>
+            <h4 class="text-uppercase small mb-3">Effect Board</h4>
             {% for internal in page.internals %}
             <div class="mb-3 ps-3 border-start border-3 border-secondary">
-              <h4 class="h5 fw-bold mb-1">{{ internal.name }}</h4>
+              <h4 class="h5 mb-1">{{ internal.name }}</h4>
               <p class="mb-0 opacity-75">{{ internal.desc }}</p>
             </div>
             {% endfor %}
@@ -97,10 +97,10 @@ layout: default
           </div>
           {% endif %}
           <div class="col-md-{% if page.images.ioboard %}8{% else %}12{% endif %}">
-            <h4 class="text-uppercase small fw-bold mb-3">IO Board</h4>
+            <h4 class="text-uppercase small mb-3">IO Board</h4>
             {% for internal in page.ioboard %}
             <div class="mb-3 ps-3 border-start border-3 border-secondary">
-              <h4 class="h5 fw-bold mb-1">{{ internal.name }}</h4>
+              <h4 class="h5 mb-1">{{ internal.name }}</h4>
               <p class="mb-0 opacity-75">{{ internal.desc }}</p>
             </div>
             {% endfor %}
@@ -116,8 +116,8 @@ layout: default
       <h2 class="mb-4 text-primary">Tips & Tricks</h2>
       <div class="ygn-card p-4">
         {% for tip in page.tips %}
-        <h4 class="text-uppercase small fw-bold mb-3">{{ tip.name }}</h4>
         <div class="mb-4 ps-3 border-start border-3 border-secondary">
+          <h4 class="h5 text-uppercase mb-3">{{ tip.name }}</h4>
           <div class="doc-content">{{ tip.desc }}</div>
         </div>
         {% endfor %}

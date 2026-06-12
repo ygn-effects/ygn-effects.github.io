@@ -51,8 +51,14 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.btn {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
 }
 
 /* =========================================
@@ -189,7 +195,6 @@ a.ygn-card:hover {
 ========================================= */
 .btn {
   padding: 0.75rem 1.5rem;
-  font-weight: 600;
   box-shadow: var(--ygn-shadow);
   border-radius: var(--ygn-radius);
   border: none;
@@ -230,7 +235,6 @@ a.ygn-card:hover {
 .section-title {
   text-align: center;
   font-size: 2.5rem;
-  font-weight: 700;
   margin-bottom: 1rem;
 }
 
@@ -251,7 +255,6 @@ a.ygn-card:hover {
   padding: 0.25rem 0.75rem;
   border-radius: 2rem;
   font-size: 0.8rem;
-  font-weight: 600;
 }
 
 .ygn-tag-sm {
@@ -329,7 +332,6 @@ a.ygn-card:hover {
 .doc-content code {
   color: var(--ygn-on-secondary);
   font-size: medium;
-  font-weight: bold;
 }
 
 .doc-sidebar {
@@ -353,7 +355,6 @@ a.ygn-card:hover {
   opacity: 1;
   color: var(--ygn-primary);
   transform: translateX(5px);
-  font-weight: 600;
 }
 
 .doc-toc-link:hover.active {
@@ -364,7 +365,6 @@ a.ygn-card:hover {
   opacity: 1;
   color: var(--ygn-secondary);
   transform: translateX(5px);
-  font-weight: 600;
 }
 
 /* =========================================
