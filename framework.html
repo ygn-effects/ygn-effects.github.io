@@ -308,10 +308,13 @@ permalink: /framework/
         <p class="small opacity-75">We don't just dump a ZIP file. We document the process.</p>
         <ul class="list-unstyled">
           <li class="mb-2">
-            <strong class="text-secondary">Hardware (CC0):</strong> Public Domain. Use it, sell it.
+            <strong class="text-secondary">Hardware ({{ site.data.licenses.hardware.name }}):</strong> {{ site.data.licenses.hardware.description }}
           </li>
           <li class="mb-2">
-            <strong class="text-secondary">Documentation (Apache 2.0):</strong> Free to share.
+            <strong class="text-secondary">Software ({{ site.data.licenses.software.name }}):</strong> {{ site.data.licenses.software.description }}
+          </li>
+          <li class="mb-2">
+            <strong class="text-secondary">Documentation ({{ site.data.licenses.docs.name }}):</strong> {{ site.data.licenses.docs.description }}
           </li>
         </ul>
         <a href="/docs.html" class="btn btn-sm btn-secondary mt-2">Read the Docs</a>

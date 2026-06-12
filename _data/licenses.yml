@@ -1,0 +1,17 @@
+hardware:
+  label: Hardware
+  name: CC0
+  url: https://creativecommons.org/publicdomain/zero/1.0/
+  description: Public Domain. Use it, sell it.
+
+software:
+  label: Software
+  name: CC0
+  url: https://creativecommons.org/publicdomain/zero/1.0/
+  description: Public Domain. Use it freely.
+
+docs:
+  label: Documentation
+  name: Apache 2.0
+  url: https://www.apache.org/licenses/LICENSE-2.0
+  description: Free to share with attribution.
