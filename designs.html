@@ -18,19 +18,19 @@ permalink: /designs/
 <section class="py-5">
   <div class="container">
     <div class="row g-4">
-      {% assign all_effects = site.effects | where_exp: "effect", "effect.draft != true" | sort: 'date' | reverse %}
+      {% assign all_designs = site.designs | where_exp: "design", "design.draft != true" | sort: 'date' | reverse %}
 
-      {% if all_effects.size > 0 %}
-        {% for effect in all_effects %}
+      {% if all_designs.size > 0 %}
+        {% for design in all_designs %}
         <div class="col-md-6 col-lg-4">
-          <a href="{{ effect.url }}" class="ygn-card">
-            <div class="ygn-card-img" style="background-image: url('{{ effect.images.card }}');"></div>
+          <a href="{{ design.url }}" class="ygn-card">
+            <div class="ygn-card-img" style="background-image: url('{{ design.images.card }}');"></div>
             <div class="ygn-card-body">
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <span class="ygn-tag">{{ effect.category }}</span>
+                <span class="ygn-tag">{{ design.category }}</span>
               </div>
-              <h3 class="h4 mb-2">{{ effect.title }}</h3>
-              <p class="small opacity-75 mb-0">{{ effect.excerpt }}</p>
+              <h3 class="h4 mb-2">{{ design.title }}</h3>
+              <p class="small opacity-75 mb-0">{{ design.excerpt }}</p>
             </div>
           </a>
         </div>
@@ -46,7 +46,7 @@ permalink: /designs/
       {% endif %}
     </div>
 
-    {% if all_effects.size > 0 %}
+    {% if all_designs.size > 0 %}
     <div class="mt-5 text-center">
       <div class="col-md-6">
         <i class="fas fa-info-circle me-2 text-primary"></i>

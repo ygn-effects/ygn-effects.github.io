@@ -286,9 +286,9 @@ footer {
 }
 
 /* =========================================
-  Effect details Specifics
+  Design details Specifics
 ========================================= */
-.effect-story blockquote {
+.design-story blockquote {
   border-left: 3px solid var(--ygn-secondary);
   padding: 1rem;
   font-style: italic;

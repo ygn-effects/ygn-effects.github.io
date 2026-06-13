@@ -1,17 +1,17 @@
 ---
 title: Shining Pig
-layout: effect
+layout: design
 permalink: /designs/shining-pig/
 category: Boost
 date: 2025-12-23
 excerpt: A civilized 18V Powerboost with Master Volume and refined gain taper.
 
 images:
-  card: /assets/images/effects/shining-pig/card.png
-  hero: /assets/images/effects/shining-pig/hero.png
-  story_1: /assets/images/effects/shining-pig/story-1.png
-  knobs: /assets/images/effects/shining-pig/knobs.png
-  ioboard: /assets/images/effects/shining-pig/ioboard.png
+  card: /assets/images/designs/shining-pig/card.png
+  hero: /assets/images/designs/shining-pig/hero.png
+  story_1: /assets/images/designs/shining-pig/story-1.png
+  knobs: /assets/images/designs/shining-pig/knobs.png
+  ioboard: /assets/images/designs/shining-pig/ioboard.png
 
 story: |
   <strong>A primitive circuit with civilized manners.</strong><br><br>

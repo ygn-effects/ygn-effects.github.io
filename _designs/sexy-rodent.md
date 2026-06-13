@@ -1,18 +1,18 @@
 ---
 title: Sexy Rodent
-layout: effect
+layout: design
 permalink: /designs/sexy-rodent/
 category: Distortion
 date: 2023-11-21
 excerpt: A hot-rodded Rat with LED/Si/Ge clipping and wide-range Sweep control.
 
 images:
-  card: /assets/images/effects/sexy-rodent/card.png
-  hero: /assets/images/effects/sexy-rodent/hero.png
-  story_1: /assets/images/effects/sexy-rodent/story-1.png
-  knobs: /assets/images/effects/sexy-rodent/knobs.png
-  internals: /assets/images/effects/sexy-rodent/internals.png
-  ioboard: /assets/images/effects/sexy-rodent/ioboard.png
+  card: /assets/images/designs/sexy-rodent/card.png
+  hero: /assets/images/designs/sexy-rodent/hero.png
+  story_1: /assets/images/designs/sexy-rodent/story-1.png
+  knobs: /assets/images/designs/sexy-rodent/knobs.png
+  internals: /assets/images/designs/sexy-rodent/internals.png
+  ioboard: /assets/images/designs/sexy-rodent/ioboard.png
 
 story: |
   <strong>Let’s be real: you don’t need another history lesson on the Rat.</strong><br><br>

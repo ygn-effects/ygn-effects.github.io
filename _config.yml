@@ -15,9 +15,9 @@ plugins:
   - jekyll-feed
 
 collections:
-  effects:
+  designs:
     output: true
-    permalink: /effects/:name/
+    permalink: /designs/:name/
   docs:
     output: true
     permalink: /docs/:name/
@@ -25,9 +25,9 @@ collections:
 defaults:
   - scope:
       path: ""
-      type: "effects"
+      type: "designs"
     values:
-      layout: "effect"
+      layout: "design"
   - scope:
       path: ""
       type: "docs"
@@ -41,3 +41,4 @@ exclude:
   - node_modules/
   - vendor/
   - README.md
+  - claude.md
