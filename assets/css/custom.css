@@ -19,6 +19,7 @@
 
   /* Global Properties */
   --ygn-radius: 1.75rem;
+  --ygn-radius-sm: 1rem;
   --ygn-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   --ygn-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
   --ygn-ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -327,7 +328,7 @@ footer {
   border-left: 4px solid var(--ygn-primary);
   background: var(--ygn-surface);
   padding: 1rem 1rem 1rem 1rem;
-  border-radius: var(--ygn-radius);
+  border-radius: var(--ygn-radius-sm);
   margin: 2rem 0;
   font-style: italic;
 }
@@ -342,7 +343,7 @@ footer {
   border-collapse: separate;
   border-spacing: 0;
   background: var(--ygn-surface);
-  border-radius: var(--ygn-radius);
+  border-radius: var(--ygn-radius-sm);
   overflow: hidden;
 }
 
