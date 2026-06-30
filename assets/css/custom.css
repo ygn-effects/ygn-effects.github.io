@@ -360,7 +360,73 @@ footer {
 
 .doc-content code {
   color: var(--ygn-on-secondary);
-  font-size: medium;
+  font-size: 0.90rem;
+}
+
+.doc-content div.highlighter-rouge {
+  background: var(--ygn-surface);
+  border-radius: var(--ygn-radius-sm);
+  overflow: hidden;
+  margin: 1.5rem 0;
+  box-shadow: var(--ygn-shadow);
+}
+
+.doc-content .code-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--ygn-surface-highlight);
+  padding: 0.35rem 1rem;
+  min-height: 2rem;
+}
+
+.doc-content .code-lang {
+  font-family: 'Space Mono', monospace;
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ygn-on-secondary);
+  opacity: 0.8;
+}
+
+.doc-content .copy-btn {
+  background: none;
+  border: none;
+  color: var(--ygn-on-surface);
+  cursor: pointer;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.85rem;
+  opacity: 0.45;
+  transition: opacity var(--ygn-dur) var(--ygn-ease), color var(--ygn-dur) var(--ygn-ease);
+  line-height: 1;
+}
+
+.doc-content .copy-btn:hover {
+  opacity: 1;
+  color: var(--ygn-primary);
+}
+
+.doc-content .copy-btn.copied {
+  opacity: 1;
+  color: var(--ygn-primary-dark);
+}
+
+.doc-content div.highlighter-rouge .highlight {
+  background: transparent;
+  margin: 0;
+  padding: 1rem 1.25rem;
+}
+
+.doc-content div.highlighter-rouge pre.highlight {
+  background: transparent;
+  margin: 0;
+  overflow-x: auto;
+  color: var(--ygn-on-surface);
+}
+
+.doc-content div.highlighter-rouge code {
+  color: var(--ygn-on-secondary);
 }
 
 .doc-sidebar {

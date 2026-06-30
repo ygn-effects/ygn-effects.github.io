@@ -50,6 +50,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Code block headers + copy buttons
+  const LANG_NAMES = {
+    sh: 'Shell', bash: 'Bash', plaintext: '', text: '',
+    javascript: 'JavaScript', js: 'JavaScript', css: 'CSS',
+    html: 'HTML', yaml: 'YAML', json: 'JSON',
+    ruby: 'Ruby', python: 'Python', c: 'C', cpp: 'C++'
+  };
+
+  document.querySelectorAll('.doc-content div.highlighter-rouge').forEach(block => {
+    const langClass = Array.from(block.classList).find(c => c.startsWith('language-'));
+    const langKey = langClass ? langClass.replace('language-', '') : '';
+    const langLabel = langKey in LANG_NAMES ? LANG_NAMES[langKey] : langKey.toUpperCase();
+
+    const header = document.createElement('div');
+    header.className = 'code-block-header';
+
+    const label = document.createElement('span');
+    label.className = 'code-lang';
+    label.textContent = langLabel;
+
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'copy-btn';
+    copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i>';
+    copyBtn.setAttribute('aria-label', 'Copy code');
+
+    copyBtn.addEventListener('click', () => {
+      const code = block.querySelector('code');
+      if (!code) return;
+      navigator.clipboard.writeText(code.textContent.trim()).then(() => {
+        copyBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+        copyBtn.classList.add('copied');
+        setTimeout(() => {
+          copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i>';
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      });
+    });
+
+    header.appendChild(label);
+    header.appendChild(copyBtn);
+    block.insertBefore(header, block.firstChild);
+  });
+
   // Image zoom functionality
   const docImages = document.querySelectorAll('.doc-img');
   docImages.forEach(img => {
