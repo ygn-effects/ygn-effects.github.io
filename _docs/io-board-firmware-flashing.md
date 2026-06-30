@@ -2,7 +2,7 @@
 title: IO Board Firmware Flashing
 layout: doc
 permalink: /docs/io-board-firmware-flashing/
-updated: 2025-07-18
+updated: 2026-06-30
 topic: Firmware
 excerpt: Flashing of the ATTiny micro controller present on the IO Board for bypass operations.
 tags: [firmware, pcb, programming]
@@ -10,7 +10,7 @@ toc:
   - label: Introduction
     href: "#intro"
   - label: Required tools
-    href: "#setup"
+    href: "#tools"
   - label: Setup
     href: "#setup"
   - label: Flashing
@@ -21,32 +21,15 @@ toc:
 
 ## 1. Introduction {#intro}
 
-Every **YGN IO board** carries a tiny AVR brain (ATTiny 202) that takes care of relay switching, LED states, and power-on state.
-All that silicon needs is the right **firmware**—and loading it is easier than soldering a jack.
+Welcome to the YGN Effects Framework documentation! Every **YGN IO board** carries a small AVR microcontroller (the ATTiny 202) that handles relay switching, LED states and power-on behaviour. Before the board can do any of that, it needs its **firmware**. This guide walks you through loading it.
 
-### No coding, just one command
-You won’t open an IDE or write a single line of C++. Instead, you’ll use **`avrdude`**, the rock-solid command-line utility that ships with most AVR toolchains. One copy-and-paste command will:
-
-1. Configure the chip’s fuses (clock, brown-out, etc.).
-2. Flash the supplied .hex file.
-3. Verify the upload.
-
-If you can open a terminal and press **Enter**, you’re golden.
-
-### What you’ll learn
-
-- How to grab the correct firmware bundle for your pedal.
-- Connecting the pogo-pin probe to the board’s ICSP pads.
-- Running a single `avrdude` line that sets fuses **and** flashes firmware in ~10 s.
-- Basic troubleshooting if the upload is interrupted.
-
-By the end, your IO board will be talking, switching, and blinking exactly as the design intended—without ever opening an IDE.
+You won’t open an IDE or write a single line of code. One copy-and-paste `avrdude` command sets the chip’s fuses and flashes the firmware in about ten seconds. If you can open a terminal, you’re all set.
 
 ---
 
-### 2. Tools & Adapters {#tools}
+## 2. Required Tools {#tools}
 
-Below is a quick‑glance checklist of everything you’ll need:
+Below is a quick-glance checklist of everything you’ll need:
 
 | Item | Purpose | YGN Notes |
 | --- | --- | --- |
@@ -55,13 +38,20 @@ Below is a quick‑glance checklist of everything you’ll need:
 
 > **Tip:** If you already own a generic USB-to-TTL adapter, you can use it instead. You'll find the wiring information [here](https://github.com/SpenceKonde/AVR-Guidance/blob/master/UPDI/jtag2updi.md).
 
+<div class="img-grid cols-2" markdown="0">
+  <img src="/assets/images/docs/io-board-firmware-flashing/tools-updi-friend.jpg"
+       alt="Adafruit UPDI Friend USB serial adapter" class="doc-img">
+  <img src="/assets/images/docs/io-board-firmware-flashing/tools-pogo-probe.jpg"
+       alt="3×2 pogo-pin probe with 1.27 mm pitch" class="doc-img">
+</div>
+
 ---
 
 ## 3. Setting-Up the Toolchain {#setup}
 
 ### Software
 
-Only `avrdude` is required, it is generally available with most distributions package manager.
+Only `avrdude` is required. It is available through most distribution package managers.
 
 | Platform | Install hint | Test it |
 |----------|--------------|---------|
@@ -69,37 +59,138 @@ Only `avrdude` is required, it is generally available with most distributions pa
 | **macOS** | `brew install avrdude` | Same `avrdude -v` sanity-check. |
 | **Windows** | Download the ZIP from the project’s **GitHub Releases** page → extract → add the folder to your **PATH** (so `avrdude.exe` runs from any prompt). | Open *Windows Terminal* and run `avrdude -v`. |
 
-### Hardware
+### 1.27 mm pogo-pin footprint
 
-##### 1.27 mm pogo-pin footprint
-
-The ICSP pins are located right under the ATTiny, the pinout is as follows:
+The ICSP pins are located right under the ATTiny. The pinout is as follows:
 
 <div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/io-board-firmware-flashing/icsp_board_top.png" alt="" class="doc-img">
-  <img src="/assets/images/docs/io-board-firmware-flashing/icsp_board_top.webp" alt="" class="doc-img quart">
+  <img src="/assets/images/docs/io-board-firmware-flashing/icsp_board_schematic.png" alt="ICSP pad layout diagram on the IO board with pin numbering" class="doc-img">
+  <img src="/assets/images/docs/io-board-firmware-flashing/icsp_board_top.webp" alt="IO board top view showing the ICSP pad location under the ATTiny" class="doc-img">
 </div>
 
 | Pin # | Function | Notes |
 |:---:|---------|-------|
-| **1** | GND | Thru-hole, also serves as *alignment post* |
-| **2** | GND | — |
-| **3** | **PA0 / UPDI** | One-wire data line |
-| **4** | GND | — |
-| **5** | +5 V | Target power from programmer (optional) |
-| **6** | GND | Thru-hole, *alignment post* |
+| **1** | NC | |
+| **2** | **PA0 / UPDI** | One-wire data line |
+| **3** | NC | |
+| **4** | **+5 V** | Target power from programmer |
+| **5** | NC | |
+| **6** | **GND** | Target power from programmer |
 
-> **Tip:** Pins 1 & 6 are plated holes—your pogo probe’s guide posts snap into them and keep everything square while you press.
+> **Tip:** Pins 2, 4 & 6 are plated holes. Your pogo probe’s guide posts snap into them and keep everything square while you press.
 
-##### Wiring to the UPDI Friend
+### Wiring to the UPDI Friend
 
 The UPDI Friend should be wired this way:
 
 | UPDI Friend pin | Probe pad |
 |-----------------|-----------|
-| **GND** | 1, 2, 4 **or** 6 (any ground) |
-| **UPDI (D)** | **3** |
-| **5 V OUT** | **5** (optional) |
+| **GND** | **6** |
+| **UPDI (D)** | **2** |
+| **5 V OUT** | **4** (optional) |
+
+> **Note:** The UPDI Friend supplies power to the ATTiny through the **5 V OUT** connection. Your target board does not need to be powered up or connected to anything else during flashing.
+
+<div class="img-grid cols-1" markdown="0">
+  <img src="/assets/images/docs/io-board-firmware-flashing/setup-updi-wired.jpg"
+       alt="UPDI Friend wired to the pogo-pin probe with GND, UPDI and 5V connections visible" class="doc-img">
+</div>
 
 ---
+
+## 4. Flashing the Firmware {#flashing}
+
+With the toolchain in place and the probe wired up, you're ready to flash.
+
+### Locating the firmware
+
+The `firmware.hex` file lives in the `_output` folder of the firmware directory for your pedal. For the Small IO Board it is at:
+
+```
+small/firmware/small-standard-firmware/_output/firmware.hex
+```
+
+**Open a terminal** and navigate to that `_output` folder. The flash command references the file as `./firmware.hex`, so your working directory needs to be there.
+
+### Finding your serial port
+
+The port name depends on your operating system. Plug in the UPDI Friend, then identify it:
+
+| Platform | Typical port | How to find it |
+|----------|-------------|----------------|
+| **Linux** | `/dev/ttyUSB0` or `/dev/ttyACM0` | Run `ls /dev/tty*` before and after plugging in. The new entry is your port. |
+| **macOS** | `/dev/tty.usbserial-XXXX` | Same trick: `ls /dev/tty.*` after plugging in. |
+| **Windows** | `COM3` (or similar) | Open *Device Manager → Ports (COM & LPT)* after plugging in. |
+
+> **Note:** On Linux, your user account may need special permissions or a udev rule to access the serial port. Check your distribution's documentation for the right approach.
+
+### Running the command
+
+1. **Press** the pogo-pin probe firmly onto the ICSP pads.
+
+<div class="img-grid cols-1" markdown="0">
+  <img src="/assets/images/docs/io-board-firmware-flashing/probe-connected.jpg"
+       alt="Pogo-pin probe pressed onto the ICSP pads on the IO board" class="doc-img">
+</div>
+
+2. **Run** the command below, replacing `/dev/ttyUSB0` with your actual port:
+
+```sh
+avrdude -c serialupdi -p t202 -P /dev/ttyUSB0 -b 57600 \
+  -U wdtcfg:w:0x00:m \
+  -U bodcfg:w:0x00:m \
+  -U osccfg:w:0x01:m \
+  -U tcd0cfg:w:0x00:m \
+  -U syscfg0:w:0xC4:m \
+  -U syscfg1:w:0x06:m \
+  -U append:w:0x00:m \
+  -U bootend:w:0x00:m \
+  -U flash:w:./firmware.hex:i
+```
+
+> **Note:** On Linux, add `-C /etc/avrdude.conf` right after `avrdude` if the command reports a missing configuration file. On macOS and Windows this flag is not needed.
+
+The command sets all required fuses and flashes the firmware in one pass. You will see avrdude reporting each write and verify operation as it goes. A successful run ends with:
+
+```
+avrdude done.  Thank you.
+```
+
+### Troubleshooting
+
+**`avrdude OS error: cannot open port /dev/ttyUSB0: Permission denied`**
+
+
+Your user account doesn't have access to the serial port. On Linux, this typically means you need special permissions or a udev rule. Check your distribution's documentation for the right approach.
+
+**`avrdude OS error: file ./firmware.hex is not readable: No such file or directory`**
+
+The command can't find the firmware file. Make sure your terminal is in the `_output` folder before running the command.
+
+**avrdude times out or reports "initialization failed"**
+
+Check that the probe is making firm, even contact across all six pads. Keep gentle, steady downward pressure throughout the process.
+
+---
+
+## 5. Testing the Flash {#test}
+
+One quick check confirms everything went as planned.
+
+1. **Set** the DIP switch on the IO board to the **ON** position.
+2. **Power** the board.
+3. **Listen** for a single audible click from the relay as the board initialises.
+
+The click confirms the firmware is running and reading the DIP switch correctly: the board is powering up in its active state as instructed.
+
+> **Note:** With the DIP switch in the **OFF** position, the board powers up in bypass mode and the relay will not click on start-up. Both behaviours are correct. The switch simply sets the power-on default for the finished pedal.
+
+If you hear no click with the switch set to ON, go back and confirm the flash completed without errors, then check your solder joints on the relay footprint.
+
+That's it. Your IO board is programmed and ready to be installed in your build.
+
+<div class="img-grid cols-1" markdown="0">
+  <img src="/assets/images/docs/io-board-firmware-flashing/dip-switch-on.jpg"
+       alt="DIP switch on the IO board set to the ON position" class="doc-img">
+</div>
 
