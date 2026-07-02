@@ -2,13 +2,15 @@
 title: FV-1 Programmer Flashing and Setup
 layout: doc
 permalink: /docs/fv1-programmer-flashing-and-setup/
-updated: 2026-06-30
+updated: 2026-07-01
 topic: Firmware
 excerpt: Flashing the ATmega328PB firmware and configuring the FT230X on the FV-1 EEPROM programmer.
 tags: [firmware, programming, fv1, avr, ftdi]
 toc:
   - label: Introduction
     href: "#intro"
+  - label: Assembly
+    href: "#assembly"
   - label: Required tools
     href: "#tools"
   - label: The SOIC clip
@@ -23,7 +25,7 @@ toc:
 
 ## 1. Introduction {#intro}
 
-Welcome to the YGN Effects Framework documentation! The **FV-1 EEPROM Programmer** is a compact tool that sits at the heart of the FV-1 platform: it lets you flash custom DSP effects directly onto your pedal's EEPROM chip right from VS Code via the [vscode-spinasm](https://github.com/yann-ygn/vscode-spinasm) extension, with no chip removal and no external programmer needed once it's set up.
+Welcome to the YGN Effects Framework documentation! The **FV-1 EEPROM Programmer** is a compact tool that sits at the heart of the FV-1 platform: it lets you flash custom DSP effects directly onto your pedal's EEPROM chip right from VS Code via the [vscode-spinasm](https://github.com/ygn-effects/project-fv1-platform/tree/main/software/spinasm) extension, with no chip removal and no external programmer needed once it's set up.
 
 Before it can do any of that, the programmer itself needs two one-time setup steps:
 
@@ -34,12 +36,29 @@ These two steps are independent and can be done in any order. Neither requires y
 
 ---
 
-## 2. Required Tools {#tools}
+## 2. Assembly {#assembly}
+
+Before flashing and configuring anything, a quick word on physically building the programmer.
+
+Populating the PCB follows the same process as our [SMD PCB Assembly](/docs/smd-pcb-assembly/) guide: paste, place, reflow. As with every board in the Framework, we provide a stencil and [stencil holder](/docs/tool-stencil-holder-assembly/) for accurate paste application, and a [soldering jig](/docs/tool-soldering-jig-usage/) to keep the through hole (TH) components perfectly aligned while you hand-solder them.
+
+The programmer's PCB was designed before we had access to a 3D printer, so instead of a printed enclosure, it's meant to be assembled inside an **LK-USB07** enclosure: a small extruded aluminium USB stick style case that's readily available on your favourite far east import site.
+
+<div class="img-grid cols-2" markdown="0">
+  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/lk-usb07-enclosure.jpg"
+       alt="LK-USB07 extruded aluminium enclosure" class="doc-img">
+  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/assembly-complete.jpg"
+       alt="Completed FV-1 programmer assembled inside the LK-USB07 enclosure" class="doc-img">
+</div>
+
+---
+
+## 3. Required Tools {#tools}
 
 | Item | Purpose | Notes |
 |------|---------|-------|
 | **AVRISP MK2** | ISP programmer for flashing the ATmega328PB | Any AVR ISP programmer compatible with `avrdude` will work. |
-| **SOIC8 clip** | Makes contact with the programmer PCB's SOICBite footprint | Any standard SOIC8 test clip with a 2×4 Dupont header. |
+| **SOIC8 test clamp** | Makes contact with the programmer PCB's SOICBite footprint | Any standard SOIC8 test clip with a 2×4 Dupont or box header. |
 | **Computer** | Runs `avrdude` and the FT230X configuration tool | Windows, macOS or Linux all work. FT_PROG (GUI) is Windows-only; `ftdi_eeprom` works on all platforms. |
 
 <div class="img-grid cols-2" markdown="0">
@@ -51,15 +70,30 @@ These two steps are independent and can be done in any order. Neither requires y
 
 ---
 
-## 3. The SOIC Clip {#soic-clip}
+## 4. The SOIC Clip {#soic-clip}
 
-The programmer PCB exposes a **SOICBite footprint**: a set of pads laid out to match the legs of a standard SOIC8 chip. An SOIC8 test clip grips these pads and gives you a reliable connection without soldering anything extra.
+The programmer PCB exposes a **SOICBite footprint**. Despite the name, these pads are not a copy of a chip's actual pins: it's a compact layout purpose-built for test clip contact, borrowed from the open-source [SOICbite](https://github.com/SimonMerrett/SOICbite) project, a cheap, small alternative to a Tag-Connect. An SOIC8 test clip grips these pads and gives you a reliable connection without soldering anything extra.
+
+### Adjusting the clip
+
+Because the SOICBite pads are more closely spaced than a real chip's body, a stock SOIC8 test clip usually won't close tightly enough on its own to make good contact. **Bend the clip's contacts slightly inward** so the jaws can close all the way onto the footprint. This is a one-time adjustment: once it's done, the clip stays ready for the SOICBite pattern. See the [SOICbite repo](https://github.com/SimonMerrett/SOICbite) for the how-to on making this adjustment.
+
+> **Tip:** Test the fit on the footprint before you rely on it for flashing. If the jaws don't close fully or feel loose, bend the contacts a little further and try again.
+
+<div class="img-grid cols-1" markdown="0">
+  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/clip-adjusted-contacts.jpg"
+       alt="SOIC8 test clip with contacts bent inward to close on the SOICBite footprint" class="doc-img">
+</div>
 
 ### Clip orientation
 
-SOIC clips are not keyed, so you need to orient them correctly before attaching. **Pin 1** of the footprint is marked with a small dot or triangle on the PCB silkscreen. **Pin 1 of the clip** is typically indicated by a marking on the clip body or a coloured wire on the cable.
+SOIC clips are not keyed, so you need to orient them correctly before attaching. **Pin 1** of the footprint is marked with a small dot on the PCB silkscreen. On most SOIC8 clips, **pin 1 is indicated by a coloured wire** in the cable, usually red.
+
+The pin 1 side of the clip **goes on the top side (component side) of the PCB**.
 
 **Align pin 1 of the clip with pin 1 of the footprint**, then press the clip down until it grips the row of pads on both sides.
+
+> **Tip:** It's easy to lose track of which side of the clip is pin 1, especially once it's flipped around in your hands. **Mark that side** with a dab of paint marker or a strip of tape so you can identify it at a glance.
 
 <div class="img-grid cols-2" markdown="0">
   <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/soic-pin1-marking.jpg"
@@ -70,7 +104,16 @@ SOIC clips are not keyed, so you need to orient them correctly before attaching.
 
 ### Wiring to the AVRISP MK2
 
-The clip's 2×4 header exposes eight pins. Connect them to the AVRISP MK2's standard 6-pin ISP header as follows:
+The clip's 2×4 header exposes eight pins.
+
+<div class="img-grid cols-2" markdown="0">
+  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/clip-pinout.jpg"
+       alt="SOIC8 clip 2x4 header with pins numbered 1 to 8" class="doc-img">
+  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/box-header-pinout.jpg"
+       alt="2x4 box header connector pinout mapped to the clip's pin numbers" class="doc-img">
+</div>
+
+Connect them to the AVRISP MK2's standard 6-pin ISP header as follows:
 
 | Clip pin | Signal | AVRISP MK2 pin |
 |:---:|--------|:---:|
@@ -85,14 +128,16 @@ The clip's 2×4 header exposes eight pins. Connect them to the AVRISP MK2's stan
 
 > **Note:** Pins 4 and 6 on the clip are not connected. You only need to wire the six active signals.
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/soic-wiring.jpg"
+<div class="img-grid cols-2" markdown="0">
+  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/avr-isp-pinout.jpg"
+       alt="Standard 6-pin AVR ISP header pinout with pin 1 marked" class="doc-img">
+  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/wiring-connected.jpg"
        alt="SOIC clip header wired to the AVRISP MK2 6-pin ISP connector" class="doc-img">
 </div>
 
 ---
 
-## 4. Flashing the ATmega328PB {#flashing}
+## 5. Flashing the ATmega328PB {#flashing}
 
 ### Software
 
@@ -118,9 +163,12 @@ firmware/_output/firmware.hex
 
 The AVRISP MK2 is accessed directly over USB, so no serial port identification is needed.
 
+> **Caution:** The AVRISP MK2 does not supply power. The ATmega328PB is powered by the target board, so the programmer must be **connected to your pedal's FV-1 target board** (and the board powered on) before you can flash it. See *Connecting the programmer to the target board* in the Tests section below for the header pinout.
+
 1. **Clip** the SOIC8 clip onto the SOICBite footprint as described in the previous section.
-2. **Plug** the AVRISP MK2 into your computer.
-3. **Run** the command below from the `_output` folder:
+2. **Connect** the programmer to your pedal's FV-1 target board via the dedicated header, then **power on** the target board.
+3. **Plug** the AVRISP MK2 into your computer.
+4. **Run** the command below from the `_output` folder:
 
 ```sh
 avrdude -p atmega328pb -c stk500v2 -P usb \
@@ -154,7 +202,7 @@ Check that the clip is making firm, even contact with all pads on both sides of 
 
 ---
 
-## 5. Setting Up the FT230X {#ft230x}
+## 6. Setting Up the FT230X {#ft230x}
 
 The **FT230X** is the USB-to-serial bridge on the programmer. Its four CBUS pins are configurable and need to be set once so the programmer can signal TX and RX activity and detect VBUS correctly.
 
@@ -167,7 +215,10 @@ The target configuration is:
 | **CBUS2** | `VBUS_SENSE` |
 | **CBUS3** | `RXLED` |
 
-**Plug the programmer into your computer via USB** before proceeding.
+> **Caution:** Like the ATmega328PB, the FT230X is powered by the target board, not by USB. The programmer must be **connected to your pedal's FV-1 target board** (and the board powered on) before you can configure its EEPROM. See *Connecting the programmer to the target board* in the Tests section below for the header pinout.
+
+1. **Connect** the programmer to your pedal's FV-1 target board via the dedicated header, then **power on** the target board.
+2. **Plug** the programmer into your computer via USB.
 
 ### Option A: FT_PROG (Windows)
 
@@ -220,7 +271,7 @@ A successful run will confirm the EEPROM was written without errors.
 
 ---
 
-## 6. Tests {#tests}
+## 7. Tests {#tests}
 
 With both setup steps complete, this is the quick end-to-end check to confirm your programmer is working correctly.
 
