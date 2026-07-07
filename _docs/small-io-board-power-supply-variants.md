@@ -13,19 +13,15 @@ toc:
     href: "#how-it-works"
   - label: Choosing Your Variant
     href: "#choosing"
-  - label: "Populating: -9V"
-    href: "#populate-9v"
-  - label: "Populating: +18V"
-    href: "#populate-18v"
-  - label: "Populating: ±15V"
-    href: "#populate-15v"
+  - label: "Populating The Board"
+    href: "#populating"
   - label: Verifying Your Output Voltages
     href: "#verify"
 ---
 
 ## Introduction {#intro}
 
-Welcome to the YGN Effects Framework documentation! The **Small IO Board** carries a small switching power supply built around the **ICL7660S** charge-pump IC, and it's designed to be flexible: the same PCB can be stuffed to deliver **-9V**, **+18V** or **±15V** on top of the standard +9V supply, depending on what the effect circuit plugged into it actually needs.
+Welcome to the YGN Effects Framework documentation! The **Small IO Board** carries a small switching power supply stage built around the **ICL7660S** charge-pump IC, and it's designed to be flexible: the same PCB can be stuffed to deliver **-9V**, **+18V** or **±15V** on top of the standard +9V supply, depending on what the effect circuit plugged into it actually needs.
 
 There's no extra hardware to source and no cutting traces involved. Every footprint for every variant already exists on the board, so building the one you want is simply a matter of populating the right handful of parts and leaving the rest empty. This guide walks you through picking a variant and stuffing it correctly.
 
@@ -40,13 +36,11 @@ The whole trick lives around **IC1**, an ICL7660S. On its own, this chip is a "c
 **IC1** and **C5** (its input decoupling capacitor) are common to all three variants and are always populated. Everything else in this stage is optional, and which parts you stuff depends entirely on the variant you're building.
 
 <div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/small-io-board-power-supply-variants/board-overview.png"
+  <img src="/assets/images/docs/small-io-board-power-supply-variants/board-overview.jpg"
        alt="3D render of the Small IO Board with the switching regulator area (IC1 and its surrounding diodes, capacitors and resistor footprints) visible" class="doc-img">
-  <img src="/assets/images/docs/small-io-board-power-supply-variants/schematic-switching-stage.png"
+  <img src="/assets/images/docs/small-io-board-power-supply-variants/schematic-switching-stage.jpg"
        alt="Schematic of the switching regulator stage, showing IC1 and the surrounding diode and capacitor network" class="doc-img">
 </div>
-
-> **Note:** The board's +5V logic supply (feeding the microcontroller and relay driver) comes from a separate regulator, **REG1**, wired directly to +REG. It's completely independent of this stage and always populated, so it isn't affected by whichever variant you build.
 
 > **Tip:** IC1's BOOST pin (pin 1) is tied to V+ in every variant. This pushes the internal oscillator up to around 35kHz, well above the audio band, so switching noise doesn't make its way into your effect's signal path.
 
@@ -65,8 +59,9 @@ The **J2** header, which powers the effect PCB plugged into your IO board, alway
 > **Caution:** Populate exactly **one** column, fully. Mixing parts from two different variants, or only half-populating one, can feed the wrong voltage into whatever effect PCB is plugged into J2 and damage it. If you're not sure which variant your effect circuit needs, check its documentation before you start soldering.
 
 ---
+## Populating The Board {#populating}
 
-## Populating: -9V {#populate-9v}
+### Populating: -9V
 
 This is the simplest variant: IC1 runs as a straightforward voltage inverter, giving you a standard ±9V split supply.
 
@@ -82,7 +77,7 @@ This is the simplest variant: IC1 runs as a straightforward voltage inverter, gi
 
 ---
 
-## Populating: +18V {#populate-18v}
+### Populating: +18V
 
 Here IC1 is used purely as a square-wave generator: it doesn't invert anything itself, it just drives an external doubler pump built from D2, D3 and their capacitors.
 
@@ -98,16 +93,14 @@ Here IC1 is used purely as a square-wave generator: it doesn't invert anything i
 
 ---
 
-## Populating: ±15V {#populate-15v}
+### Populating: ±15V
 
 This variant runs both pumps at once: the doubler feeds a cascaded inverter stage, giving you a split supply with more headroom than the -9V variant.
 
 1. **Populate** C6, D2, D3, C7, C8, RJ2, C10, C9, D5, C11 and D4.
 2. **Leave empty** D6, RJ1, RJ3 and RJ4.
 
-> **Caution:** D4 and D6 are mutually exclusive. This variant uses D4, not D6, don't populate both. Doing so clamps the negative pump to ground and drags -REG back up to roughly -8V instead of the intended ±15V.
-
-> **Caution:** C7, C9 and C11 must be rated for **at least 25V**. In this variant they see somewhere between 17V and 18V across them, so a lower-rated capacitor in these three positions can fail.
+> **Note:** D4 and D6 are mutually exclusive. This variant uses D4, not D6, don't populate both. Doing so clamps the negative pump to ground and drags -REG back up to roughly -8V instead of the intended ±15V.
 
 <div class="img-grid cols-1" markdown="0">
   <img src="/assets/images/docs/small-io-board-power-supply-variants/populated-plusminus15v.jpg"
