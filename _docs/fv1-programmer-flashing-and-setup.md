@@ -151,11 +151,7 @@ Only `avrdude` is required.
 
 ### Locating the firmware
 
-The pre-built firmware lives in the programmer's repository at:
-
-```
-firmware/_output/firmware.hex
-```
+The pre-built firmware lives in the programmer's repository at `firmware/_output/vscode-spinasm-firmware.hex`.
 
 **Open a terminal** and navigate to that `_output` folder before running the command below.
 
@@ -173,17 +169,36 @@ The AVRISP MK2 is accessed directly over USB, so no serial port identification i
 ```sh
 avrdude -p atmega328pb -c stk500v2 -P usb \
   -U lfuse:w:0xFF:m -U hfuse:w:0xD7:m -U efuse:w:0xF5:m \
-  -U flash:w:./firmware.hex:i
+  -U flash:w:./vscode-spinasm-firmware.hex:i
 ```
 
 > **Note:** On Linux, you may need to add `-C /etc/avrdude.conf` right after `avrdude` if the command reports a missing configuration file. On macOS and Windows this is not needed.
 
 > **Note:** On Linux, accessing the AVRISP MK2 over USB may require adding your user to the `plugdev` group or setting up a udev rule. Check your distribution's documentation for the right approach.
 
-A successful run ends with:
+A successful run will output:
 
 ```
-avrdude done.  Thank you.
+Processing -U lfuse:w:0xFF:m
+Reading 1 byte for lfuse from input file 0xFF
+Writing 1 byte (0xFF) to lfuse, 1 byte written, 1 verified
+
+Processing -U hfuse:w:0xD7:m
+Reading 1 byte for hfuse from input file 0xD7
+Writing 1 byte (0xD7) to hfuse, 1 byte written, 1 verified
+
+Processing -U efuse:w:0xF5:m
+Reading 1 byte for efuse from input file 0xF5
+Writing 1 byte (0xF5) to efuse, 1 byte written, 1 verified
+
+Processing -U flash:w:./vscode-spinasm-firmware.hex:i
+Reading 6148 bytes for flash from input file vscode-spinasm-firmware.hex
+Writing 6148 bytes to flash
+Writing | ################################################## | 100% 1.88 s
+Reading | ################################################## | 100% 1.81 s
+6148 bytes of flash verified
+
+Avrdude done.  Thank you.
 ```
 
 ### Troubleshooting
@@ -246,28 +261,47 @@ The target configuration is:
 | **Linux** | `sudo apt install ftdi-eeprom` *(Debian/Ubuntu)*<br>`sudo dnf install libftdi-devel` *(Fedora)* |
 | **macOS** | `brew install libftdi` |
 
-Create a configuration file named `ft230x.conf` with the following content:
+Create a configuration file named `vscode-spinasm-ftdi.conf` with the following content:
 
 ```ini
-vendor_id=0x0403
-product_id=0x6015
-max_power=100
+vendor_id="0x0403"
+product_id="0x6015"
 
-cbus0=TXLED
-cbus1=TRISTATE
-cbus2=VBUS_SENSE
-cbus3=RXLED
+manufacturer="YGN"
+product="vscode-spinasm programmer v1.0"
+serial="001"
+use_serial=true
+
+max_power=0
+self_powered=true
+remote_wakeup=false
+
+cbusx0=TXLED
+cbusx1=TRISTATE
+cbusx2=VBUS_SENSE
+cbusx3=RXLED
 ```
 
-> **Note:** A ready-to-use `ft230x.conf` file is included in the programmer's repository.
+> **Note:** A ready-to-use `vscode-spinasm-ftdi.conf` file is included in `firmware/_output/`.
 
 Then **run**:
 
 ```sh
-ftdi_eeprom --flash-eeprom ft230x.conf
+ftdi_eeprom --flash-eeprom vscode-spinasm-ftdi.conf
 ```
 
-A successful run will confirm the EEPROM was written without errors.
+A successful run will confirm the EEPROM was written without errors, the typical output is as follows:
+
+```
+FTDI eeprom generator v0.17
+(c) Intra2net AG and the libftdi developers <opensource@intra2net.com>
+FTDI read eeprom: 0
+EEPROM size: 256
+Used eeprom space: 240 bytes
+FTDI write eeprom: 0
+Writing to file: eeprom.bin
+FTDI close: 0
+```
 
 ---
 
