@@ -23,13 +23,11 @@ toc:
 
 ## 1. Introduction {#intro}
 
-Welcome to the YGN Effects Framework documentation! An **Arduino Pro Mini 3.3 V** is a simple, low-cost way to program the EEPROM on an FV-1 target board from [SpinASM for FV-1](https://github.com/ygn-effects/project-fv1-platform/tree/develop-software/software/vscode-spinasm) in VS Code.
+Welcome to the YGN Effects Framework documentation! An **Arduino Pro Mini 3.3 V** is a simple, low-cost way to program the EEPROM on an FV-1 target board from [SpinASM for VS Code](https://github.com/ygn-effects/project-fv1-platform/tree/develop-software/software/vscode-spinasm) in VS Code.
 
 It runs the same programming protocol as the dedicated [FV-1 EEPROM Programmer](/docs/fv1-programmer-flashing-and-setup/), but replaces the custom board with an Arduino Pro Mini and a separate USB-to-serial adapter. Once it is set up, the extension can detect the programmer, write compiled programs to the target EEPROM and read them back to verify every upload.
 
-This guide supports the **3.3 V, 8 MHz ATmega328P Arduino Pro Mini** only. The FV-1 programming connection is a 3.3 V system. Do not connect 5 V power or 5 V serial logic to the target board, Arduino or EEPROM.
-
-The USB-to-serial adapter powers the Pro Mini only while you flash its firmware. When you program an EEPROM, the powered FV-1 target board supplies the Pro Mini and the EEPROM.
+This guide supports the **3.3 V 8 MHz ATmega328P Arduino Pro Mini** only, as the FV-1 programming connection is a 3.3 V system.
 
 ---
 
@@ -79,7 +77,7 @@ The Pro Mini has two jobs in this guide, and each job has its own wiring and pow
 
 ### Wiring for EEPROM programming
 
-1. **Disconnect** the adapter's 3.3 V wire from the Pro Mini after flashing. Keep its GND, TX and RX connections in place so VS Code can communicate with the programmer.
+1. **Disconnect** the adapter's 3.3 V and RESET wires from the Pro Mini after flashing. Keep its GND, TX and RX connections in place so VS Code can communicate with the programmer.
 2. **Connect** the Pro Mini to the FV-1 target board's dedicated programming header by signal name:
 
    | Arduino Pro Mini | Target programming header |
@@ -117,11 +115,7 @@ Only `avrdude` is required to flash the firmware.
 
 ### Locate the firmware
 
-The pre-built firmware is provided in the FV-1 programmer repository at:
-
-```
-firmware/_output/firmware.hex
-```
+The pre-built firmware is provided in the FV-1 programmer repository at: `firmware/_output/pro-mini-firmware.hex`
 
 **Open** a terminal in that `_output` folder before you run the flash command.
 
@@ -134,7 +128,7 @@ firmware/_output/firmware.hex
 
 ```sh
 avrdude -p atmega328p -c arduino -P <serial-port> -b 57600 \
-  -U flash:w:./firmware.hex:i
+  -U flash:w:./pro-mini-firmware.hex:i
 ```
 
 <div class="img-grid cols-1" markdown="0">
@@ -142,10 +136,16 @@ avrdude -p atmega328p -c arduino -P <serial-port> -b 57600 \
        alt="3.3 V USB-to-serial adapter wired to an Arduino Pro Mini while the programmer firmware is flashed" class="doc-img">
 </div>
 
-A successful run ends with:
+A successful run will output:
 
 ```
-avrdude done.  Thank you.
+Reading 5428 bytes for flash from input file pro-mini-firmware.hex
+Writing 5428 bytes to flash
+Writing | ################################################## | 100% 2.66 s
+Reading | ################################################## | 100% 2.31 s
+5428 bytes of flash verified
+
+Avrdude done.  Thank you.
 ```
 
 > **Tip:** If `avrdude` cannot open the serial port on Linux, your user account may need access to the `dialout` group or an appropriate udev rule. Check your distribution's documentation for the right approach.
@@ -154,7 +154,7 @@ avrdude done.  Thank you.
 
 ## 5. Tests {#tests}
 
-With the firmware flashed, you are ready to test the complete programming path from [SpinASM for FV-1](https://github.com/ygn-effects/project-fv1-platform/tree/develop-software/software/vscode-spinasm) to the target EEPROM.
+With the firmware flashed, you are ready to test the complete programming path from [SpinASM for VS Code](https://github.com/ygn-effects/project-fv1-platform/tree/develop-software/software/vscode-spinasm) to the target EEPROM.
 
 ### Connect the programmer to the target board
 
@@ -172,7 +172,7 @@ With the firmware flashed, you are ready to test the complete programming path f
 
 ### Run auto-detect and check the hardware
 
-1. **Open** your FV-1 project in VS Code with SpinASM for FV-1 installed.
+1. **Open** your FV-1 project in VS Code with SpinASM for VS Code installed.
 2. **Open** the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and run **SpinASM: Auto-Detect Programmer**.
 3. **Confirm** that the extension finds the USB-to-serial adapter and selects its serial port.
 4. **Run** **SpinASM: Check Hardware Connection** to confirm the compiler, programmer and target EEPROM can communicate.
