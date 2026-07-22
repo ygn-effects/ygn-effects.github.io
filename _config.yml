@@ -10,10 +10,6 @@ url: "https://ygn-effects.github.io"
 
 github_username: ygn-effects
 
-# Build settings
-plugins:
-  - jekyll-feed
-
 collections:
   designs:
     output: true
@@ -35,10 +31,8 @@ defaults:
       layout: "doc"
 
 exclude:
-  - graphics/
   - Gemfile
   - Gemfile.lock
   - node_modules/
   - vendor/
-  - README.md
-  - claude.md
+  - AGENTS.md
