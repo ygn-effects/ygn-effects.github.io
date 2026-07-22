@@ -55,7 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
     sh: 'Shell', bash: 'Bash', plaintext: '', text: '',
     javascript: 'JavaScript', js: 'JavaScript', css: 'CSS',
     html: 'HTML', yaml: 'YAML', json: 'JSON',
-    ruby: 'Ruby', python: 'Python', c: 'C', cpp: 'C++'
+    ruby: 'Ruby', python: 'Python', c: 'C', cpp: 'C++',
+    ini: 'INI', powershell: 'PowerShell'
+  };
+
+  const LANG_ICONS = {
+    sh: 'fa-solid fa-terminal', bash: 'fa-solid fa-terminal',
+    javascript: 'fa-brands fa-js', js: 'fa-brands fa-js',
+    css: 'fa-brands fa-css3-alt', html: 'fa-brands fa-html5',
+    yaml: 'fa-solid fa-file-code', json: 'fa-solid fa-braces',
+    ruby: 'fa-regular fa-gem', python: 'fa-brands fa-python',
+    c: 'fa-solid fa-c', cpp: 'fa-solid fa-code',
+    ini: 'fa-solid fa-sliders', powershell: 'fa-solid fa-terminal'
   };
 
   document.querySelectorAll('.doc-content div.highlighter-rouge').forEach(block => {
@@ -63,12 +74,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const langKey = langClass ? langClass.replace('language-', '') : '';
     const langLabel = langKey in LANG_NAMES ? LANG_NAMES[langKey] : langKey.toUpperCase();
 
+    if (!langLabel) return;
+
     const header = document.createElement('div');
     header.className = 'code-block-header';
 
     const label = document.createElement('span');
     label.className = 'code-lang';
-    label.textContent = langLabel;
+
+    const langIcon = document.createElement('i');
+    langIcon.className = LANG_ICONS[langKey] || 'fa-solid fa-code';
+    langIcon.setAttribute('aria-hidden', 'true');
+
+    label.appendChild(langIcon);
+    label.appendChild(document.createTextNode(langLabel));
 
     const copyBtn = document.createElement('button');
     copyBtn.className = 'copy-btn';
