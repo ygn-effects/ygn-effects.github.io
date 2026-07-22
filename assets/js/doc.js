@@ -25,28 +25,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Active section highlighting
   if (content && tocLinks.length > 0) {
-    const headings = content.querySelectorAll('h2[id]');
+    const headings = Array.from(content.querySelectorAll('h2[id]'));
 
     if (headings.length > 0) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const id = entry.target.id;
-              tocLinks.forEach(link => {
-                const isActive = link.getAttribute('href') === `#${id}`;
-                link.classList.toggle('active', isActive);
-              });
-            }
-          });
-        },
-        {
-          rootMargin: '-20% 0px -70% 0px',
-          threshold: 0.1
-        }
-      );
+      let updateQueued = false;
 
-      headings.forEach(heading => observer.observe(heading));
+      const updateActiveSection = () => {
+        updateQueued = false;
+
+        // Consider a section active once its heading reaches the upper quarter
+        // of the viewport. Default to the first section while above it.
+        const readingLine = Math.min(window.innerHeight * 0.25, 240);
+        let activeHeading = headings[0];
+
+        for (const heading of headings) {
+          if (heading.getBoundingClientRect().top > readingLine) break;
+          activeHeading = heading;
+        }
+
+        tocLinks.forEach(link => {
+          const isActive = link.getAttribute('href') === `#${activeHeading.id}`;
+          link.classList.toggle('active', isActive);
+
+          if (isActive) {
+            link.setAttribute('aria-current', 'location');
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+      };
+
+      const queueActiveSectionUpdate = () => {
+        if (updateQueued) return;
+        updateQueued = true;
+        window.requestAnimationFrame(updateActiveSection);
+      };
+
+      updateActiveSection();
+      window.addEventListener('scroll', queueActiveSectionUpdate, { passive: true });
+      window.addEventListener('resize', queueActiveSectionUpdate);
+      window.addEventListener('hashchange', queueActiveSectionUpdate);
+      window.addEventListener('load', queueActiveSectionUpdate);
+      window.addEventListener('pageshow', queueActiveSectionUpdate);
     }
   }
 
