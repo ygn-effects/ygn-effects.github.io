@@ -42,19 +42,18 @@ The workflow has three stages. Stop after the stage that matches what you want t
 Each stage builds on the previous one, but none forces you to continue. Use SpinASM for VS Code as a capable editor, a cross-platform assembler or the complete path from source code to a running pedal.
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/extension-overview.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/extension-overview.jpg"
        alt="VS Code with a SpinASM program open, inline diagnostics and FV-1 bank and resource usage shown in the status bar" class="doc-img">
 </div>
 
 ## 2. Install and Configure {#installation}
 
-SpinASM for VS Code separates the editor from the assembler. The extension provides the editing workflow while [`asfv1`](https://pypi.org/project/asfv1/) turns your `.spn` source into code the FV-1 can run. Install both pieces once and the same project will work on Windows, macOS or Linux.
+SpinASM for VS Code separates the editor from the assembler. The extension provides the editing workflow while [`asfv1`](https://github.com/ndf-zz/asfv1) turns your `.spn` source into code the FV-1 can run. Install both pieces once and the same project will work on Windows, macOS or Linux.
 
 ### What you need
 
 | Item | Required for | Notes |
 |------|--------------|-------|
-| **Visual Studio Code 1.95 or newer** | All three stages | Download it from the [official VS Code website](https://code.visualstudio.com/). |
 | **SpinASM for VS Code** | Editing, assembling and integrated programming | The extension adds support for `.spn` files. |
 | **Python 3 and `asfv1`** | Assembling programs and EEPROM images | Python runs the open-source FV-1 assembler. |
 | **Compatible programmer hardware** | Integrated EEPROM programming only | Editing and assembling work without it. |
@@ -70,13 +69,13 @@ SpinASM for VS Code separates the editor from the assembler. The extension provi
 > **Note:** The extension may warn that its compiler path is not configured. That is expected until you install `asfv1` and complete the final steps in this section.
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/extension-install.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/extension-install.jpg"
        alt="VS Code Extensions view showing SpinASM for VS Code installed from the YGN Effects publisher" class="doc-img">
 </div>
 
-### Install `asfv1`
+### Install asfv1
 
-Use Python 3 to install `asfv1` for your platform. Do not use `sudo pip`: a user installation is safer and does not modify your operating system's Python packages.
+Use Python 3 to install `asfv1` for your platform.
 
 #### Windows
 
@@ -171,7 +170,7 @@ Use Python 3 to install `asfv1` for your platform. Do not use `sudo pip`: a user
 The compiler path is now configured. The first real compilation in this guide will confirm that VS Code can launch `asfv1` and create an output file.
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/compiler-settings.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/compiler-settings.jpg"
        alt="VS Code Settings showing the SpinASM compiler path and default compiler arguments" class="doc-img">
 </div>
 
@@ -218,7 +217,7 @@ The **Create Project** command creates all eight bank folders, the `output` fold
 > **Tip:** Run **Create Project** in a dedicated project folder. The command preserves existing files, but using a clean folder makes the eight-bank layout much easier to understand.
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/project-layout.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/project-layout.jpg"
        alt="VS Code Explorer showing an FV-1 project with eight bank folders and the output folder" class="doc-img">
 </div>
 
@@ -236,7 +235,7 @@ You do not need to recreate a project that already follows the bank layout.
 
 Keep no more than one `.spn` file inside each `bank_N` folder. If a bank contains several, the extension sorts their filenames, selects the first one and reports the others as an ambiguity. This makes the result repeatable, but it may not be the program you intended to build.
 
-> **Caution:** Do not use a bank folder as general storage for alternate `.spn` files. Move experiments and previous versions outside `bank_0` through `bank_7`, or change their filename extension, before you compile.
+> **Note:** Do not use a bank folder as general storage for alternate `.spn` files. Move experiments and previous versions outside `bank_0` through `bank_7`, or change their filename extension, before you compile.
 
 ### Read the bank status
 
@@ -252,7 +251,7 @@ The bank indicator in the VS Code status bar gives each slot a symbol:
 **Click** the indicator or **run** **SpinASM: Show Bank Status** to inspect all eight slots. The detailed view names each source file, identifies stale output and warns when a bank contains extra `.spn` files. Selecting a populated bank opens its source and offers to compile it when its output is missing or stale.
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/bank-status.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/bank-status.jpg"
        alt="SpinASM bank status list showing empty, uncompiled, current and stale program banks" class="doc-img">
 </div>
 
@@ -299,7 +298,7 @@ The extension also includes larger snippets for common structures:
 > **Tip:** Individual instructions also have snippets. If the completion list does not open automatically, press `Ctrl+Space` on Windows or Linux. On macOS, use the configured **Trigger Suggest** shortcut because `Ctrl+Space` may be reserved for input-source switching.
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/editor-completion.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/editor-completion.jpg"
        alt="SpinASM instruction completion in VS Code showing an instruction signature and description" class="doc-img">
 </div>
 
@@ -333,7 +332,7 @@ The live checks cover common mistakes including:
 > **Note:** Live diagnostics provide quick feedback before compilation. `asfv1` remains the final authority. When you compile, its warnings and errors are also attached to the relevant `.spn` file and shown in the Problems view.
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/editor-diagnostics.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/editor-diagnostics.jpg"
        alt="SpinASM source in VS Code with an inline error and the matching explanation in the Problems view" class="doc-img">
 </div>
 
@@ -349,7 +348,7 @@ Every FV-1 program has three important resource limits: 32 general-purpose regis
 > **Tip:** The two SpinASM status indicators answer different questions. The eight-bank indicator tracks whether project outputs are current. The resource indicator tracks whether the active source fits inside one FV-1 program slot.
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/resource-usage.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/resource-usage.jpg"
        alt="SpinASM resource usage view showing registers, instructions and delay-memory allocation for the active program" class="doc-img">
 </div>
 
@@ -380,7 +379,7 @@ An individual `.hex` file uses the Intel HEX format and includes the address of 
 > **Tip:** If you are looking at the wrong editor, use **SpinASM: Compile Specific Bank...** and select the intended populated bank. An empty bank has no source to compile.
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/compile-current.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/compile-current.jpg"
        alt="VS Code after compiling the active SpinASM program with its HEX output and current bank status visible" class="doc-img">
 </div>
 
@@ -411,7 +410,7 @@ The extension assembles each populated bank into its correct 512-byte slot, then
 > **Caution:** A complete `output.bin` represents the whole EEPROM, including empty banks. Writing it with an external programmer replaces every slot on the device.
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/combined-image.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/combined-image.jpg"
        alt="VS Code Explorer showing individual bank HEX files and the combined 4 KB output.bin EEPROM image" class="doc-img">
 </div>
 
@@ -425,6 +424,11 @@ Compiler warnings and errors appear as diagnostics on the source file. The compl
 4. **Return** to the underlined source line, **correct** it and **compile** again.
 
 > **Tip:** The extension reveals the SpinASM output channel automatically when a command fails. You can keep it open while learning how source changes map to `asfv1` messages.
+
+<div class="img-grid cols-1" markdown="0">
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/compile-error.jpg"
+       alt="Compiler output in the SpinASM output channel showing up on compile error" class="doc-img">
+</div>
 
 ## 6. Program an EEPROM {#programming}
 
@@ -620,8 +624,6 @@ The compiler path and arguments affect every build command.
 2. **Keep** `spinasm.compiler.args` at `["-s"]` for normal SpinASM source.
 3. **Run** **SpinASM: Show Configuration** to confirm the stored path.
 4. **Compile** one program to prove that the executable can run.
-
-> **Caution:** The arguments setting is a JSON array. In `settings.json`, keep each argument as its own quoted item. Do not combine several arguments into one string.
 
 > **Note:** **Show Configuration** displays the path but does not check whether the file exists or is executable. A compile command or **Check Hardware Connection** performs that validation.
 
