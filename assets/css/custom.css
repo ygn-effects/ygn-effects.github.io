@@ -347,6 +347,16 @@ footer {
   overflow: hidden;
 }
 
+@media (max-width: 767.98px) {
+  .doc-content > table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 .doc-content th {
   background: var(--ygn-surface-highlight);
   padding: 1rem;
