@@ -180,7 +180,7 @@ An FV-1 EEPROM provides eight program slots. SpinASM for VS Code mirrors those s
 
 A typical project looks like this:
 
-```text
+```
 my-fv1-project/
 ├── bank_0/
 │   └── chorus.spn
@@ -470,7 +470,7 @@ The hardware check validates three parts of the chain: the configured `asfv1` ex
 > **Tip:** Run **SpinASM: Show Configuration** at any time to review the compiler path, serial port and baud rate together.
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/programmer-autodetect.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/programmer-autodetect.jpg"
        alt="VS Code reporting that SpinASM automatically detected and configured an FV-1 programmer serial port" class="doc-img">
 </div>
 
@@ -489,7 +489,7 @@ After writing the bank, the extension reads all 512 bytes back from the EEPROM a
 > **Note:** Programming one bank leaves the other seven EEPROM slots unchanged. This is useful while developing an effect because you can update one program without rebuilding the complete EEPROM image.
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/upload-verified.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/upload-verified.jpg"
        alt="VS Code reporting a successful SpinASM compile, EEPROM upload and read-back verification" class="doc-img">
 </div>
 
@@ -612,7 +612,7 @@ Compiler paths and serial-port names are machine-specific. The baud rate must ma
 </div>
 
 <div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/vscode-spinasm/all-settings.png"
+  <img src="/assets/images/docs/vscode-spinasm-extension-usage/all-settings.jpg"
        alt="VS Code Settings filtered to SpinASM and showing all compiler, programmer, editor, status-bar and logging options" class="doc-img">
 </div>
 
@@ -764,16 +764,6 @@ Do not treat a verification mismatch as a successful write. The extension read t
 4. **Run** **SpinASM: Check Hardware Connection**.
 5. **Run** the matching **Compile & Upload** command again.
 6. If the mismatch repeats, **inspect** the EEPROM, programmer connection and target-board hardware before continuing.
-
-### An external programmer rejects the image
-
-**The external tool reports the wrong size or format**
-
-1. **Rebuild** the file with **SpinASM: Compile all programs to .bin**.
-2. **Confirm** that you selected `output/output.bin`, not a `bank_N.hex` file.
-3. **Confirm** that the binary is exactly 4 KB (4096 bytes).
-4. **Select** a 24LC32A-compatible device in the external programmer software.
-5. **Load** the file as raw binary and **retry** the write.
 
 ### Collect useful information for a bug report
 
