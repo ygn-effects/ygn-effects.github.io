@@ -2,14 +2,14 @@
 title: FV-1 Programmer Flashing and Setup
 layout: doc
 permalink: /docs/fv1-programmer-flashing-and-setup/
-updated: 2026-07-01
+updated: 2026-07-27
 topic: Firmware
 excerpt: Flashing the ATmega328PB firmware and configuring the FT230X on the FV-1 EEPROM programmer.
 tags: [firmware, programming, fv1, avr, ftdi]
 toc:
   - label: Introduction
     href: "#intro"
-  - label: Assembly
+  - label: Programmer assembly
     href: "#assembly"
   - label: Required tools
     href: "#tools"
@@ -25,28 +25,26 @@ toc:
 
 ## 1. Introduction {#intro}
 
-Welcome to the YGN Effects Framework documentation! The **FV-1 EEPROM Programmer** is a compact tool that sits at the heart of the FV-1 platform: it lets you flash custom DSP effects directly onto your pedal's EEPROM chip right from VS Code via the [vscode-spinasm](https://github.com/ygn-effects/project-fv1-platform/tree/main/software/spinasm) extension, with no chip removal and no external programmer needed once it's set up.
+Welcome to the YGN Effects Framework documentation! The **FV-1 EEPROM Programmer** connects an FV-1 target board to [SpinASM for VS Code](/docs/vscode-spinasm-extension-usage/). Once configured, it can write compiled DSP programs directly to the EEPROM in your pedal without removing the chip or transferring it to a standalone EEPROM writer.
 
-Before it can do any of that, the programmer itself needs two one-time setup steps:
+Before using the programmer for the first time, complete two one-time setup steps:
 
-- **Flashing the ATmega328PB:** the onboard microcontroller that drives the programming logic.
-- **Configuring the FT230X:** the USB-to-serial bridge whose programmable CBUS pins need to be set correctly for the programmer to communicate with your computer.
+1. **Flash the ATmega328PB.** This microcontroller runs the programming logic.
+2. **Configure the FT230X.** This USB-to-serial bridge has programmable CBUS pins that must be configured for the programmer hardware.
 
-These two steps are independent and can be done in any order. Neither requires you to open an IDE or write any code. Let's get set up.
+You can complete these steps in either order. Neither step requires you to open an IDE or write any code. Once both are complete, a quick end-to-end test will confirm that the programmer is ready to use.
 
 ---
 
-## 2. Assembly {#assembly}
+## 2. Programmer Assembly {#assembly}
 
-Before flashing and configuring anything, a quick word on physically building the programmer.
+Before jumping into flashing and configuration, assemble the programmer PCB by following the [SMD PCB Assembly](/docs/smd-pcb-assembly/) guide. Use the YGN [stencil holder](/docs/tool-stencil-holder-assembly/) for accurate paste application and the [soldering jig](/docs/tool-soldering-jig-usage/) to keep the through-hole components steady while you solder them.
 
-Populating the PCB follows the same process as our [SMD PCB Assembly](/docs/smd-pcb-assembly/) guide: paste, place, reflow. As with every board in the Framework, we provide a stencil and [stencil holder](/docs/tool-stencil-holder-assembly/) for accurate paste application, and a [soldering jig](/docs/tool-soldering-jig-usage/) to keep the through hole (TH) components perfectly aligned while you hand-solder them.
-
-The programmer's PCB was designed before we had access to a 3D printer, so instead of a printed enclosure, it's meant to be assembled inside an **LK-USB07** enclosure: a small extruded aluminium USB stick style case that's readily available on your favourite far east import site.
+The programmer was designed before we had access to a 3D printer, so its home is an **LK-USB07 ABS enclosure** rather than one of our printed cases. You can usually find one by searching for `LK-USB07` on Chinese online marketplaces such as AliExpress or Banggood.
 
 <div class="img-grid cols-2" markdown="0">
   <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/lk-usb07-enclosure.jpg"
-       alt="LK-USB07 extruded aluminium enclosure" class="doc-img">
+       alt="LK-USB07 ABS enclosure for the FV-1 programmer" class="doc-img">
   <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/assembly-complete.jpg"
        alt="Completed FV-1 programmer assembled inside the LK-USB07 enclosure" class="doc-img">
 </div>
@@ -55,11 +53,15 @@ The programmer's PCB was designed before we had access to a 3D printer, so inste
 
 ## 3. Required Tools {#tools}
 
+Gather the following tools before starting. You will also need a way to power the programmer while flashing the ATmega328PB and configuring the FT230X.
+
 | Item | Purpose | Notes |
 |------|---------|-------|
-| **AVRISP MK2** | ISP programmer for flashing the ATmega328PB | Any AVR ISP programmer compatible with `avrdude` will work. |
-| **SOIC8 test clamp** | Makes contact with the programmer PCB's SOICBite footprint | Any standard SOIC8 test clip with a 2×4 Dupont or box header. |
-| **Computer** | Runs `avrdude` and the FT230X configuration tool | Windows, macOS or Linux all work. FT_PROG (GUI) is Windows-only; `ftdi_eeprom` works on all platforms. |
+| **AVRISP MK2** | Flashes the ATmega328PB firmware | This guide uses an AVRISP MK2. Other `avrdude`-compatible AVR ISP programmers may work, but their wiring and command options can differ. |
+| **SOIC8 test clip** | Makes contact with the programmer PCB's SOICBite footprint | Use a standard SOIC8 test clip with a 2×4 connector. |
+| **Clip-to-ISP wiring** | Connects the clip's 2×4 connector to the AVRISP MK2's 2×3 connector | Use eight individual male-to-male jumper wires bundled with a zip tie, or make a 2×4-to-2×3 harness with properly crimped male terminals. Only six wires carry signals. |
+| **3.3 V power source** | Powers the programmer during setup | Use a powered FV-1 target board or a bench power supply connected to the programmer's 3.3 V and GND pins. |
+| **Computer** | Runs `avrdude` and the FT230X configuration tool | Windows, macOS and Linux are supported. FT_PROG is available for Windows, while `ftdi_eeprom` is covered for Linux and macOS in this guide. |
 
 <div class="img-grid cols-2" markdown="0">
   <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/tools-avrisp.jpg"
@@ -72,13 +74,19 @@ The programmer's PCB was designed before we had access to a 3D printer, so inste
 
 ## 4. The SOIC Clip {#soic-clip}
 
-The programmer PCB exposes a **SOICBite footprint**. Despite the name, these pads are not a copy of a chip's actual pins: it's a compact layout purpose-built for test clip contact, borrowed from the open-source [SOICbite](https://github.com/SimonMerrett/SOICbite) project, a cheap, small alternative to a Tag-Connect. An SOIC8 test clip grips these pads and gives you a reliable connection without soldering anything extra.
+The programmer PCB uses a **SOICBite footprint** for the ATmega328PB programming connection. This compact connector comes from the open-source [SOICbite](https://github.com/SimonMerrett/SOICbite) project and works with an inexpensive SOIC8 test clip, so the PCB does not need a permanent programming header.
+
+Although the footprint resembles the pins of a SOIC8 chip, its signal arrangement is specific to the SOICBite connection. Follow the orientation and wiring shown below rather than treating it as a standard chip pinout.
 
 ### Adjusting the clip
 
-Because the SOICBite pads are more closely spaced than a real chip's body, a stock SOIC8 test clip usually won't close tightly enough on its own to make good contact. **Bend the clip's contacts slightly inward** so the jaws can close all the way onto the footprint. This is a one-time adjustment: once it's done, the clip stays ready for the SOICBite pattern. See the [SOICbite repo](https://github.com/SimonMerrett/SOICbite) for the how-to on making this adjustment.
+A stock SOIC8 clip may not close tightly enough because the SOICBite pads are closer together than the pins on a real chip. With the clip disconnected, **bend** the contacts on both jaws slightly inward. Work a little at a time and keep both rows even.
 
-> **Tip:** Test the fit on the footprint before you rely on it for flashing. If the jaws don't close fully or feel loose, bend the contacts a little further and try again.
+**Test-fit** the clip on the footprint. The jaws should close completely with every contact sitting over its pad. If the clip feels loose or rocks on the board, **adjust** the contacts a little further and try again.
+
+> **Caution:** Bend the contacts gently. Bending them too far can weaken or misalign them.
+
+> **Tip:** Once adjusted, keep this clip for SOICBite connections. You should not need to reshape it again.
 
 <div class="img-grid cols-1" markdown="0">
   <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/clip-adjusted-contacts.jpg"
@@ -87,13 +95,13 @@ Because the SOICBite pads are more closely spaced than a real chip's body, a sto
 
 ### Clip orientation
 
-SOIC clips are not keyed, so you need to orient them correctly before attaching. **Pin 1** of the footprint is marked with a small dot on the PCB silkscreen. On most SOIC8 clips, **pin 1 is indicated by a coloured wire** in the cable, usually red.
+The clip is not keyed, so check its orientation every time you attach it. A small dot on the PCB silkscreen marks pin 1 of the footprint. Most clip cables identify pin 1 with a coloured wire, usually red.
 
-The pin 1 side of the clip **goes on the top side (component side) of the PCB**.
+**Position** the pin 1 side of the clip on the top, component side of the PCB. **Align** clip pin 1 with footprint pin 1, then **press** the clip down until both jaws grip the pads evenly.
 
-**Align pin 1 of the clip with pin 1 of the footprint**, then press the clip down until it grips the row of pads on both sides.
+> **Caution:** Confirm the orientation before applying power. A reversed clip can place power on the wrong pins and damage the hardware.
 
-> **Tip:** It's easy to lose track of which side of the clip is pin 1, especially once it's flipped around in your hands. **Mark that side** with a dab of paint marker or a strip of tape so you can identify it at a glance.
+> **Tip:** Mark the pin 1 side of the clip with a paint marker or a small piece of tape so you can identify it at a glance.
 
 <div class="img-grid cols-2" markdown="0">
   <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/soic-pin1-marking.jpg"
@@ -104,7 +112,7 @@ The pin 1 side of the clip **goes on the top side (component side) of the PCB**.
 
 ### Wiring to the AVRISP MK2
 
-The clip's 2×4 header exposes eight pins.
+The clip's 2×4 connector exposes eight positions, but only six carry signals. Connect those signals to the AVRISP MK2's 2×3 ISP connector using either of the methods below.
 
 <div class="img-grid cols-2" markdown="0">
   <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/clip-pinout.jpg"
@@ -112,8 +120,6 @@ The clip's 2×4 header exposes eight pins.
   <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/box-header-pinout.jpg"
        alt="2x4 box header connector pinout mapped to the clip's pin numbers" class="doc-img">
 </div>
-
-Connect them to the AVRISP MK2's standard 6-pin ISP header as follows:
 
 | Clip pin | Signal | AVRISP MK2 pin |
 |:---:|--------|:---:|
@@ -126,13 +132,38 @@ Connect them to the AVRISP MK2's standard 6-pin ISP header as follows:
 | **7** | MOSI | **4** |
 | **8** | GND | **6** |
 
-> **Note:** Pins 4 and 6 on the clip are not connected. You only need to wire the six active signals.
+> **Note:** Positions 4 and 6 on the clip connector are not connected.
+
+#### Option A: Individual jumper wires
+
+Use eight male-to-male jumper wires at the clip end. Filling all eight positions allows the zip tie to hold the individual connector housings together as a stable 2×4 block. Only six wires continue to the AVRISP MK2.
+
+1. **Arrange** all eight jumper wires in the correct 2×4 pattern at the clip connector.
+2. **Identify** the wires in clip positions 4 and 6. These positions are not connected to the AVRISP MK2.
+3. **Cut** the unused AVRISP ends from those two wires, then **insulate** each cut end with heat-shrink tubing.
+4. **Connect** the remaining six wires to the AVRISP MK2 according to the wiring table.
+5. **Secure** the eight connector housings together near the clip end with a small zip tie.
+6. **Mark** pin 1 at both ends so the harness can be reconnected without tracing every wire.
+
+> **Caution:** Make sure the cut wires in positions 4 and 6 are fully insulated. They act only as spacers in the clip-side bundle and must not contact the AVRISP MK2 or exposed metal.
+
+#### Option B: Crimped adapter harness
+
+1. **Cut** six wires to the same length.
+2. **Crimp** a male terminal onto both ends of each wire.
+3. **Insert** one end into a 2×4 housing and the other into a 2×3 housing according to the wiring table.
+4. **Leave** positions 4 and 6 of the 2×4 housing empty.
+5. **Check** every connection with a multimeter before connecting the harness to the programmer.
+
+> **Caution:** Connector housings are easy to view from the wrong side. Confirm the pin numbering and check continuity before applying power.
 
 <div class="img-grid cols-2" markdown="0">
   <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/avr-isp-pinout.jpg"
        alt="Standard 6-pin AVR ISP header pinout with pin 1 marked" class="doc-img">
   <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/wiring-connected.jpg"
-       alt="SOIC clip header wired to the AVRISP MK2 6-pin ISP connector" class="doc-img">
+       alt="Eight-wire clip bundle with two insulated ends and six wires connected to the AVRISP MK2" class="doc-img">
+  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/wiring-crimped-adapter.jpg"
+       alt="Crimped 2×4-to-2×3 male adapter harness for connecting the SOIC8 clip to the AVRISP MK2" class="doc-img">
 </div>
 
 ---
@@ -141,79 +172,61 @@ Connect them to the AVRISP MK2's standard 6-pin ISP header as follows:
 
 ### Software
 
-Only `avrdude` is required.
+Only `avrdude` is required. After installing it, **open** a terminal and **run** `avrdude -v` to confirm that the command is available.
 
-| Platform | Install hint | Test it |
-|----------|------------|---------|
-| **Linux** | `sudo apt install avrdude` *(Debian/Ubuntu)*<br>`sudo dnf install avrdude` *(Fedora)*<br>`sudo pacman -S avrdude` *(Arch)* | `avrdude -v` should print version info. |
-| **macOS** | `brew install avrdude` | Same `avrdude -v` sanity-check. |
-| **Windows** | Download the ZIP from the project's **GitHub Releases** page, extract it, and add the folder to your **PATH**. | Open *Windows Terminal* and run `avrdude -v`. |
+| Platform | Install |
+|----------|---------|
+| **Linux** | `sudo apt install avrdude` *(Debian/Ubuntu)*<br>`sudo dnf install avrdude` *(Fedora)*<br>`sudo pacman -S avrdude` *(Arch)* |
+| **macOS** | `brew install avrdude` |
+| **Windows** | Download a Windows build from the official [AVRDUDE releases](https://github.com/avrdudes/avrdude/releases), extract it and add the folder containing `avrdude.exe` to your **PATH**. |
 
 ### Locating the firmware
 
-The pre-built firmware lives in the programmer's repository at `firmware/_output/vscode-spinasm-firmware.hex`.
+The pre-built firmware is available in the FV-1 platform repository at [`firmware/_output/vscode-spinasm-firmware.hex`](https://github.com/ygn-effects/project-fv1-platform/blob/main/firmware/_output/vscode-spinasm-firmware.hex).
 
-**Open a terminal** and navigate to that `_output` folder before running the command below.
+**Download** that file or **clone** the repository, then **open** a terminal in the folder containing `vscode-spinasm-firmware.hex`.
 
 ### Running the flash command
 
 The AVRISP MK2 is accessed directly over USB, so no serial port identification is needed.
 
-> **Caution:** The AVRISP MK2 does not supply power. The ATmega328PB is powered by the target board, so the programmer must be **connected to your pedal's FV-1 target board** (and the board powered on) before you can flash it. See *Connecting the programmer to the target board* in the Tests section below for the header pinout.
+> **Caution:** The AVRISP MK2 does not power the programmer. Before flashing, supply **3.3 V** from either a powered FV-1 target board or a bench power supply connected to the programmer's 3.3 V and GND pins. If you use a bench supply, confirm the voltage and polarity before switching it on.
 
-1. **Clip** the SOIC8 clip onto the SOICBite footprint as described in the previous section.
-2. **Connect** the programmer to your pedal's FV-1 target board via the dedicated header, then **power on** the target board.
-3. **Plug** the AVRISP MK2 into your computer.
-4. **Run** the command below from the `_output` folder:
+1. **Switch off** the 3.3 V power source and **unplug** the AVRISP MK2 from USB.
+2. **Attach** the SOIC8 clip to the SOICBite footprint as described in the previous section.
+3. **Connect** the programmer to a powered FV-1 target board, or **connect** a bench power supply to its 3.3 V and GND pins.
+4. If you are using a bench supply, **confirm** its voltage and polarity.
+5. **Switch on** the 3.3 V power source.
+6. **Plug** the AVRISP MK2 into your computer.
+7. **Run** the following command from the folder containing the firmware file:
 
-```sh
-avrdude -p atmega328pb -c stk500v2 -P usb \
-  -U lfuse:w:0xFF:m -U hfuse:w:0xD7:m -U efuse:w:0xF5:m \
-  -U flash:w:./vscode-spinasm-firmware.hex:i
-```
+    ```sh
+    avrdude -p atmega328pb -c stk500v2 -P usb \
+      -U lfuse:w:0xFF:m -U hfuse:w:0xD7:m -U efuse:w:0xF5:m \
+      -U flash:w:./vscode-spinasm-firmware.hex:i
+    ```
 
-> **Note:** On Linux, you may need to add `-C /etc/avrdude.conf` right after `avrdude` if the command reports a missing configuration file. On macOS and Windows this is not needed.
+    > **Caution:** These fuse values are specific to the FV-1 programmer hardware. Do not use them when flashing an unrelated ATmega328PB board.
 
-> **Note:** On Linux, accessing the AVRISP MK2 over USB may require adding your user to the `plugdev` group or setting up a udev rule. Check your distribution's documentation for the right approach.
+8. After the flash completes, **unplug** the AVRISP MK2 and **switch off** the 3.3 V power source before removing the clip.
 
-A successful run will output:
+On Linux, direct USB access to the AVRISP MK2 may require a udev rule or membership in an appropriate device-access group. Check your distribution's documentation if `avrdude` cannot open the programmer.
 
-```
-Processing -U lfuse:w:0xFF:m
-Reading 1 byte for lfuse from input file 0xFF
-Writing 1 byte (0xFF) to lfuse, 1 byte written, 1 verified
-
-Processing -U hfuse:w:0xD7:m
-Reading 1 byte for hfuse from input file 0xD7
-Writing 1 byte (0xD7) to hfuse, 1 byte written, 1 verified
-
-Processing -U efuse:w:0xF5:m
-Reading 1 byte for efuse from input file 0xF5
-Writing 1 byte (0xF5) to efuse, 1 byte written, 1 verified
-
-Processing -U flash:w:./vscode-spinasm-firmware.hex:i
-Reading 6148 bytes for flash from input file vscode-spinasm-firmware.hex
-Writing 6148 bytes to flash
-Writing | ################################################## | 100% 1.88 s
-Reading | ################################################## | 100% 1.81 s
-6148 bytes of flash verified
-
-Avrdude done.  Thank you.
-```
+A successful run finishes without errors and reports that each fuse and the firmware were written and verified. The exact byte count and timing may change between firmware builds.
 
 ### Troubleshooting
 
 **`avrdude: usbdev_open(): did not find any USB device "usb"`**
 
-The AVRISP MK2 is not being seen over USB. On Linux, add your user to the `plugdev` group or set up a udev rule. On Windows, make sure the Jungo driver is installed (it ships with Atmel Studio / Microchip Studio).
+The AVRISP MK2 is not being detected. On Linux, check your udev rules and device permissions. On Windows, confirm that the installed USB driver is compatible with your `avrdude` package.
 
-**`avrdude OS error: file ./firmware.hex is not readable: No such file or directory`**
+**`avrdude OS error: file ./vscode-spinasm-firmware.hex is not readable: No such file or directory`**
 
-Make sure your terminal is in the `_output` folder before running the command.
+Make sure your terminal is in the folder containing `vscode-spinasm-firmware.hex`, then run the command again.
 
 **avrdude times out or reports "initialization failed"**
 
-Check that the clip is making firm, even contact with all pads on both sides of the footprint, and that pin 1 is correctly aligned.
+Check that the programmer has 3.3 V power, the clip is oriented correctly and every contact sits firmly on its pad. Then check the clip-to-ISP harness against the wiring table.
 
 ---
 
@@ -230,27 +243,32 @@ The target configuration is:
 | **CBUS2** | `VBUS_SENSE` |
 | **CBUS3** | `RXLED` |
 
-> **Caution:** Like the ATmega328PB, the FT230X is powered by the target board, not by USB. The programmer must be **connected to your pedal's FV-1 target board** (and the board powered on) before you can configure its EEPROM. See *Connecting the programmer to the target board* in the Tests section below for the header pinout.
+> **Caution:** USB does not power the FT230X on this programmer. Supply **3.3 V** from either a powered FV-1 target board or a bench power supply connected to the programmer's 3.3 V and GND pins. If you use a bench supply, confirm the voltage and polarity before switching it on.
 
-1. **Connect** the programmer to your pedal's FV-1 target board via the dedicated header, then **power on** the target board.
-2. **Plug** the programmer into your computer via USB.
+1. **Switch off** the 3.3 V power source.
+2. **Connect** the programmer to a powered FV-1 target board, or **connect** a bench power supply to its 3.3 V and GND pins.
+3. If you are using a bench supply, **confirm** its voltage and polarity.
+4. **Switch on** the 3.3 V power source.
+5. **Connect** the programmer to your computer via USB.
 
 ### Option A: FT_PROG (Windows)
 
 [FT_PROG](https://ftdichip.com/utilities/#ft_prog) is FTDI's free Windows GUI tool for programming FT device EEPROMs.
 
 1. **Download and install** FT_PROG from the FTDI website.
-2. **Open** FT_PROG. It will scan and list connected FTDI devices automatically.
-3. **Select** your FT230X device from the device tree.
-4. **Navigate** to the *Hardware Specific → CBUS Pins* section in the tree.
-5. **Set** each CBUS pin to its target function using the dropdown menus.
+2. **Open** FT_PROG.
+3. **Select** *Devices → Scan and Parse* to find the connected FT230X.
+4. **Select** the FT230X in the device tree.
+5. **Navigate** to *Hardware Specific → CBUS Pins*.
+6. **Set** CBUS0 through CBUS3 to the values shown above.
+7. **Select** *Devices → Program*, then **confirm** the device programming operation.
+8. When programming finishes, **disconnect** USB and **switch off** the 3.3 V power source.
+9. **Reconnect** power and USB so the FT230X starts with its new configuration.
 
 <div class="img-grid cols-1" markdown="0">
   <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/ft-prog-cbus.jpg"
        alt="FT_PROG showing the CBUS Pins section with CBUS0 to CBUS3 set to their target functions" class="doc-img">
 </div>
-
-6. **Click** *Devices → Program* (or press **Ctrl+P**) to write the configuration to the chip.
 
 ### Option B: ftdi_eeprom (Linux / macOS)
 
@@ -261,7 +279,7 @@ The target configuration is:
 | **Linux** | `sudo apt install ftdi-eeprom` *(Debian/Ubuntu)*<br>`sudo dnf install libftdi-devel` *(Fedora)* |
 | **macOS** | `brew install libftdi` |
 
-Create a configuration file named `vscode-spinasm-ftdi.conf` with the following content:
+A ready-to-use [`vscode-spinasm-ftdi.conf`](https://github.com/ygn-effects/project-fv1-platform/blob/main/firmware/_output/vscode-spinasm-ftdi.conf) file is available in `firmware/_output/`. **Download** that file, or **create** one with the following content:
 
 ```ini
 vendor_id="0x0403"
@@ -282,36 +300,36 @@ cbusx2=VBUS_SENSE
 cbusx3=RXLED
 ```
 
-> **Note:** A ready-to-use `vscode-spinasm-ftdi.conf` file is included in `firmware/_output/`.
+> **Caution:** Disconnect any other FTDI devices before continuing so you do not program the wrong device.
 
-Then **run**:
+1. **Open** a terminal in the folder containing `vscode-spinasm-ftdi.conf`.
+2. **Run**:
 
-```sh
-ftdi_eeprom --flash-eeprom vscode-spinasm-ftdi.conf
-```
+    ```sh
+    ftdi_eeprom --flash-eeprom vscode-spinasm-ftdi.conf
+    ```
 
-A successful run will confirm the EEPROM was written without errors, the typical output is as follows:
+    > **Note:** On Linux, prefix the command with `sudo` if device permissions prevent `ftdi_eeprom` from opening the FT230X.
 
-```
-FTDI eeprom generator v0.17
-(c) Intra2net AG and the libftdi developers <opensource@intra2net.com>
-FTDI read eeprom: 0
-EEPROM size: 256
-Used eeprom space: 240 bytes
-FTDI write eeprom: 0
-Writing to file: eeprom.bin
-FTDI close: 0
-```
+3. **Confirm** that the command finishes without errors.
+4. **Disconnect** USB and **switch off** the 3.3 V power source.
+5. **Reconnect** power and USB so the FT230X starts with its new configuration.
 
 ---
 
 ## 7. Tests {#tests}
 
-With both setup steps complete, this is the quick end-to-end check to confirm your programmer is working correctly.
+With the firmware flashed and the FT230X configured, connect the programmer to an FV-1 target board before continuing to the complete SpinASM workflow.
 
-### Connecting the programmer to the target board
+### Connect the programmer to the target board
 
-**Connect** the programmer to your pedal's FV-1 board using the dedicated header. The pinout is shown below.
+1. **Switch off** the target board and **disconnect** the programmer from USB.
+2. **Disconnect** the bench power supply if it is still attached from the setup process.
+3. **Connect** the programmer to the target board's programming header. Match SDA, SCL, FV-1 RESET, 3.3 V and GND as shown below.
+4. **Power on** the target board. It now supplies the programmer and target EEPROM.
+5. **Connect** the programmer to your computer via USB.
+
+> **Caution:** Do not leave the bench power supply connected while the target board is supplying 3.3 V.
 
 <div class="img-grid cols-2" markdown="0">
   <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/test-connection-pinout.png"
@@ -320,18 +338,6 @@ With both setup steps complete, this is the quick end-to-end check to confirm yo
        alt="Programmer connected to the FV-1 target board via the programming header" class="doc-img">
 </div>
 
-### Running the auto-detect
+### Continue in SpinASM for VS Code
 
-1. **Power on** the target board.
-2. **Connect** the programmer to your computer via USB.
-3. **Open** VS Code with the [vscode-spinasm](https://github.com/yann-ygn/vscode-spinasm) extension installed.
-4. **Open** the command palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and run **SpinASM: Auto-Detect Programmer**.
-
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/test-autodetect.jpg"
-       alt="VS Code command palette showing the SpinASM Auto-Detect Programmer command" class="doc-img">
-</div>
-
-The extension will scan available serial ports and identify the programmer. Once detected, **flash a sample program** to confirm the full chain is working end to end.
-
-> **Tip:** If the auto-detect doesn't find the programmer, check that the FT230X CBUS pins are configured correctly and that the USB connection is solid. On Linux, you may also need to add your user to the `dialout` group for serial port access.
+Follow the [Program an EEPROM](/docs/vscode-spinasm-extension-usage/#programming) section of the SpinASM for VS Code guide. Start with its hardware-detection check, then compile and upload a program. A successful upload and read-back verification confirms that the complete programming chain is working.
