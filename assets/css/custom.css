@@ -510,3 +510,143 @@ footer {
 .img-grid.cols-1 {
   justify-items: center;
 }
+
+.img-grid.doc-image-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.img-grid.doc-image-grid.cols-1 {
+  grid-template-columns: minmax(0, 40rem);
+  justify-content: center;
+  justify-items: stretch;
+}
+
+.doc-image {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ygn-on-surface);
+  background: var(--ygn-surface);
+  border: 0;
+  border-radius: var(--ygn-radius);
+  box-shadow: var(--ygn-shadow);
+  cursor: zoom-in;
+  transition: transform var(--ygn-dur) var(--ygn-ease);
+}
+
+.doc-image::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border: 1px solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: border-color var(--ygn-dur) var(--ygn-ease);
+}
+
+.doc-image:hover,
+.doc-image:focus-visible {
+  transform: translateY(-2px);
+}
+
+.doc-image:hover::after,
+.doc-image:focus-visible::after {
+  border-color: var(--ygn-primary);
+}
+
+.doc-image:focus-visible {
+  outline: 2px solid var(--ygn-primary);
+  outline-offset: 3px;
+}
+
+.doc-content .doc-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0;
+  border-radius: inherit;
+  box-shadow: none;
+}
+
+.doc-image-zoom {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--ygn-bg);
+  background: var(--ygn-primary);
+  border-radius: 50%;
+  box-shadow: var(--ygn-shadow);
+  pointer-events: none;
+}
+
+.doc-image-dialog {
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  overflow: visible;
+  color: var(--ygn-on-surface);
+  background: transparent;
+  border: 0;
+}
+
+.doc-image-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.doc-image-dialog img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: var(--ygn-radius);
+  box-shadow: var(--ygn-shadow);
+}
+
+.doc-image-dialog-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  color: var(--ygn-bg);
+  background: var(--ygn-primary);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: var(--ygn-shadow);
+  cursor: pointer;
+}
+
+.doc-image-dialog-close:hover,
+.doc-image-dialog-close:focus-visible {
+  background: var(--ygn-primary-dark);
+}
+
+.doc-image-dialog-close:focus-visible {
+  outline: 2px solid var(--ygn-on-surface);
+  outline-offset: 3px;
+}
+
+@media (max-width: 767.98px) {
+  .img-grid.doc-image-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .doc-image-dialog img {
+    max-width: 94vw;
+    max-height: 88vh;
+  }
+}

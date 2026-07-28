@@ -132,9 +132,61 @@ document.addEventListener('DOMContentLoaded', () => {
     block.insertBefore(header, block.firstChild);
   });
 
-  // Image zoom functionality
+  // Lazy thumbnail/full-size image viewer
+  const imageLinks = document.querySelectorAll('[data-doc-image]');
+
+  if (imageLinks.length > 0 && typeof HTMLDialogElement !== 'undefined') {
+    const dialog = document.createElement('dialog');
+    dialog.className = 'doc-image-dialog';
+    dialog.setAttribute('aria-label', 'Full-size documentation image');
+
+    const fullImage = document.createElement('img');
+    const closeButton = document.createElement('button');
+    closeButton.type = 'button';
+    closeButton.className = 'doc-image-dialog-close';
+    closeButton.setAttribute('aria-label', 'Close full-size image');
+    closeButton.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
+
+    dialog.appendChild(fullImage);
+    dialog.appendChild(closeButton);
+    document.body.appendChild(dialog);
+
+    closeButton.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      fullImage.removeAttribute('src');
+      fullImage.removeAttribute('alt');
+    });
+
+    imageLinks.forEach(link => {
+      link.addEventListener('click', event => {
+        if (
+          event.defaultPrevented ||
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+        const thumbnail = link.querySelector('img');
+        fullImage.src = link.href;
+        fullImage.alt = thumbnail ? thumbnail.alt : '';
+        dialog.showModal();
+      });
+    });
+  }
+
+  // Preserve the original zoom treatment for guides not yet migrated.
   const docImages = document.querySelectorAll('.doc-img');
   docImages.forEach(img => {
+    if (img.closest('[data-doc-image]')) return;
+
     img.style.cursor = 'zoom-in';
     img.addEventListener('click', () => {
       const overlay = document.createElement('div');
