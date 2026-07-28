@@ -17,6 +17,12 @@
   --ygn-secondary-dark: #552DA8;
   --ygn-on-secondary: #D1C4E9;
 
+  /* Semantic Palette */
+  --ygn-tip: #4CAF50;
+  --ygn-note: #00BCD4;
+  --ygn-caution: #F44336;
+  --ygn-warning: #FF9800;
+
   /* Global Properties */
   --ygn-radius: 1.75rem;
   --ygn-radius-sm: 1rem;
@@ -335,6 +341,31 @@ footer {
 
 .doc-content blockquote p {
   margin: 0;
+}
+
+.doc-content blockquote.doc-callout {
+  --doc-callout-color: var(--ygn-primary);
+  border-left-color: var(--doc-callout-color);
+}
+
+.doc-content blockquote.doc-callout-tip {
+  --doc-callout-color: var(--ygn-tip);
+}
+
+.doc-content blockquote.doc-callout-note {
+  --doc-callout-color: var(--ygn-note);
+}
+
+.doc-content blockquote.doc-callout-caution {
+  --doc-callout-color: var(--ygn-caution);
+}
+
+.doc-content blockquote.doc-callout-warning {
+  --doc-callout-color: var(--ygn-warning);
+}
+
+.doc-content .doc-callout > p:first-child > strong:first-child {
+  color: var(--doc-callout-color);
 }
 
 .doc-content table {
