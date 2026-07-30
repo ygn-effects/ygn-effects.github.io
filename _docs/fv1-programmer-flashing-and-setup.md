@@ -42,11 +42,17 @@ Before jumping into flashing and configuration, assemble the programmer PCB by f
 
 The programmer was designed before we had access to a 3D printer, so its home is an **LK-USB07 ABS enclosure** rather than one of our printed cases. You can usually find one by searching for `LK-USB07` on Chinese online marketplaces such as AliExpress or Banggood.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/lk-usb07-enclosure.jpg"
-       alt="LK-USB07 ABS enclosure for the FV-1 programmer" class="doc-img">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/assembly-complete.jpg"
-       alt="Completed FV-1 programmer assembled inside the LK-USB07 enclosure" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/lk-usb07-enclosure.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/lk-usb07-enclosure.webp"
+     alt="LK-USB07 ABS enclosure for the FV-1 programmer"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/assembly-complete.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/assembly-complete.webp"
+     alt="Completed FV-1 programmer assembled inside the LK-USB07 enclosure"
+     width="1600" height="1200" %}
 </div>
 
 ---
@@ -63,11 +69,17 @@ Gather the following tools before starting. You will also need a way to power th
 | **3.3 V power source** | Powers the programmer during setup | Use a powered FV-1 target board or a bench power supply connected to the programmer's 3.3 V and GND pins. |
 | **Computer** | Runs `avrdude` and the FT230X configuration tool | Windows, macOS and Linux are supported. FT_PROG is available for Windows, while `ftdi_eeprom` is covered for Linux and macOS in this guide. |
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/tools-avrisp.jpg"
-       alt="AVRISP MK2 USB programmer" class="doc-img">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/tools-soic-clip.jpg"
-       alt="SOIC8 test clip with 2×4 Dupont header" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/tools-avrisp.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/tools-avrisp.webp"
+     alt="AVRISP MK2 USB programmer"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/tools-soic-clip.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/tools-soic-clip.webp"
+     alt="SOIC8 test clip with 2×4 Dupont header"
+     width="1600" height="1200" %}
 </div>
 
 ---
@@ -85,40 +97,64 @@ A stock SOIC8 clip may not close tightly enough because the SOICBite pads are cl
 **Test-fit** the clip on the footprint. The jaws should close completely with every contact sitting over its pad. If the clip feels loose or rocks on the board, **adjust** the contacts a little further and try again.
 
 > **Caution:** Bend the contacts gently. Bending them too far can weaken or misalign them.
+{: .doc-callout .doc-callout-caution}
 
 > **Tip:** Once adjusted, keep this clip for SOICBite connections. You should not need to reshape it again.
+{: .doc-callout .doc-callout-tip}
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/clip-adjusted-contacts.jpg"
-       alt="SOIC8 test clip with contacts bent inward to close on the SOICBite footprint" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/clip-adjusted-contacts.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/clip-adjusted-contacts.webp"
+     alt="SOIC8 test clip with contacts bent inward to close on the SOICBite footprint"
+     width="1600" height="1200" %}
 </div>
 
 ### Clip orientation
 
-The clip is not keyed, so check its orientation every time you attach it. A small dot on the PCB silkscreen marks pin 1 of the footprint. Most clip cables identify pin 1 with a coloured wire, usually red.
+The clip is not keyed, so check its orientation every time you attach it. On the PCB, pin 1 is leftmost on the component side. Most clip cables identify pin 1 with a coloured wire, usually red.
 
 **Position** the pin 1 side of the clip on the top, component side of the PCB. **Align** clip pin 1 with footprint pin 1, then **press** the clip down until both jaws grip the pads evenly.
 
 > **Caution:** Confirm the orientation before applying power. A reversed clip can place power on the wrong pins and damage the hardware.
+{: .doc-callout .doc-callout-caution}
 
 > **Tip:** Mark the pin 1 side of the clip with a paint marker or a small piece of tape so you can identify it at a glance.
+{: .doc-callout .doc-callout-tip}
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/soic-pin1-marking.jpg"
-       alt="SOICBite footprint on the programmer PCB with pin 1 marker highlighted" class="doc-img">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/soic-clip-seated.jpg"
-       alt="SOIC8 clip correctly seated on the SOICBite footprint" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/soic-pin1-marking.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/soic-pin1-marking.webp"
+     alt="SOICBite footprint on the programmer PCB with pin 1 marker highlighted"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/soic-clip-seated.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/soic-clip-seated.webp"
+     alt="SOIC8 clip correctly seated on the SOICBite footprint"
+     width="1600" height="1200" %}
 </div>
 
 ### Wiring to the AVRISP MK2
 
 The clip's 2×4 connector exposes eight positions, but only six carry signals. Connect those signals to the AVRISP MK2's 2×3 ISP connector using either of the methods below.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/clip-pinout.jpg"
-       alt="SOIC8 clip 2x4 header with pins numbered 1 to 8" class="doc-img">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/box-header-pinout.jpg"
-       alt="2x4 box header connector pinout mapped to the clip's pin numbers" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/clip-pinout.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/clip-pinout.webp"
+     alt="SOIC8 clip 2x4 header with pins numbered 1 to 8"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/box-header-pinout.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/box-header-pinout.webp"
+     alt="2x4 box header connector pinout mapped to the clip's pin numbers"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/avr-isp-pinout.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/avr-isp-pinout.webp"
+     alt="Standard 6-pin AVR ISP header pinout with pin 1 marked"
+     width="1600" height="1200" %}
 </div>
 
 | Clip pin | Signal | AVRISP MK2 pin |
@@ -133,6 +169,7 @@ The clip's 2×4 connector exposes eight positions, but only six carry signals. C
 | **8** | GND | **6** |
 
 > **Note:** Positions 4 and 6 on the clip connector are not connected.
+{: .doc-callout .doc-callout-note}
 
 #### Option A: Individual jumper wires
 
@@ -146,6 +183,15 @@ Use eight male-to-male jumper wires at the clip end. Filling all eight positions
 6. **Mark** pin 1 at both ends so the harness can be reconnected without tracing every wire.
 
 > **Caution:** Make sure the cut wires in positions 4 and 6 are fully insulated. They act only as spacers in the clip-side bundle and must not contact the AVRISP MK2 or exposed metal.
+{: .doc-callout .doc-callout-caution}
+
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/wiring-zip-tied.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/wiring-zip-tied.webp"
+     alt="Eight-wire clip bundle with two insulated ends and six wires zip-tied at both ends"
+     width="1600" height="1200" %}
+</div>
 
 #### Option B: Crimped adapter harness
 
@@ -156,14 +202,24 @@ Use eight male-to-male jumper wires at the clip end. Filling all eight positions
 5. **Check** every connection with a multimeter before connecting the harness to the programmer.
 
 > **Caution:** Connector housings are easy to view from the wrong side. Confirm the pin numbering and check continuity before applying power.
+{: .doc-callout .doc-callout-caution}
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/avr-isp-pinout.jpg"
-       alt="Standard 6-pin AVR ISP header pinout with pin 1 marked" class="doc-img">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/wiring-connected.jpg"
-       alt="Eight-wire clip bundle with two insulated ends and six wires connected to the AVRISP MK2" class="doc-img">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/wiring-crimped-adapter.jpg"
-       alt="Crimped 2×4-to-2×3 male adapter harness for connecting the SOIC8 clip to the AVRISP MK2" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/wiring-crimped-harness.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/wiring-crimped-harness.webp"
+     alt="Eight-wire crimped harness to six-wire crimped harness adapter"
+     width="1600" height="1200" %}
+</div>
+
+The adapter can then be used to connect the clip to the AVR ISP.
+
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/wiring-connected.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/wiring-connected.webp"
+     alt="Eight-wire clip bundle with two insulated ends and six wires connected to the AVRISP MK2"
+     width="1600" height="1200" %}
 </div>
 
 ---
@@ -190,7 +246,16 @@ The pre-built firmware is available in the FV-1 platform repository at [`firmwar
 
 The AVRISP MK2 is accessed directly over USB, so no serial port identification is needed.
 
-> **Caution:** The AVRISP MK2 does not power the programmer. Before flashing, supply **3.3 V** from either a powered FV-1 target board or a bench power supply connected to the programmer's 3.3 V and GND pins. If you use a bench supply, confirm the voltage and polarity before switching it on.
+> **Note:** The AVRISP MK2 does not power the programmer. Before flashing, supply **3.3 V** from either a powered FV-1 target board or a bench power supply connected to the programmer's 3.3 V and GND pins. If you use a bench supply, confirm the voltage and polarity before switching it on.
+{: .doc-callout .doc-callout-note}
+
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/programmer-powered-on.jpg"
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/programmer-powered-on.webp"
+     alt="Eight-wire clip bundle with two insulated ends and six wires connected to the AVRISP MK2"
+     width="1600" height="1200" %}
+</div>
 
 1. **Switch off** the 3.3 V power source and **unplug** the AVRISP MK2 from USB.
 2. **Attach** the SOIC8 clip to the SOICBite footprint as described in the previous section.
@@ -207,12 +272,37 @@ The AVRISP MK2 is accessed directly over USB, so no serial port identification i
     ```
 
     > **Caution:** These fuse values are specific to the FV-1 programmer hardware. Do not use them when flashing an unrelated ATmega328PB board.
+    {: .doc-callout .doc-callout-caution}
 
 8. After the flash completes, **unplug** the AVRISP MK2 and **switch off** the 3.3 V power source before removing the clip.
 
-On Linux, direct USB access to the AVRISP MK2 may require a udev rule or membership in an appropriate device-access group. Check your distribution's documentation if `avrdude` cannot open the programmer.
+> **Note:** On Linux, direct USB access to the AVRISP MK2 may require a udev rule or membership in an appropriate device-access group. Check your distribution's documentation if `avrdude` cannot open the programmer.
+{: .doc-callout .doc-callout-note}
 
 A successful run finishes without errors and reports that each fuse and the firmware were written and verified. The exact byte count and timing may change between firmware builds.
+
+```
+Processing -U lfuse:w:0xFF:m
+Reading 1 byte for lfuse from input file 0xFF
+Writing 1 byte (0xFF) to lfuse, 1 byte written, 1 verified
+
+Processing -U hfuse:w:0xD7:m
+Reading 1 byte for hfuse from input file 0xD7
+Writing 1 byte (0xD7) to hfuse, 1 byte written, 1 verified
+
+Processing -U efuse:w:0xF5:m
+Reading 1 byte for efuse from input file 0xF5
+Writing 1 byte (0xF5) to efuse, 1 byte written, 1 verified
+
+Processing -U flash:w:./vscode-spinasm-firmware.hex:i
+Reading 6148 bytes for flash from input file vscode-spinasm-firmware.hex
+Writing 6148 bytes to flash
+Writing | ################################################## | 100% 1.88 s
+Reading | ################################################## | 100% 1.81 s
+6148 bytes of flash verified
+
+Avrdude done.  Thank you.
+```
 
 ### Troubleshooting
 
@@ -224,7 +314,7 @@ The AVRISP MK2 is not being detected. On Linux, check your udev rules and device
 
 Make sure your terminal is in the folder containing `vscode-spinasm-firmware.hex`, then run the command again.
 
-**avrdude times out or reports "initialization failed"**
+**`avrdude times out or reports "initialization failed"`**
 
 Check that the programmer has 3.3 V power, the clip is oriented correctly and every contact sits firmly on its pad. Then check the clip-to-ISP harness against the wiring table.
 
@@ -243,7 +333,8 @@ The target configuration is:
 | **CBUS2** | `VBUS_SENSE` |
 | **CBUS3** | `RXLED` |
 
-> **Caution:** USB does not power the FT230X on this programmer. Supply **3.3 V** from either a powered FV-1 target board or a bench power supply connected to the programmer's 3.3 V and GND pins. If you use a bench supply, confirm the voltage and polarity before switching it on.
+> **Note:** USB does not power the FT230X on this programmer. Supply **3.3 V** from either a powered FV-1 target board or a bench power supply connected to the programmer's 3.3 V and GND pins. If you use a bench supply, confirm the voltage and polarity before switching it on.
+{: .doc-callout .doc-callout-note}
 
 1. **Switch off** the 3.3 V power source.
 2. **Connect** the programmer to a powered FV-1 target board, or **connect** a bench power supply to its 3.3 V and GND pins.
@@ -265,9 +356,10 @@ The target configuration is:
 8. When programming finishes, **disconnect** USB and **switch off** the 3.3 V power source.
 9. **Reconnect** power and USB so the FT230X starts with its new configuration.
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/ft-prog-cbus.jpg"
-       alt="FT_PROG showing the CBUS Pins section with CBUS0 to CBUS3 set to their target functions" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/ft-prog-cbus.jpg"
+     alt="FT_PROG showing the CBUS Pins section with CBUS0 to CBUS3 set to their target functions" %}
 </div>
 
 ### Option B: ftdi_eeprom (Linux / macOS)
@@ -301,6 +393,7 @@ cbusx3=RXLED
 ```
 
 > **Caution:** Disconnect any other FTDI devices before continuing so you do not program the wrong device.
+{: .doc-callout .doc-callout-caution}
 
 1. **Open** a terminal in the folder containing `vscode-spinasm-ftdi.conf`.
 2. **Run**:
@@ -308,10 +401,22 @@ cbusx3=RXLED
     ```sh
     ftdi_eeprom --flash-eeprom vscode-spinasm-ftdi.conf
     ```
-
-    > **Note:** On Linux, prefix the command with `sudo` if device permissions prevent `ftdi_eeprom` from opening the FT230X.
+    > **Note:** On Linux, direct serial access to the FT230X may require a udev rule or membership in an appropriate device-access group. Check your distribution's documentation if `ftdi_eeprom` cannot open the serial port.
+    {: .doc-callout .doc-callout-note}
 
 3. **Confirm** that the command finishes without errors.
+
+```
+FTDI eeprom generator v0.17
+(c) Intra2net AG and the libftdi developers <opensource@intra2net.com>
+FTDI read eeprom: 0
+EEPROM size: 256
+Used eeprom space: 240 bytes
+FTDI write eeprom: 0
+Writing to file: eeprom.bin
+FTDI close: 0
+```
+
 4. **Disconnect** USB and **switch off** the 3.3 V power source.
 5. **Reconnect** power and USB so the FT230X starts with its new configuration.
 
@@ -329,13 +434,13 @@ With the firmware flashed and the FT230X configured, connect the programmer to a
 4. **Power on** the target board. It now supplies the programmer and target EEPROM.
 5. **Connect** the programmer to your computer via USB.
 
-> **Caution:** Do not leave the bench power supply connected while the target board is supplying 3.3 V.
-
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/test-connection-pinout.png"
-       alt="Schematic showing the programmer header pinout and its connection to the FV-1 target board" class="doc-img">
-  <img src="/assets/images/docs/fv1-programmer-flashing-and-setup/test-connection-photo.jpg"
-       alt="Programmer connected to the FV-1 target board via the programming header" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/test-connection-pinout.png"
+     alt="Schematic showing the programmer header pinout and its connection to the FV-1 target board" %}
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-flashing-and-setup/test-connection-photo.jpg"
+     alt="Programmer connected to the FV-1 target board via the programming header" %}
 </div>
 
 ### Continue in SpinASM for VS Code
