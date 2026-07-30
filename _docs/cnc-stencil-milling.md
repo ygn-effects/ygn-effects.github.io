@@ -29,9 +29,12 @@ A solder paste stencil is a thin, flat sheet of material with openings (aperture
 
 Professionally manufactured stencils are laser-cut from stainless steel. For the YGN Framework, we mill ours from polyimide (kapton) sheet on a CNC router. The result is not quite as sharp as a laser-cut steel stencil, but it is more than good enough for our board geometries, and you can produce one in-house in under an hour for almost no cost.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/cnc-stencil-milling/intro-stencil-pcb.jpg"
-       alt="Kapton stencil laid over a PCB, showing how the apertures align with the solder pads" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/intro-stencil-pcb.jpg"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/intro-stencil-pcb.webp"
+     alt="Kapton stencil laid over a PCB, showing how the apertures align with the solder pads"
+     width="1600" height="1200" %}
 </div>
 
 ### Where this fits in the Framework
@@ -53,6 +56,7 @@ The good news: preparation eliminates almost every failure mode. If the stock is
 In each effect repository, you will find the FreeCAD files used to generate the toolpaths for stencil milling (in pcb/stencil). We also provide ready-to-use GRBL G-code files. However, these were generated for our specific setup: a stock 3018-PRO CNC with a **0.1mm tip, 10° V-bit**.
 
 > **Note:** The G-code files in each repository were generated for our specific setup. If your machine or bit differs, open the FreeCAD file and adjust the CAM jobs and toolpaths to match your parameters before running. A detailed guide on how to do this is on the way in a future revision.
+{: .doc-callout .doc-callout-note}
 
 ## 2. Required Tools & Materials {#tools}
 
@@ -69,6 +73,7 @@ Thickness is the one specification that directly affects paste deposit quality. 
 Avoid going thicker than that. At **0.2mm**, the paste column sitting in each aperture becomes tall enough that it won't release cleanly onto the pad and you end up with excess paste that spreads under the stencil as you lift it. On fine-pitch IC footprints in particular, this is a reliable recipe for bridges.
 
 > **Note:** "Kapton" is a DuPont brand name. Generic polyimide sheet from other suppliers works just as well. What you are looking for on supplier listings is simply **polyimide film**, in the appropriate thickness, without adhesive.
+{: .doc-callout .doc-callout-note}
 
 #### Mylar as an alternative
 
@@ -96,11 +101,17 @@ There are two fundamentally different CAM strategies for cutting a stencil apert
 
 For profiling, you need a **fine-tipped engraving bit**, and the most common type for this application is the **V-bit**.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/cnc-stencil-milling/cam-strategy-pocketing.png"
-       alt="FreeCAD CAM view showing a pocketing strategy: multiple overlapping passes covering the full aperture area" class="doc-img">
-  <img src="/assets/images/docs/cnc-stencil-milling/cam-strategy-profiling.png"
-       alt="FreeCAD CAM view showing a profiling strategy: a single pass tracing the perimeter of each aperture" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/cam-strategy-pocketing.png"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/cam-strategy-pocketing.webp"
+     alt="FreeCAD CAM view showing a pocketing strategy: multiple overlapping passes covering the full aperture area"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/cam-strategy-profiling.png"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/cam-strategy-profiling.webp"
+     alt="FreeCAD CAM view showing a profiling strategy: a single pass tracing the perimeter of each aperture"
+     width="1600" height="1200" %}
 </div>
 
 #### V-bits: what to look for
@@ -114,12 +125,19 @@ The included angle affects how the walls of the aperture are cut. A narrower ang
 For our setup, we use a **0.1mm tip, 10° V-bit**. This combination threads the needle: fine enough to profile small pads accurately, narrow enough to stay nearly vertical through the full depth of the sheet.
 
 > **Note:** Inexpensive V-bits from your favourite far-east import site work perfectly well for this application. The specs to prioritise are a stated tip diameter of 0.1mm and an included angle of 10°. We have had the best results with 3-edge "pyramid" cutters (also listed as 3-flute engraving bits): the extra flute produces a cleaner cut and the geometry holds up well over multiple stencil runs.
+{: .doc-callout .doc-callout-note}
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/cnc-stencil-milling/endmill-selection.jpg"
-       alt="Selection of 3-edge pyramid V-bits used for stencil milling, laid out on a flat surface" class="doc-img">
-  <img src="/assets/images/docs/cnc-stencil-milling/endmill-tip.jpg"
-       alt="Close-up of a 3-edge pyramid V-bit tip showing the 0.1mm point and three cutting edges" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/endmill-selection.jpg"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/endmill-selection.webp"
+     alt="Selection of 3-edge pyramid V-bits used for stencil milling, laid out on a flat surface"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/endmill-tip.jpg"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/endmill-tip.webp"
+     alt="Close-up of a 3-edge pyramid V-bit tip showing the 0.1mm point and three cutting edges"
+     width="1600" height="1200" %}
 </div>
 
 ### Everything Else
@@ -134,20 +152,29 @@ For our setup, we use a **0.1mm tip, 10° V-bit**. This combination threads the 
 - **A Dremel with a 403, 404 or 405 soft brush attachment:** For clearing and smoothing apertures, especially in tighter areas where the scalpel alone is awkward.
 - **Isopropyl Alcohol (IPA) and paper towels:** For cleaning the finished stencil.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/cnc-stencil-milling/tools-overview.jpg"
-       alt="Full setup laid out: polyimide sheet, spoilboard, 3D-printed holder, V-bit, Dremel with abrasive points, scalpel, and sandpaper" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/tools-overview.jpg"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/tools-overview.webp"
+     alt="Full setup laid out: polyimide sheet, spoilboard, 3D-printed holder, V-bit, Dremel with abrasive points, scalpel, and sandpaper"
+     width="1600" height="1200" %}
 </div>
 
 ## 3. Preparing the Stock {#stock}
 
 Polyimide sheet is almost always sold in rolls rather than flat sheets. This is worth knowing before you order: what arrives is a tightly wound coil and the material will have absorbed that shape. Left to its own devices, a freshly cut piece will curl back toward the roll making it awkward to position and difficult to clamp flat. You can work with curled kapton, but it is genuinely annoying. The right move is to cut it to size and then flatten it, and the whole process only takes a few minutes of hands-on time.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/cnc-stencil-milling/stock-coiled.jpg"
-       alt="Freshly cut kapton sheet curling back on itself, showing the roll memory from the coil" class="doc-img">
-  <img src="/assets/images/docs/cnc-stencil-milling/stock-flat-result.jpg"
-       alt="Flattened kapton sheet lying perfectly flat after heat treatment" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/stock-coiled.jpg"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/stock-coiled.webp"
+     alt="Freshly cut kapton sheet curling back on itself, showing the roll memory from the coil"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/stock-flat-result.jpg"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/stock-flat-result.webp"
+     alt="Flattened kapton sheet lying perfectly flat after heat treatment"
+     width="1600" height="1200" %}
 </div>
 
 ### Cutting to size
@@ -169,10 +196,14 @@ Our setup uses two lava rock slabs as the outer layers of the stack, with the ka
 Once the stack is cool, the sheets should be completely flat and stay that way.
 
 > **Note:** If you don't have a hot plate or lava rock slabs, a kitchen oven works fine as an alternative. Sandwich the kapton between two aluminium sheets, clamp the stack firmly with binder clips and place it on a baking tray at 200°C for 30 minutes. The result is the same; the lava rock setup just produces more consistent pressure and heat distribution.
+{: .doc-callout .doc-callout-note}
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/cnc-stencil-milling/stock-flattening-stack.jpg"
-       alt="Kapton sheets sandwiched between aluminium sheets and lava rock slabs on a hot plate, ready for heat treatment" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/stock-flattening-stack.jpg"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/stock-flattening-stack.webp"
+     alt="Kapton sheets sandwiched between aluminium sheets and lava rock slabs on a hot plate, ready for heat treatment"
+     width="1600" height="1200" %}
 </div>
 
 ## 4. Fixing to the Bed {#fixing}
@@ -190,9 +221,12 @@ The blue tape and white glue method gives you a bond that is strong enough to ho
 5. **Roll it flat with the brayer.** Starting from the centre and working outward, **roll** the brayer firmly across the kapton in overlapping passes. The goal is zero air pockets between the two tape surfaces. Any trapped air is a potential lifting point during the job.
 6. **Let the glue set.** Give it a few minutes before moving on. The glue doesn't need to be fully cured, but the bond should feel firm when you press gently on the kapton. Once it does, **give it one more pass with the brayer** to make sure nothing has lifted as the glue dried.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/cnc-stencil-milling/assembly-bonded.jpg"
-       alt="Kapton sheet bonded to the spoilboard with blue tape and white glue, rolled flat" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/assembly-bonded.jpg"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/assembly-bonded.webp"
+     alt="Kapton sheet bonded to the spoilboard with blue tape and white glue, rolled flat"
+     width="1600" height="1200" %}
 </div>
 
 ### Mounting on the Machine Bed
@@ -203,12 +237,16 @@ The blue tape and white glue method gives you a bond that is strong enough to ho
 10. **Set the job origin.** **Jog** the spindle to the center mark you made on the kapton and **zero** the X and Y axes. Then **zero** Z on the **top surface of the kapton**, this is the reference the toolpaths were generated from. Getting Z wrong is the single most common cause of a ruined stencil: too high and the apertures won't clear; too low and you'll cut through into the spoilboard.
 
 > **Caution:** Double-check the origin before pressing Start. Walk through the X, Y, and Z positions against your NC file. Once the job starts, there is no recovery from a wrong zero.
+{: .doc-callout .doc-callout-caution}
 
 With everything verified, run your job. The machine will profile each aperture in a single pass, the whole run should take only a few minutes.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/cnc-stencil-milling/assembly-on-bed.jpg"
-       alt="Full assembly, spoilboard, kapton and holder, mounted and clamped on the CNC bed with the origin set" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/assembly-on-bed.jpg"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/assembly-on-bed.webp"
+     alt="Full assembly, spoilboard, kapton and holder, mounted and clamped on the CNC bed with the origin set"
+     width="1600" height="1200" %}
 </div>
 
 ## 5. Cleanup & Inspection {#cleanup}
@@ -220,9 +258,12 @@ The first step off the machine is also your first quality check.
 1. **Remove the holder** and **peel the kapton sheet off the spoilboard tape.** The cut-out slugs (the small pieces of kapton that were cleared from each aperture) should remain stuck to the tape below and separate cleanly as you lift the sheet. A stencil that peels off easily with clean, open apertures is a good sign the job went well.
 2. **Check for any uncleared apertures.** If a slug didn't separate fully, it will still be sitting in its opening, attached by a thin uncut sliver. **Work** it free with the scalpel using a gentle lifting motion. This is normal on the occasional aperture and nothing to worry about.
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/cnc-stencil-milling/stencil-released.jpg"
-       alt="Kapton stencil peeled off the spoilboard tape, with aperture slugs remaining on the tape below" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/stencil-released.jpg"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/stencil-released.webp"
+     alt="Kapton stencil peeled off the spoilboard tape, with aperture slugs remaining on the tape below"
+     width="1600" height="1200" %}
 </div>
 
 ### Cleaning Up the Edges
@@ -235,10 +276,14 @@ Some burring along the aperture edges is expected and normal: the V-bit leaves a
 The goal is a surface that feels uniformly smooth under your fingertip. No raised edges, no snags.
 
 > **Tip:** Alternate between the sandpaper and the Dremel as needed. The sandpaper keeps things flat; the Dremel gets into the edges. A couple of passes with each is usually all it takes.
+{: .doc-callout .doc-callout-tip}
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/cnc-stencil-milling/stencil-cleanup.jpg"
-       alt="Stencil being wet-sanded with 3000-grit paper on a flat surface" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/stencil-cleanup.jpg"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/stencil-cleanup.webp"
+     alt="Stencil being wet-sanded with 3000-grit paper on a flat surface"
+     width="1600" height="1200" %}
 </div>
 
 ### Inspection
@@ -248,7 +293,10 @@ The goal is a surface that feels uniformly smooth under your fingertip. No raise
 
 A stencil that passes both checks is ready to use. **Clean** it with IPA and a paper towel before mounting it in the stencil holder for paste application.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/cnc-stencil-milling/stencil-finished.jpg"
-       alt="Finished kapton stencil held up to light, showing clean open apertures" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/cnc-stencil-milling/stencil-finished.jpg"
+     thumb="/assets/images/docs/cnc-stencil-milling/thumbs/stencil-finished.webp"
+     alt="Finished kapton stencil held up to light, showing clean open apertures"
+     width="1600" height="1200" %}
 </div>

@@ -25,9 +25,17 @@ A pot that doesn't line up with its enclosure hole or a connector sitting crooke
 
 There's a jig variant for each board family in the Framework. Each one is shaped to hold the specific components for that board. Check the [soldering jig repository](https://github.com/ygn-effects/tool-various/tree/main/soldering-jig) for the full lineup and to grab the `.step` file that matches what you're building.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/soldering-jig/misaligned-example.jpg" alt="Hand-soldered board with a crooked pot, the kind of mistake the jig prevents" class="doc-img">
-  <img src="/assets/images/docs/soldering-jig/jig-variants.jpg" alt="Two jig variants side by side, for an effect board and an IO board" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/soldering-jig/misaligned-example.jpg"
+     thumb="/assets/images/docs/soldering-jig/thumbs/misaligned-example.webp"
+     alt="Hand-soldered board with a crooked pot, the kind of mistake the jig prevents"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/soldering-jig/jig-variants.jpg"
+     thumb="/assets/images/docs/soldering-jig/thumbs/jig-variants.webp"
+     alt="Two jig variants side by side, for an effect board and an IO board"
+     width="1600" height="1200" %}
 </div>
 
 ## Required materials {#materials}
@@ -38,8 +46,12 @@ There's a jig variant for each board family in the Framework. Each one is shaped
 - **A small vise or clamp.** You'll hold the jig in it while you solder, so it stays put and your hands stay free.
 - **The pots, switches, or JST PH connectors and the PCB** you're about to solder.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/soldering-jig/jig-with-components.jpg" alt="Printed jig next to its PCB and the components it holds" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/soldering-jig/jig-with-components.jpg"
+     thumb="/assets/images/docs/soldering-jig/thumbs/jig-with-components.webp"
+     alt="Printed jig next to its PCB and the components it holds"
+     width="1600" height="1200" %}
 </div>
 
 ## 3D Printing {#printing}
@@ -52,11 +64,17 @@ These jigs print clean and simple:
 - **Infill:** 25% or higher.
 
 > **Note:** The extra walls, top/bottom layers and infill aren't about print quality, they're about durability. The jig spends its working life clamped in a vise and absorbing the heat from the soldering action going on around it, build after build. A thin-walled, low-infill print will eventually crack under that combination of clamping pressure and repeated heat. Printing it sturdy from the start saves you from reprinting it down the line.
+{: .doc-callout .doc-callout-note}
 
 > **Note:** ABS, ASA, and PC are all prone to shrinkage as they cool, and the pockets that hold your pots, switches, and connectors are cut to tight tolerances. Make sure your slicer profile accounts for the X/Y shrinkage of your specific filament, or those pockets can end up undersized.
+{: .doc-callout .doc-callout-note}
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/soldering-jig/heat-relief-detail.jpg" alt="Close-up of the heat relief cutouts near the iron contact points" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/soldering-jig/heat-relief-detail.jpg"
+     thumb="/assets/images/docs/soldering-jig/thumbs/heat-relief-detail.webp"
+     alt="Close-up of the heat relief cutouts near the iron contact points"
+     width="1600" height="1200" %}
 </div>
 
 ## Using the Jig {#usage}
@@ -68,12 +86,33 @@ These jigs print clean and simple:
 5. **Solder.**
 6. **Unclamp the jig and lift the board off.** Everything comes off perfectly aligned, no rework needed.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/soldering-jig/jig-clamped.jpg" alt="Jig clamped in a small vise" class="doc-img">
-  <img src="/assets/images/docs/soldering-jig/components-seated.jpg" alt="Pots and switches seated in the jig" class="doc-img">
-  <img src="/assets/images/docs/soldering-jig/pcb-placed.jpg" alt="PCB placed on top of the seated components" class="doc-img">
-  <img src="/assets/images/docs/soldering-jig/soldering-in-progress.jpg" alt="Soldering a component while the jig is clamped" class="doc-img">
-  <img src="/assets/images/docs/soldering-jig/final-result.jpg" alt="Finished board with all components perfectly aligned" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/soldering-jig/jig-clamped.jpg"
+     thumb="/assets/images/docs/soldering-jig/thumbs/jig-clamped.webp"
+     alt="Jig clamped in a small vise"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/soldering-jig/components-seated.jpg"
+     thumb="/assets/images/docs/soldering-jig/thumbs/components-seated.webp"
+     alt="Pots and switches seated in the jig"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/soldering-jig/pcb-placed.jpg"
+     thumb="/assets/images/docs/soldering-jig/thumbs/pcb-placed.webp"
+     alt="PCB placed on top of the seated components"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/soldering-jig/soldering-in-progress.jpg"
+     thumb="/assets/images/docs/soldering-jig/thumbs/soldering-in-progress.webp"
+     alt="Soldering a component while the jig is clamped"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/soldering-jig/final-result.jpg"
+     thumb="/assets/images/docs/soldering-jig/thumbs/final-result.webp"
+     alt="Finished board with all components perfectly aligned"
+     width="1600" height="1200" %}
 </div>
 
 > **Tip:** If your board has both a top and a bottom jig, solder the top side first and the bottom side last, that order is consistent across every board in the Framework. Seat and solder the top jig's components, then move the board to the bottom jig for the rest.
+{: .doc-callout .doc-callout-tip}

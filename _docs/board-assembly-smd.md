@@ -48,11 +48,27 @@ Here is everything you'll need to assemble your PCB.
   - **Reflow Hot Plate:** This is what will heat the board and melt the solder. Many commercial and DIY versions are available in various sizes.
   - **Isopropyl Alcohol (IPA) and Paper Towels:** For cleaning the stencil and any accidental messes.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/board-assembly-smd/tools-stencil-holder.webp" alt="PCB and stencil seated in the YGN Stencil Holder jig" class="doc-img">
-  <img src="/assets/images/docs/board-assembly-smd/tools-hot-plate.jpg" alt="Reflow hot plate used to heat the board during soldering" class="doc-img">
-  <img src="/assets/images/docs/board-assembly-smd/tools-stencil.jpg" alt="Solder paste stencil for the PCB" class="doc-img">
-  <img src="/assets/images/docs/board-assembly-smd/tools-paste-squeegee-tweezers.jpg" alt="Solder paste, squeegee, and tweezers laid out together" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/board-assembly-smd/tools-stencil-holder.webp"
+     thumb="/assets/images/docs/board-assembly-smd/thumbs/tools-stencil-holder.webp"
+     alt="PCB and stencil seated in the YGN Stencil Holder jig"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/board-assembly-smd/tools-hot-plate.jpg"
+     thumb="/assets/images/docs/board-assembly-smd/thumbs/tools-hot-plate.webp"
+     alt="Reflow hot plate used to heat the board during soldering"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/board-assembly-smd/tools-stencil.jpg"
+     thumb="/assets/images/docs/board-assembly-smd/thumbs/tools-stencil.webp"
+     alt="Solder paste stencil for the PCB"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/board-assembly-smd/tools-paste-squeegee-tweezers.jpg"
+     thumb="/assets/images/docs/board-assembly-smd/thumbs/tools-paste-squeegee-tweezers.webp"
+     alt="Solder paste, squeegee, and tweezers laid out together"
+     width="1600" height="1200" %}
 </div>
 
 ## 3. Applying the Solder Paste {#paste}
@@ -69,10 +85,19 @@ With our workspace ready, it's time for the most crucial step. Take your time he
 8. **Inspect your work.** **Look** closely at the PCB. All the pads should be covered with a uniform, gray deposit of solder paste.
 
 > **Tip:** If some pads look thin or you see bridges between pads, don't worry! You can simply place the PCB back in the jig, lay the stencil back on top (it should snap into place), and repeat the application process. The same "pop-on, pop-off" motion works wonders here.
+{: .doc-callout .doc-callout-tip}
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/board-assembly-smd/stencil-lift-off.jpg" alt="Stencil being lifted straight off the PCB after paste application" class="doc-img">
-  <img src="/assets/images/docs/board-assembly-smd/paste-applied.jpg" alt="PCB with uniform gray solder paste deposits on every pad" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/board-assembly-smd/stencil-lift-off.jpg"
+     thumb="/assets/images/docs/board-assembly-smd/thumbs/stencil-lift-off.webp"
+     alt="Stencil being lifted straight off the PCB after paste application"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/board-assembly-smd/paste-applied.jpg"
+     thumb="/assets/images/docs/board-assembly-smd/thumbs/paste-applied.webp"
+     alt="PCB with uniform gray solder paste deposits on every pad"
+     width="1600" height="1200" %}
 </div>
 
 ## 4. Placing the Components {#placement}
@@ -83,13 +108,22 @@ This is where your circuit starts to come to life! A bit of organization now wil
 
 1. **Organize Your Components:** Working from cut tapes of tiny components is not practical. We strongly recommend a good storage system. There are many options, from simple trays to multi-drawer bins. We personally use and love the **AideTek BOX-ALL** system, with separate organizers for resistors, capacitors, ICs, etc. A neat, logical organization will significantly speed up your build.
 
-    <div class="img-grid cols-2" markdown="0">
-      <img src="/assets/images/docs/board-assembly-smd/components-storage-boxes.jpg" alt="BOX-ALL component storage boxes with all compartment lids closed" class="doc-img">
-      <img src="/assets/images/docs/board-assembly-smd/components-storage-lid-open.jpg" alt="Close-up of an open compartment lid showing components inside" class="doc-img">
+    <div class="img-grid doc-image-grid cols-2" markdown="0">
+      {% include doc-image.html
+         full="/assets/images/docs/board-assembly-smd/components-storage-boxes.jpg"
+         thumb="/assets/images/docs/board-assembly-smd/thumbs/components-storage-boxes.webp"
+         alt="BOX-ALL component storage boxes with all compartment lids closed"
+         width="1600" height="1200" %}
+      {% include doc-image.html
+         full="/assets/images/docs/board-assembly-smd/components-storage-lid-open.jpg"
+         thumb="/assets/images/docs/board-assembly-smd/thumbs/components-storage-lid-open.webp"
+         alt="Close-up of an open compartment lid showing components inside"
+         width="1600" height="1200" %}
     </div>
 
 2. **Know What Goes Where:** While you can use the Bill of Materials (BOM) and the silk screen overlay on the PCB, the small size of the components can sometimes make the overlay hard to read. For a crystal-clear view, we recommend opening the **mechanical layer** file from the effect's repository. This file shows only the component outlines and their designators.
-  > **Tip:** Feel free to print this mechanical layer view and annotate it with component values. There's usually plenty of space, and it creates a perfect "map" for your build.
+    > **Tip:** Feel free to print this mechanical layer view and annotate it with component values. There's usually plenty of space, and it creates a perfect "map" for your build.
+    {: .doc-callout .doc-callout-tip}
 3. **Clean Your Tweezers:** Your tweezers must be perfectly clean and have sharp, well-aligned tips. Tiny 0603 components are so light that any residue or slight deformation on the tweezer tips can cause the part to stick or be misplaced.
 
 ### The Placement Process
@@ -97,6 +131,7 @@ This is where your circuit starts to come to life! A bit of organization now wil
 1. **Place the components.** With your parts organized and your placement map ready, it's time to start. The general strategy is to work from the smallest components up to the largest.
 
     > **Note:** Don't stress about getting the placement absolutely perfect! The magic of the reflow process is that the surface tension of the molten solder (capillary action) will pull most components into precise alignment. Just get them reasonably centered on their pads.
+    {: .doc-callout .doc-callout-note}
 
     A good workflow is:
       - **Start with 0603 resistors.** Pick one value (e.g., 10kΩ), and **place** all of them on the board. Move to the next value and repeat.
@@ -106,9 +141,17 @@ This is where your circuit starts to come to life! A bit of organization now wil
       - Then, **place** the Integrated Circuits (ICs).
       -  Finally, **place** the "big stuff" like electrolytic capacitors, relays, or other bulky parts.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/board-assembly-smd/tweezers-placing-component.jpg" alt="Tweezers placing a small SMD component onto its pads" class="doc-img">
-  <img src="/assets/images/docs/board-assembly-smd/components-placed.jpg" alt="Fully populated PCB with all SMD components placed, ready for reflow" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/board-assembly-smd/tweezers-placing-component.jpg"
+     thumb="/assets/images/docs/board-assembly-smd/thumbs/tweezers-placing-component.webp"
+     alt="Tweezers placing a small SMD component onto its pads"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/board-assembly-smd/components-placed.jpg"
+     thumb="/assets/images/docs/board-assembly-smd/thumbs/components-placed.webp"
+     alt="Fully populated PCB with all SMD components placed, ready for reflow"
+     width="1600" height="1200" %}
 </div>
 
 ## 5. The Reflow Process {#reflow}
@@ -126,8 +169,12 @@ The process has three main stages:
 
 We will follow this profile closely for the first two phases. For the final reflow phase, we'll rely on visual cues, as most hobbyist hot plates can't precisely match the steep temperature curves.
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/board-assembly-smd/reflow-profile-smd291.png" alt="Reflow profile graph for Chipquik SMD291SNL50T3 solder paste with the ramp-up, soak, and reflow stages highlighted" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/board-assembly-smd/reflow-profile-smd291.png"
+     thumb="/assets/images/docs/board-assembly-smd/thumbs/reflow-profile-smd291.webp"
+     alt="Reflow profile graph for Chipquik SMD291SNL50T3 solder paste with the ramp-up, soak, and reflow stages highlighted"
+     width="1600" height="1200" %}
 </div>
 
 ### Let's Reflow!
@@ -140,10 +187,19 @@ We will follow this profile closely for the first two phases. For the final refl
 6. **Inspect the joints.** After the board has cooled completely (wait at least 5-10 minutes), it's time to inspect your work. Grab a magnifier if you have one and look at the solder joints.
 
 > **Tip:** A good SMT solder joint, called a "fillet," should be shiny and have a concave shape where the solder has wicked up from the pad onto the component's lead. This indicates a strong, reliable connection. Check for any bridges (solder connecting two pads that shouldn't be) or unsoldered pads.
+{: .doc-callout .doc-callout-tip}
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/board-assembly-smd/reflow-melting.jpg" alt="Solder paste turning shiny and liquid on the hot plate during reflow" class="doc-img">
-  <img src="/assets/images/docs/board-assembly-smd/solder-joints-fillet.jpg" alt="Close-up of finished SMD solder joints showing a clean, concave fillet" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/board-assembly-smd/reflow-melting.jpg"
+     thumb="/assets/images/docs/board-assembly-smd/thumbs/reflow-melting.webp"
+     alt="Solder paste turning shiny and liquid on the hot plate during reflow"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/board-assembly-smd/solder-joints-fillet.jpg"
+     thumb="/assets/images/docs/board-assembly-smd/thumbs/solder-joints-fillet.webp"
+     alt="Close-up of finished SMD solder joints showing a clean, concave fillet"
+     width="1600" height="1200" %}
 </div>
 
 ## 6. Testing Your Board {#tests}
@@ -154,6 +210,10 @@ Once all the through-hole components (like headers and connectors) have been sol
 2. **Find the Expected Values:** To know what you're looking for, refer to the **Test Points document** located in the fabrication output folder within each effect's repository. This document lists each test point and its expected voltage or behavior.
 3. **Measure the Voltages:** Power up the board. To take a measurement, you'll need a multimeter. All of the un-tented vias (the small, exposed copper holes) running along the edges of the board are connected to the ground plane. These make a perfect, stable anchor point for the black COM probe of your multimeter. **Touch** the red probe to each test point and **compare** the reading on your multimeter to the value listed in the documentation. If everything matches, congratulations on a successful build!
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/board-assembly-smd/test-points-probe.jpg" alt="Multimeter probe touching a labeled test point on the finished board" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/board-assembly-smd/test-points-probe.jpg"
+     thumb="/assets/images/docs/board-assembly-smd/thumbs/test-points-probe.webp"
+     alt="Multimeter probe touching a labeled test point on the finished board"
+     width="1600" height="1200" %}
 </div>

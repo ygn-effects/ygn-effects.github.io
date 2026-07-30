@@ -74,6 +74,7 @@ Once assembled, you'll achieve industrial-level paste placement accuracy with ho
 | **M3 hex nuts** | 12 | Standard height (2.4mm) |
 
 > **Tip:** Most hardware stores carry these hinges in packs. Look in the cabinet hardware section, not door hardware—you want the small decorative hinges.
+{: .doc-callout .doc-callout-tip}
 
 ### 3D Printing Materials
 
@@ -90,6 +91,7 @@ Get the STL files from the [GitHub repository](https://github.com/ygn-effects/to
 - `stencil-holder-small-top.stl` - Frame with stencil clamp
 
 > **Note:** Choose the appropriate size for your PCB (small, medium, or large). For IO boards, use the `-io-board-` variants.
+{: .doc-callout .doc-callout-note}
 
 ### Print Settings
 
@@ -120,6 +122,7 @@ Print time: ~2.5 hours
 - Use "support on build plate only" setting
 
 > **Tip:** If your printer has good bridging (e.g., well-tuned Prusa or Bambu), you may be able to print without supports. Test with a single piece first.
+{: .doc-callout .doc-callout-tip}
 
 ### Post-Processing
 
@@ -128,9 +131,17 @@ Print time: ~2.5 hours
 3. Test-fit M3 nuts—they should drop in but not rattle loose
 4. Optional: Light sanding (220 grit) on the PCB pocket edges for smooth insertion
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/stencil-holder/printed-parts.jpg" alt="Printed top and bottom pieces" class="doc-img">
-  <img src="/assets/images/docs/stencil-holder/nut-trap-detail.jpg" alt="Hexagonal nut trap detail" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/stencil-holder/printed-parts.jpg"
+     thumb="/assets/images/docs/stencil-holder/thumbs/printed-parts.webp"
+     alt="Printed top and bottom pieces"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/stencil-holder/nut-trap-detail.jpg"
+     thumb="/assets/images/docs/stencil-holder/thumbs/nut-trap-detail.webp"
+     alt="Hexagonal nut trap detail"
+     width="1600" height="1200" %}
 </div>
 
 ---
@@ -162,6 +173,7 @@ Using **6× M3×8mm screws**, secure the hinges to the bottom piece:
 - Tighten firmly but don't overtighten—you'll strip the plastic threads
 
 > **Note:** The hinges have 6 holes each, but 4 screws per hinge is more than adequate for the light clamping forces involved.
+{: .doc-callout .doc-callout-note}
 
 ### Step 4: Attach Top Piece
 
@@ -181,11 +193,27 @@ Test the hinge action:
 
 If the hinges bind, loosen the screws slightly. If there's too much play, ensure all nuts are fully seated in their traps.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/stencil-holder/assembly-hardware.jpg" alt="All required hardware laid out" class="doc-img">
-  <img src="/assets/images/docs/stencil-holder/hinge-mounting.jpg" alt="Hinges mounted to base" class="doc-img">
-  <img src="/assets/images/docs/stencil-holder/assembled-open.jpg" alt="Assembled holder in open position" class="doc-img">
-  <img src="/assets/images/docs/stencil-holder/assembled-closed.jpg" alt="Assembled holder closed" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/stencil-holder/assembly-hardware.jpg"
+     thumb="/assets/images/docs/stencil-holder/thumbs/assembly-hardware.webp"
+     alt="All required hardware laid out"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/stencil-holder/hinge-mounting.jpg"
+     thumb="/assets/images/docs/stencil-holder/thumbs/hinge-mounting.webp"
+     alt="Hinges mounted to base"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/stencil-holder/assembled-open.jpg"
+     thumb="/assets/images/docs/stencil-holder/thumbs/assembled-open.webp"
+     alt="Assembled holder in open position"
+     width="1600" height="1200" %}
+  {% include doc-image.html
+     full="/assets/images/docs/stencil-holder/assembled-closed.jpg"
+     thumb="/assets/images/docs/stencil-holder/thumbs/assembled-closed.webp"
+     alt="Assembled holder closed"
+     width="1600" height="1200" %}
 </div>
 
 ---

@@ -31,6 +31,7 @@ For jobs that require high precision on the Z-axis—like engraving a faceplate 
 To achieve this level of flatness, CNC operators perform a process called **surfacing** (or **trimming**). This involves using a large, flat-bottomed bit to have the CNC machine mill a very thin layer off the entire top of the spoilboard. This ensures the working surface is absolutely parallel to the machine's own movements.
 
 > **Tip:** You can think of this process just like leveling the bed of a 3D printer. Just as bed leveling ensures a perfect first layer by creating a consistent distance between the nozzle and the build plate, surfacing a spoilboard ensures your cuts are perfectly consistent across the entire workpiece.
+{: .doc-callout .doc-callout-tip}
 
 This guide will show you how to prepare a spoilboard for our CNC holder. While we will be making a spoilboard for a pedal faceplate, the process is identical for any other board you might need.
 
@@ -39,6 +40,7 @@ This guide will show you how to prepare a spoilboard for our CNC holder. While w
 In the project repository, you will find the FreeCAD files used to generate the toolpaths for surfacing the spoilboard. We also provide ready-to-use GRBL G-code files. However, these were generated for our specific setup: a stock 3018-PRO CNC with a 25mm surfacing bit.
 
 > **Caution:** Unless you have the exact same machine and bit, you should not use the provided G-code directly. You will need to open the FreeCAD file and adjust the CAM jobs and toolpaths to match your own machine's parameters and bit choice. A detailed guide on how to do this is beyond the scope of this document.
+{: .doc-callout .doc-callout-caution}
 
 ---
 
@@ -55,6 +57,7 @@ This leaves us with wood-based fiberboards, which are easy to work with and offe
  - **Surfacing Bit:** A large-diameter, flat-bottomed bit designed for planing and surfacing.
 
 > **Note:** The provided GRBL G-code is specifically for a **25mm** surfacing bit. If you use a different size, you must adjust the toolpaths in the FreeCAD file accordingly.
+{: .doc-callout .doc-callout-note}
 
  - **Shellac:** While optional, applying a couple of thin coats of shellac after the spoilboard has been surfaced will help seal the fibers. This makes the board more durable and resistant to tearing when you remove the blue tape, significantly extending its lifespan.
 
@@ -68,10 +71,19 @@ This leaves us with wood-based fiberboards, which are easy to work with and offe
     - **Mark** one of the short edges to designate it as the "bottom." You can use a permanent marker or a bit of paint. This is a crucial step for consistency.
 
     > **Tip:** Once your spoilboard is surfaced, it is only flat in relation to the exact spot where it was milled. You must always place it in the same location and orientation on your CNC bed for it to work correctly. These markings ensure you do that every time.
+    {: .doc-callout .doc-callout-tip}
 
-    <div class="img-grid cols-2" markdown="0">
-      <img src="/assets/images/docs/spoilboard-fabrication/spoilboard-material.jpg" alt="Cut stock marked" class="doc-img quart">
-      <img src="/assets/images/docs/spoilboard-fabrication/spoilboard-side-paint.jpg" alt="Cut stock side painted" class="doc-img quart">
+    <div class="img-grid doc-image-grid cols-2" markdown="0">
+      {% include doc-image.html
+         full="/assets/images/docs/spoilboard-fabrication/spoilboard-material.jpg"
+         thumb="/assets/images/docs/spoilboard-fabrication/thumbs/spoilboard-material.webp"
+         alt="Cut stock marked"
+         width="618" height="567" %}
+      {% include doc-image.html
+         full="/assets/images/docs/spoilboard-fabrication/spoilboard-side-paint.jpg"
+         thumb="/assets/images/docs/spoilboard-fabrication/thumbs/spoilboard-side-paint.webp"
+         alt="Cut stock side painted"
+         width="1171" height="448" %}
     </div>
 
 2.  **Clamp the Stock to the Bed**
@@ -81,9 +93,17 @@ This leaves us with wood-based fiberboards, which are easy to work with and offe
     - **Secure** the stock firmly to the bed using your clamps on the extra material you left on the sides. Make sure it is held down tightly and cannot move at all.
     - **Jog** your machine's spindle to the starting point for the surfacing job. If you are using the provided G-code, the job origin is the **top center** of the stock. Use your marked center line to position the bit perfectly.
 
-    <div class="img-grid cols-2" markdown="0">
-      <img src="/assets/images/docs/spoilboard-fabrication/spoilboard-clamped.jpg" alt="Stock clamped on bed" class="doc-img quart">
-      <img src="/assets/images/docs/spoilboard-fabrication/spoilboard-origin.jpg" alt="Job origin" class="doc-img quart">
+    <div class="img-grid doc-image-grid cols-2" markdown="0">
+      {% include doc-image.html
+         full="/assets/images/docs/spoilboard-fabrication/spoilboard-clamped.jpg"
+         thumb="/assets/images/docs/spoilboard-fabrication/thumbs/spoilboard-clamped.webp"
+         alt="Stock clamped on bed"
+         width="945" height="797" %}
+      {% include doc-image.html
+         full="/assets/images/docs/spoilboard-fabrication/spoilboard-origin.jpg"
+         thumb="/assets/images/docs/spoilboard-fabrication/thumbs/spoilboard-origin.webp"
+         alt="Job origin"
+         width="800" height="600" %}
     </div>
 
 4.  **Post-Processing and Final Cutout**
@@ -94,10 +114,22 @@ This leaves us with wood-based fiberboards, which are easy to work with and offe
     - **Mark** the final width. The surfaced area is now your reference. Since it was milled from the center, you can now re-draw your center line if it was removed during surfacing. From that center line, **measure** and **mark** the final edges of the spoilboard.
     - **Cut** the excess material from the sides. You can use a utility knife with a fresh blade, a handsaw, or your tool of choice. Once the sides are trimmed, your spoilboard is officially ready to use!
 
-    <div class="img-grid cols-2" markdown="0">
-      <img src="/assets/images/docs/spoilboard-fabrication/spoilboard-trimmed.jpg" alt="Raw trimmed spoilboard" class="doc-img quart">
-      <img src="/assets/images/docs/spoilboard-fabrication/spoilboard-trimmed-lines.jpg" alt="Center and edges line drawn on spoilboard" class="doc-img quart">
-      <img src="/assets/images/docs/spoilboard-fabrication/spoilboard-cut.jpg" alt="Spoilboard done" class="doc-img quart">
+    <div class="img-grid doc-image-grid cols-2" markdown="0">
+      {% include doc-image.html
+         full="/assets/images/docs/spoilboard-fabrication/spoilboard-trimmed.jpg"
+         thumb="/assets/images/docs/spoilboard-fabrication/thumbs/spoilboard-trimmed.webp"
+         alt="Raw trimmed spoilboard"
+         width="761" height="629" %}
+      {% include doc-image.html
+         full="/assets/images/docs/spoilboard-fabrication/spoilboard-trimmed-lines.jpg"
+         thumb="/assets/images/docs/spoilboard-fabrication/thumbs/spoilboard-trimmed-lines.webp"
+         alt="Center and edges line drawn on spoilboard"
+         width="764" height="663" %}
+      {% include doc-image.html
+         full="/assets/images/docs/spoilboard-fabrication/spoilboard-cut.jpg"
+         thumb="/assets/images/docs/spoilboard-fabrication/thumbs/spoilboard-cut.webp"
+         alt="Spoilboard done"
+         width="752" height="513" %}
     </div>
 
 5.  **Sealing with Shellac (Optional)**

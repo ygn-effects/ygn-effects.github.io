@@ -41,9 +41,12 @@ Gather the following before you start. The USB-to-serial adapter is required bec
 | **USB-to-serial adapter** | Flashes the Pro Mini and connects it to VS Code | It must use 3.3 V logic and expose TX, RX, GND and DTR. |
 | **Computer** | Flashes firmware and runs SpinASM in VS Code | See the SpinASM extension README for software installation. |
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/required-hardware.jpg"
-       alt="Arduino Pro Mini, 3.3 V USB-to-serial adapter, jumper wires and an FV-1 target board laid out for programming" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/required-hardware.jpg"
+     thumb="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/thumbs/required-hardware.webp"
+     alt="Arduino Pro Mini, 3.3 V USB-to-serial adapter, jumper wires and an FV-1 target board laid out for programming"
+     width="1600" height="1200" %}
 </div>
 
 ---
@@ -53,14 +56,18 @@ Gather the following before you start. The USB-to-serial adapter is required bec
 The Pro Mini has two jobs in this guide, and each job has its own wiring and power source. **Flash** its firmware with the USB-to-serial adapter first. Then **disconnect** the adapter's 3.3 V power connection and let the powered target board supply the Pro Mini while you program its EEPROM.
 
 > **Note:** The Pro Mini, target programming header and EEPROM are 3.3 V only. Check the adapter's logic-voltage setting before you connect it. Do not use its 5 V output or connect 5 V serial logic to any part of this setup.
+{: .doc-callout .doc-callout-note}
 
 ### Wiring for firmware flashing
 
 1. **Set** the USB-to-serial adapter to 3.3 V. This is usually a small jumper that you **move** to the 3.3 V pins, or a switch that you **set** to 3.3 V.
 
-   <div class="img-grid cols-1" markdown="0">
-     <img src="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/adapter-3v3-setting.jpg"
-          alt="USB-to-serial adapter jumper set to the 3.3 V logic-voltage position" class="doc-img">
+   <div class="img-grid doc-image-grid cols-1" markdown="0">
+     {% include doc-image.html
+        full="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/adapter-3v3-setting.jpg"
+        thumb="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/thumbs/adapter-3v3-setting.webp"
+        alt="USB-to-serial adapter jumper set to the 3.3 V logic-voltage position"
+        width="1600" height="1200" %}
    </div>
 
 2. **Connect** the adapter to the Pro Mini as follows:
@@ -91,10 +98,14 @@ The Pro Mini has two jobs in this guide, and each job has its own wiring and pow
 3. **Power on** the target board. It now supplies the Pro Mini and the EEPROM.
 
 > **Note:** Do not let the USB-to-serial adapter and target board power the Pro Mini at the same time. Disconnect the adapter's 3.3 V wire before you power the target board.
+{: .doc-callout .doc-callout-note}
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/eeprom-programming-wiring.jpg"
-       alt="Arduino Pro Mini wired to an FV-1 target board programming header with the target board supplying 3.3 V power" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/eeprom-programming-wiring.jpg"
+     thumb="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/thumbs/eeprom-programming-wiring.webp"
+     alt="Arduino Pro Mini wired to an FV-1 target board programming header with the target board supplying 3.3 V power"
+     width="1600" height="1200" %}
 </div>
 
 ---
@@ -131,9 +142,12 @@ avrdude -p atmega328p -c arduino -P <serial-port> -b 57600 \
   -U flash:w:./pro-mini-firmware.hex:i
 ```
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/firmware-flashing-wiring.jpg"
-       alt="3.3 V USB-to-serial adapter wired to an Arduino Pro Mini while the programmer firmware is flashed" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/firmware-flashing-wiring.jpg"
+     thumb="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/thumbs/firmware-flashing-wiring.webp"
+     alt="3.3 V USB-to-serial adapter wired to an Arduino Pro Mini while the programmer firmware is flashed"
+     width="1600" height="1200" %}
 </div>
 
 A successful run will output:
@@ -149,6 +163,7 @@ Avrdude done.  Thank you.
 ```
 
 > **Tip:** If `avrdude` cannot open the serial port on Linux, your user account may need access to the `dialout` group or an appropriate udev rule. Check your distribution's documentation for the right approach.
+{: .doc-callout .doc-callout-tip}
 
 ---
 
@@ -164,10 +179,14 @@ With the firmware flashed, you are ready to test the complete programming path f
 4. **Power on** the FV-1 target board. It supplies the Pro Mini and the target EEPROM.
 
 > **Note:** Do not use the adapter's 3.3 V output while the target board is powered. The adapter provides serial communication only during this test.
+{: .doc-callout .doc-callout-note}
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/test-programmer-connected.jpg"
-       alt="Arduino Pro Mini connected to the FV-1 target board programming header with a USB-to-serial adapter connected for communication" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/test-programmer-connected.jpg"
+     thumb="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/thumbs/test-programmer-connected.webp"
+     alt="Arduino Pro Mini connected to the FV-1 target board programming header with a USB-to-serial adapter connected for communication"
+     width="1600" height="1200" %}
 </div>
 
 ### Run auto-detect and check the hardware
@@ -177,9 +196,12 @@ With the firmware flashed, you are ready to test the complete programming path f
 3. **Confirm** that the extension finds the USB-to-serial adapter and selects its serial port.
 4. **Run** **SpinASM: Check Hardware Connection** to confirm the compiler, programmer and target EEPROM can communicate.
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/test-autodetect.jpg"
-       alt="VS Code Command Palette showing the SpinASM Auto-Detect Programmer command" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/test-autodetect.jpg"
+     thumb="/assets/images/docs/fv1-programmer-arduino-pro-mini-setup/thumbs/test-autodetect.webp"
+     alt="VS Code Command Palette showing the SpinASM Auto-Detect Programmer command"
+     width="1600" height="1200" %}
 </div>
 
 ### Compile, upload and verify a program
@@ -190,6 +212,7 @@ With the firmware flashed, you are ready to test the complete programming path f
 4. **Confirm** that VS Code reports a successful upload and verification.
 
 > **Tip:** If the test fails, **check** that the target board is powered, the adapter's 3.3 V wire is disconnected and every SDA, SCL, reset and ground connection is firm.
+{: .doc-callout .doc-callout-tip}
 
 ---
 

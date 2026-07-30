@@ -26,6 +26,7 @@ Welcome to the YGN Effects Framework documentation! The **Small IO Board** carri
 There's no extra hardware to source and no cutting traces involved. Every footprint for every variant already exists on the board, so building the one you want is simply a matter of populating the right handful of parts and leaving the rest empty. This guide walks you through picking a variant and stuffing it correctly.
 
 > **Note:** This guide assumes you're already comfortable with the general SMD population process. If you haven't yet, read the [SMD PCB Assembly guide](/docs/smd-pcb-assembly/) first: everything here builds on that same technique, just applied to one specific area of the board.
+{: .doc-callout .doc-callout-note}
 
 ---
 
@@ -35,14 +36,21 @@ The whole trick lives around **IC1**, an ICL7660S. On its own, this chip is a "c
 
 **IC1** and **C5** (its input decoupling capacitor) are common to all three variants and are always populated. Everything else in this stage is optional, and which parts you stuff depends entirely on the variant you're building.
 
-<div class="img-grid cols-2" markdown="0">
-  <img src="/assets/images/docs/small-io-board-power-supply-variants/board-overview.jpg"
-       alt="3D render of the Small IO Board with the switching regulator area (IC1 and its surrounding diodes, capacitors and resistor footprints) visible" class="doc-img">
-  <img src="/assets/images/docs/small-io-board-power-supply-variants/schematic-switching-stage.jpg"
-       alt="Schematic of the switching regulator stage, showing IC1 and the surrounding diode and capacitor network" class="doc-img">
+<div class="img-grid doc-image-grid cols-2" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/small-io-board-power-supply-variants/board-overview.jpg"
+     thumb="/assets/images/docs/small-io-board-power-supply-variants/thumbs/board-overview.webp"
+     alt="3D render of the Small IO Board with the switching regulator area (IC1 and its surrounding diodes, capacitors and resistor footprints) visible"
+     width="800" height="523" %}
+  {% include doc-image.html
+     full="/assets/images/docs/small-io-board-power-supply-variants/schematic-switching-stage.jpg"
+     thumb="/assets/images/docs/small-io-board-power-supply-variants/thumbs/schematic-switching-stage.webp"
+     alt="Schematic of the switching regulator stage, showing IC1 and the surrounding diode and capacitor network"
+     width="800" height="652" %}
 </div>
 
 > **Tip:** IC1's BOOST pin (pin 1) is tied to V+ in every variant. This pushes the internal oscillator up to around 35kHz, well above the audio band, so switching noise doesn't make its way into your effect's signal path.
+{: .doc-callout .doc-callout-tip}
 
 ---
 
@@ -57,6 +65,7 @@ The **J2** header, which powers the effect PCB plugged into your IO board, alway
 | **±15V** | +15V | -15V | Op-amp circuits designed around a standard ±15V audio supply, for the most headroom of the three. |
 
 > **Caution:** Populate exactly **one** column, fully. Mixing parts from two different variants, or only half-populating one, can feed the wrong voltage into whatever effect PCB is plugged into J2 and damage it. If you're not sure which variant your effect circuit needs, check its documentation before you start soldering.
+{: .doc-callout .doc-callout-caution}
 
 ---
 ## Populating The Board {#populating}
@@ -69,10 +78,14 @@ This is the simplest variant: IC1 runs as a straightforward voltage inverter, gi
 2. **Leave empty** C6, D2, D3, C7, D4, RJ1, RJ3 and RJ4.
 
 > **Note:** D6 clamps -REG to ground-referenced ≈ -9V. It's what keeps your negative rail sitting at roughly the same magnitude as +REG.
+{: .doc-callout .doc-callout-note}
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/small-io-board-power-supply-variants/populated-minus9v.jpg"
-       alt="Small IO Board switching regulator area populated for the -9V variant" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/small-io-board-power-supply-variants/populated-minus9v.jpg"
+     thumb="/assets/images/docs/small-io-board-power-supply-variants/thumbs/populated-minus9v.webp"
+     alt="Small IO Board switching regulator area populated for the -9V variant"
+     width="1200" height="777" %}
 </div>
 
 ---
@@ -85,10 +98,14 @@ Here IC1 is used purely as a square-wave generator: it doesn't invert anything i
 2. **Leave empty** C8, RJ2, C9, C10, C11, D4, D5 and D6.
 
 > **Note:** RJ3 and RJ4 tie the unused VOUT pin and the unused -REG rail to ground. Since this variant doesn't produce a negative rail, those two footprints matter just as much as the ones that do the doubling.
+{: .doc-callout .doc-callout-note}
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/small-io-board-power-supply-variants/populated-plus18v.jpg"
-       alt="Small IO Board switching regulator area populated for the +18V variant" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/small-io-board-power-supply-variants/populated-plus18v.jpg"
+     thumb="/assets/images/docs/small-io-board-power-supply-variants/thumbs/populated-plus18v.webp"
+     alt="Small IO Board switching regulator area populated for the +18V variant"
+     width="1200" height="777" %}
 </div>
 
 ---
@@ -101,10 +118,14 @@ This variant runs both pumps at once: the doubler feeds a cascaded inverter stag
 2. **Leave empty** D6, RJ1, RJ3 and RJ4.
 
 > **Note:** D4 and D6 are mutually exclusive. This variant uses D4, not D6, don't populate both. Doing so clamps the negative pump to ground and drags -REG back up to roughly -8V instead of the intended ±15V.
+{: .doc-callout .doc-callout-note}
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/small-io-board-power-supply-variants/populated-plusminus15v.jpg"
-       alt="Small IO Board switching regulator area populated for the ±15V variant" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/small-io-board-power-supply-variants/populated-plusminus15v.jpg"
+     thumb="/assets/images/docs/small-io-board-power-supply-variants/thumbs/populated-plusminus15v.webp"
+     alt="Small IO Board switching regulator area populated for the ±15V variant"
+     width="1200" height="777" %}
 </div>
 
 ---
@@ -120,6 +141,7 @@ Once your board is soldered, it's worth confirming the switching stage is produc
 5. **Measure** TP3 (+REG*2) and TP4 (-REG) and compare against the table below.
 
 > **Tip:** Probing from the bottom side is not just convenient, it's safer. There are no SMT components on this face of the board, so there's no risk of your probe tip slipping and bridging two component pins together.
+{: .doc-callout .doc-callout-tip}
 
 | Variant | TP3 (+REG*2) | TP4 (-REG) |
 |---|---|---|
@@ -128,12 +150,16 @@ Once your board is soldered, it's worth confirming the switching stage is produc
 | **±15V** | ≈ +17V unloaded | ≈ -17V unloaded |
 
 > **Note:** The doubled rails read a little under their nameplate voltage even unloaded, because of diode drops through the pump network. Once you connect a real effect circuit drawing a few mA, expect the ±15V variant to settle closer to its name, around ±15V. A 0V reading on the rail your variant intentionally grounds isn't a fault, that's RJ1 or RJ4 doing its job.
+{: .doc-callout .doc-callout-note}
 
 If a rail reads far outside these ranges, double-check the populate/leave-empty lists for your chosen variant against the section above before you go any further.
 
-<div class="img-grid cols-1" markdown="0">
-  <img src="/assets/images/docs/small-io-board-power-supply-variants/test-points-bottom.jpg"
-       alt="Bottom side of the Small IO Board with the TP1, TP3 and TP4 test point vias annotated" class="doc-img">
+<div class="img-grid doc-image-grid cols-1" markdown="0">
+  {% include doc-image.html
+     full="/assets/images/docs/small-io-board-power-supply-variants/test-points-bottom.jpg"
+     thumb="/assets/images/docs/small-io-board-power-supply-variants/thumbs/test-points-bottom.webp"
+     alt="Bottom side of the Small IO Board with the TP1, TP3 and TP4 test point vias annotated"
+     width="1100" height="865" %}
 </div>
 
 That's it, your Small IO Board's power supply is built, verified and ready to feed whatever effect circuit you connect to it.

@@ -359,7 +359,9 @@ The target configuration is:
 <div class="img-grid doc-image-grid cols-1" markdown="0">
   {% include doc-image.html
      full="/assets/images/docs/fv1-programmer-flashing-and-setup/ft-prog-cbus.jpg"
-     alt="FT_PROG showing the CBUS Pins section with CBUS0 to CBUS3 set to their target functions" %}
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/ft-prog-cbus.webp"
+     alt="FT_PROG showing the CBUS Pins section with CBUS0 to CBUS3 set to their target functions"
+     width="1600" height="1200" %}
 </div>
 
 ### Option B: ftdi_eeprom (Linux / macOS)
@@ -437,10 +439,14 @@ With the firmware flashed and the FT230X configured, connect the programmer to a
 <div class="img-grid doc-image-grid cols-2" markdown="0">
   {% include doc-image.html
      full="/assets/images/docs/fv1-programmer-flashing-and-setup/test-connection-pinout.png"
-     alt="Schematic showing the programmer header pinout and its connection to the FV-1 target board" %}
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/test-connection-pinout.webp"
+     alt="Schematic showing the programmer header pinout and its connection to the FV-1 target board"
+     width="1600" height="1200" %}
   {% include doc-image.html
      full="/assets/images/docs/fv1-programmer-flashing-and-setup/test-connection-photo.jpg"
-     alt="Programmer connected to the FV-1 target board via the programming header" %}
+     thumb="/assets/images/docs/fv1-programmer-flashing-and-setup/thumbs/test-connection-photo.webp"
+     alt="Programmer connected to the FV-1 target board via the programming header"
+     width="1600" height="1200" %}
 </div>
 
 ### Continue in SpinASM for VS Code
