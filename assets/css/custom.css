@@ -123,6 +123,129 @@ a.ygn-card:hover {
 }
 
 /* =========================================
+  Landing Page: Framework Architecture
+========================================= */
+.home-framework {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2rem minmax(0, 1fr) 2rem minmax(0, 1fr);
+  align-items: stretch;
+  padding: 1.5rem;
+}
+
+.home-framework-part {
+  position: relative;
+  min-width: 0;
+  padding: 1rem;
+}
+
+.home-framework-index {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1;
+}
+
+.home-framework-media {
+  display: grid;
+  place-items: center;
+  height: 10rem;
+  margin-bottom: 1.25rem;
+}
+
+.home-framework-media img {
+  display: block;
+  width: 100%;
+  height: 10rem;
+  object-fit: contain;
+  filter: grayscale(0.75) saturate(0.65);
+  opacity: 0.92;
+  transition:
+    transform var(--ygn-dur) var(--ygn-ease),
+    filter var(--ygn-dur) var(--ygn-ease),
+    opacity var(--ygn-dur) var(--ygn-ease);
+}
+
+.home-framework-part:hover .home-framework-media img {
+  filter: grayscale(0) saturate(1);
+  opacity: 1;
+  transform: translateY(-4px);
+}
+
+.home-framework-part h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.35rem;
+}
+
+.home-framework-part p {
+  margin-bottom: 0;
+  opacity: 0.75;
+}
+
+.home-framework-connector {
+  display: grid;
+  place-items: center;
+  color: var(--ygn-primary);
+}
+
+.home-framework-connector span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.home-framework-connector span::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  content: "";
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@media (max-width: 767.98px) {
+  .home-framework {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0.75rem;
+  }
+
+  .home-framework-part {
+    padding: 1rem;
+  }
+
+  .home-framework-media {
+    height: 7.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .home-framework-media img {
+    height: 7.75rem;
+  }
+
+  .home-framework-connector {
+    height: 2rem;
+  }
+
+  .home-framework-connector span {
+    width: 1px;
+    height: 100%;
+  }
+
+  .home-framework-connector span::after {
+    top: auto;
+    right: 50%;
+    bottom: 0;
+    transform: translateX(50%) rotate(135deg);
+  }
+}
+
+/* =========================================
   Component: YGN Hero
 ========================================= */
 .ygn-hero {
