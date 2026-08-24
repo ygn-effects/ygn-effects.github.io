@@ -15,6 +15,7 @@
 
   --ygn-secondary: #673AB7;
   --ygn-secondary-dark: #552DA8;
+  --ygn-secondary-foreground: #9575CD;
   --ygn-on-secondary: #D1C4E9;
 
   /* Semantic Palette */
@@ -417,6 +418,14 @@ footer {
 /* =========================================
   Design details Specifics
 ========================================= */
+.design-secondary-accent {
+  color: var(--ygn-secondary-foreground);
+}
+
+.design-copy-rail {
+  border-left: 3px solid rgba(224, 224, 224, 0.25);
+}
+
 .design-story blockquote {
   border-left: 3px solid var(--ygn-secondary);
   padding: 1rem;
