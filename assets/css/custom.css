@@ -426,6 +426,11 @@ footer {
   border-left: 3px solid rgba(224, 224, 224, 0.25);
 }
 
+.design-control-divider {
+  border-top: 1px solid rgba(224, 224, 224, 0.15);
+  margin-bottom: 3rem;
+}
+
 .design-story blockquote {
   border-left: 3px solid var(--ygn-secondary);
   padding: 1rem;
