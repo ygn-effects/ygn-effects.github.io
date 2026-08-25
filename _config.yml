@@ -5,7 +5,7 @@ description: >-
   Open-source hardware framework for building professional guitar effects pedals.
   Complete PCB designs, firmware, and documentation for DIY builders.
 
-baseurl: "" 
+baseurl: ""
 url: "https://ygn-effects.github.io"
 
 github_username: ygn-effects
@@ -36,3 +36,4 @@ exclude:
   - node_modules/
   - vendor/
   - AGENTS.md
+  - graphics/
