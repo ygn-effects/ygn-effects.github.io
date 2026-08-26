@@ -424,11 +424,78 @@ footer {
 
 .design-copy-rail {
   border-left: 3px solid rgba(224, 224, 224, 0.25);
+  margin-top: 2rem;
 }
 
 .design-control-divider {
   border-top: 1px solid rgba(224, 224, 224, 0.15);
   margin-bottom: 3rem;
+}
+
+.design-using-rail {
+  border-left: 3px solid rgba(224, 224, 224, 0.25);
+}
+
+@media (min-width: 768px) {
+  .design-front-panel {
+    --bs-gutter-x: 0;
+    flex-direction: column;
+  }
+
+  .design-front-panel-media,
+  .design-front-panel-copy {
+    width: 100%;
+  }
+
+  .design-front-panel-media {
+    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(224, 224, 224, 0.15);
+  }
+
+  .design-front-panel-media img {
+    display: block;
+    width: min(100%, 30rem);
+    margin: 0 auto;
+  }
+
+  .design-front-panel-copy {
+    max-width: 68rem;
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .design-front-panel {
+    display: block;
+  }
+
+  .design-front-panel::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+
+  .design-front-panel-media {
+    float: left;
+    width: min(38%, 30rem);
+    margin: 2rem 3rem 2rem 0;
+    border: 0;
+  }
+
+  .design-front-panel-media img {
+    width: 100%;
+  }
+
+  .design-front-panel-copy {
+    width: auto;
+    max-width: none;
+    margin: 0;
+  }
+
+  .design-front-panel-copy > .design-copy-rail {
+    display: flow-root;
+  }
 }
 
 .design-story blockquote {
