@@ -4,7 +4,7 @@ layout: design
 permalink: /designs/sexy-rodent/
 category: Distortion
 date: 2023-11-21
-excerpt: A hot-rodded Rat with LED/Si/Ge clipping and wide-range Sweep control.
+excerpt: "Our reference design: a RAT-derived distortion with Sweep control and selectable clipping."
 
 images:
   card: /assets/images/designs/sexy-rodent/card.png
@@ -15,77 +15,105 @@ images:
   ioboard: /assets/images/designs/sexy-rodent/ioboard.png
 
 story: |
-  <strong>Let’s be real: you don’t need another history lesson on the Rat.</strong><br><br>
+  <strong>The RAT doesn't really need fixing.</strong>
+  </br>
+  </br>
+  It has been around since the late '70s, gone through plenty of revisions, spawned a whole family of variants and clones and even gets a particularly enthusiastic guest appearance in Blur's <i>Song 2</i> video. We keep coming back to it for a simpler reason: it is an exceptionally useful distortion circuit.
+  </br>
+  </br>
+  A lot of that comes from the way its gain stage handles frequency. The RAT applies considerably more gain to some parts of the signal than others, keeping the low end controlled as the distortion increases. Combined with the Filter control, that gives it a remarkably wide useful range. It can add a little grit and level into an amp, sit comfortably in familiar distortion territory or get considerably less polite without immediately turning the bottom end into soup.
+  </br>
+  </br>
+  Sexy Rodent keeps that basic architecture and makes two of its more interesting areas adjustable:
+  </br>
+  <strong>Sweep</strong> is a variable implementation of the Ruetz mod, giving control over the frequency response of the op-amp gain stage.
+  </br>
+  <strong>Clip</strong> selects between silicon, LED and germanium diodes, changing the clipping threshold, output level and compression while leaving the rest of the circuit alone.
+  </br>
+  </br>
+  Those controls cover a fair bit of the RAT family territory in one circuit. Silicon gives the familiar response, LEDs open things up with more headroom and output and germanium takes the circuit in a softer, lower-level and slightly stranger direction. Sweep then lets you decide how much of the lower end gets involved before the signal reaches those clipping diodes.
+  </br>
+  </br>
+  Sexy Rodent also became the <strong>reference design for the YGN Framework</strong>. We used it while developing the enclosure, IO Board, Effect Board format, assembly process and documentation. Starting with a circuit we already knew well gave us a useful baseline while the rest of the system was taking shape.
+  </br>
+  </br>
+  Like the rest of the Framework, the complete design is open source. You can build it as published, buy one already assembled, change the clipping options, alter the Sweep range or use the Effect Board as a starting point for something else.
+  </br>
+  </br>
+  It is a reference design. Messing with it is encouraged.
 
-  You know the sound. It’s the "happy accident" of the late 70s: a circuit that generated distortion not just by using clipping diodes, but by pushing an op-amp so hard it physically couldn't slew fast enough to keep up. That specific, primitive failure mode is what gives this circuit its legendary "yeowl." It’s dirty, it’s aggressive, and it’s perfect.<br><br>
-
-  <strong>So why build another one?</strong> <br><br>
-
-  Because as good as the original is, it has limits. The Sexy Rodent is our attempt to take that classic topology and uncage it. We kept the core "slewing" gain stage that defines the sound, but ripped out the restrictions.<br><br>
-
-  The stock circuit is notorious for strangling your low end. We fixed that with the Sweep control (a fully variable implementation of the classic "Ruetz" mod). This lets you alter the frequency response of the gain stage directly, moving from the tight, mid-focused bite of the 80s to a massive, blown-out fuzz tone that shakes the floor.<br><br>
-
-  We also wanted texture options without the hassle. The Clip switch lets you toggle between the classic Silicon crunch, the compressed, spongy feel of Germanium, or the loud, open roar of LEDs.<br><br>
-
-  <strong>The Open-Source Philosophy</strong><br><br>
-
-  Like everything at YGN, the Sexy Rodent is built on our Open Source Framework. This pedal is actually the "Reference Build" of the Framework, assembled by us to show exactly what the platform is capable of. We make these because we love the sound, but we also build them to show you what you can achieve. Whether you buy this pedal or download the files to make your own, the goal is the same: make it loud, and make it yours.
 
 knobs-image: sexyrodent-knobs.png
 knobs:
   - name: Volume
-    desc: Adjusts the output volume of the effect.
+    desc: Sets the output level. The available level varies with the selected clipping mode, with LED clipping leaving considerably more output on tap than silicon or germanium.
   - name: Gain
-    desc: Sets the amount of distortion. The range of this control is pretty wide, it covers ground from mild overdrive to straight-up fuzz. This is also dependent on the selected clipping option.
+    desc: |
+      Sets the gain of the op-amp stage and covers a wide range, from mild overdrive through distortion and into fuzzier territory. Its response interacts with Sweep, since Sweep changes part of the feedback network that determines the stage's frequency-dependent gain.
+      </br>
+      </br>
+      The clipping mode also has a large effect on the result. Lower-threshold diodes reach clipping earlier, while LEDs allow a larger signal swing before the clipping stage starts limiting it.
   - name: Tone
-    desc: Adjusts the cut-off frequency. Turning this knob clockwise will filter more higher frequencies out.
+    desc:  |
+      Controls the post-clipping low-pass filter. Turning it clockwise lowers the cutoff frequency and removes progressively more high-frequency content.
   - name: Sweep
-    desc: Adjusts the frequency response of the op-amp gain stage. Turning this knob clockwise will allow more low end to be clipped. Fully counter-clockwise is equivalent to the stock  value.
+    desc: |
+      Adjusts the frequency response of the op-amp gain stage using a variable implementation of the Ruetz mod. The stock RAT feedback network contains two frequency-dependent branches. Sweep acts on the higher of the two, built around a 47 Ω resistor and 2.2 µF capacitor, with a corner frequency of roughly 1.5 kHz. The control adds up to approximately 1 kΩ in series with that resistor.
+      </br>
+      </br>
+      Fully counter-clockwise gives the stock 47 Ω value. Turning Sweep clockwise increases the resistance and progressively lowers that corner frequency, reaching roughly 70 Hz at the other end of the control. This allows more low-frequency content into the high-gain region of the circuit.
+      </br>
+      </br>
+      Increasing the resistance also reduces the gain contributed by that branch, so Sweep changes the frequency response and gain structure together. This interaction is a large part of the control's range and is worth exploring alongside Gain.
   - name: Clip
-    desc: Selects the clipping mode between LED, silicon and germanium diodes. Each will have their own threshold and will give a different character to the distortion.
+    desc: |
+      Selects the clipping diodes between silicon, LED and germanium.
+      </br>
+      </br>
+      Silicon gives the familiar stock-style clipping. LEDs have a higher forward voltage, allowing a larger signal swing before clipping and producing more output with less diode compression. Germanium has the lowest clipping threshold of the three, producing earlier clipping, more compression and a lower output level.
+      </br>
+      </br>
+      Since the op-amp gain stage remains unchanged, the switch gives three different responses from the same underlying circuit.
 
 
 internals:
   - name: Mellow
-    desc: Setting this on will tame the beast a little. It will filter some higher frequencies out at the clipping stage resulting in a slightly less aggressive, smoother sound.
+    desc: Adds a capacitor at the clipping stage to roll off some of the higher-frequency content generated by the distortion. Enable it for a slightly smoother, less aggressive top end.
 
 ioboard:
   - name: Mode
-    desc: This jumper allows you to set the power-on state of the pedal. With the jumper present it will stay off and without the jumper it will switch on upon powering.
+    desc: Sets the power-on state of the pedal. With the DIP switch set to the ON position, the effect starts active.
   - name: Bright
-    desc: This trimpot allows you to set the brightness of the status LED.
+    desc: Adjusts the brightness of the status LED.
 
-tips:
-  - name: Clipping vs. Headroom
+using:
+  - name: Boost
     desc: |
-      Think of the Clip switch as an adjustable ceiling.
-      <ul>
-        <li>
-          <strong>Germanium diodes</strong> have the lowest ceiling. They compress early, giving you rich saturation and a lower output volume. It typically won't push your amp very hard.
-        </li>
-        <li>
-          <strong>LEDs</strong> on the other hand have a very high ceiling. They allow for huge signal swings before clipping. Use this mode if you want to use the pedal as a dirty boost to drive your tube amp's preamp into natural saturation.
-        </li>
-        <li>
-          <strong>Silicon diodes</strong> sit in the middle ground, though still on the lower side of the headroom ceiling. This is the diode flavor found in most stock RATs.
-        </li>
-      </ul>
-      This selection of clipping diodes is based on various iterations of the effect over the years and gives the Sexy Rodent a lot of versatility, allowing it to slot naturally into most rigs.
-  - name: Dialing in the "Sweep"
+      Set Clip to LED, leave Sweep fully counter-clockwise, keep Gain fairly low and set Tone to suit the amp. From there, let Volume do the work.
+      </br>
+      </br>
+      LED clipping leaves plenty of output on tap, so this works well for pushing the front end of an amp and letting its preamp provide most of the distortion. There is still enough gain from the Rodent to add some grit and shape the signal before it gets there.
+  - name: Fuzz
     desc: |
-      The <strong>Sweep</strong> control is interactive. As you turn it up (clockwise) to add bass, you are also increasing the overall gain of the op-amp. You might find that as you increase the Sweep, you need to back off the <strong>Tone</strong> knob slightly to keep the definition, or lower the <strong>Gain</strong> knob to maintain clarity. This is of course also dependent on the clipping mode used.
-  - name: Stacking Strategy
+      Set Clip to silicon, add a small amount of Sweep, turn Gain all the way up and bring Volume back to unity. Tone is, once again, whatever works with the rest of the rig.
+      </br>
+      </br>
+      The small increase in Sweep brings a little more low end into the gain stage without completely changing the familiar RAT response. With Gain maxed, the result gets rougher and fuzzier while keeping enough of that frequency shaping to stop everything collapsing into mush.
+  - name: Stoner rock
     desc: |
-      The Sexy Rodent plays well with others.
-      <ul>
-        <li>
-          <strong>Tighten the lows:</strong> Put a mid-hump drive (like a Tube Screamer or Klon-style circuit) before the Rodent. This cuts the bass before it hits the distortion stage, keeping things tight even with the Gain cranked.
-        </li>
-        <li>
-          <strong>The Doom Stack:</strong> Run the Rodent into a mid-scooped fuzz (like a Big Muff). Use the Rodent's mid-focus to punch through the mix, adding a gnarly texture to the smooth wall of fuzz.
-        </li>
-      </ul>
-      The Rodent also stacks very well with itself. With one set as a dirty boost and one set as an overdrive or a distortion, it might be all you need!
+      Set Clip to LED, bring Sweep fairly high, use a healthy amount of Gain and keep Volume around unity.
+      </br>
+      </br>
+      The higher Sweep setting lets considerably more low end into the distortion while LED clipping gives the signal more room before the diodes start limiting it. There is no need to max the Gain here. Leaving some headroom keeps the result big without immediately turning it into fuzz.
+      </br>
+      </br>
+      Tone to taste. Obviously.
+  - name: Two Rodents
+    desc: |
+      Sexy Rodent also stacks very well with another Sexy Rodent.
+      </br>
+      </br>
+      A lower-gain, higher-output first stage works particularly well for pushing a second one set for distortion or fuzz. The controls give you enough range to make the two stages do quite different jobs, despite starting from the same circuit.
 
 resources:
   - name: hardware
