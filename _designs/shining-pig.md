@@ -4,7 +4,7 @@ layout: design
 permalink: /designs/shining-pig/
 category: Boost
 date: 2025-12-23
-excerpt: A civilized 18V Powerboost with Master Volume and refined gain taper.
+excerpt: An 18V Power Boost-derived drive built around the clean-to-dirty transition, with a master volume.
 
 images:
   card: /assets/images/designs/shining-pig/card.png
@@ -14,59 +14,106 @@ images:
   ioboard: /assets/images/designs/shining-pig/ioboard.png
 
 story: |
-  <strong>A primitive circuit with civilized manners.</strong><br><br>
-
-  The Shining Pig is our take on the legendary Colorsound Powerboost, the monster that defined the sound of 70s psych rock.<br><br>
-
-  The original circuit is famous for two things: incredible, high-headroom dynamics and being absolutely deafening. It had no master volume, meaning you had to shake the walls just to get the transistors to crackle. It was a crude but brilliant design for a time when PA systems were weak and amplifiers needed to be punished.<br><br>
-
-  <strong>We kept the brilliance and fixed the usability.</strong><br><br>
-
-  The Shining Pig runs on an internal 18V rail (generated from a standard 9V supply via our IO board's charge pump), preserving that percussive, high-voltage "thump" that makes the original so addictive. But we added a Master Volume, so you can finally get that cooking transistor sound at bedroom levels.<br><br>
-
-  We also swapped the stock gain control for a different taper that creates a usable "Goldilocks" zone. Instead of an on/off switch for fuzz, you get a wide sweep of "hair", that magical texture where the signal is still mostly clean but also harmonically rich, responding instantly to your pick attack.<br><br>
-
-  <strong>The Gateway Build</strong><br><br>
-
-  For builders, this is the perfect entry point into the YGN Framework. The circuit is simple but sensitive, allowing you to figure out the importance of biasing and power rails. And because the PCB is a straightforward layout, you aren't locked in: swap a few values, add a few traces and eventually add biasing trimpots on the rails to convert it to the 9V Overdriver, tweak the EQ stage values or keep it its original 18V specs for the full original experience.
+  <strong>There is a spot.</strong>
+  </br>
+  </br>
+  Like a lot of people, we first came across the Colorsound Power Boost through David Gilmour. The original idea made plenty of sense at the time: take an already loud amplifier and hit it with an enormous 18V transistor boost until something gives. Having tried one into a dimed 50W Plexi, we are quite happy leaving the DR103 experiment to somebody else.
+  </br>
+  </br>
+  Shining Pig is our take on the 18V Power Boost circuit, although outright volume is not really the part we find most interesting.
+  </br>
+  </br>
+  There is a narrow region on the Gain control where the transistor stages sit right on the transition between clean and dirty. Set it there and the circuit becomes extremely responsive to the input signal. Softer playing stays largely clean while harder notes push it into distortion, adding a little hair around the signal without completely taking it over.
+  </br>
+  </br>
+  We wanted more control around that transition.
+  </br>
+  </br>
+  The original 10k linear Gain control packs most of its useful range into a very small part of the pot travel. Reducing the value to 1k makes the control considerably easier to use, then the taper decides where that extra resolution goes. A 1k reverse-log pot gives finer control over the more distorted part of the range. We use a 1k linear pot instead, giving us more room around the clean-to-dirty transition while still leaving plenty of gain beyond it.
+  </br>
+  </br>
+  We also added a master Volume control. The original circuit can produce a frankly unreasonable amount of output, particularly when pushed into distortion. Separating gain from final output level means we can sit on that transition without requiring the rest of the rig to participate in a volume experiment.
+  </br>
+  </br>
+  The circuit still runs at 18V, generated from a standard 9V supply by the Framework IO Board. The active Bass and Treble controls are retained too, giving plenty of range to shape what reaches the later transistor stages.
+  </br>
+  </br>
+  The Power Boost has existed in plenty of forms over the years, which makes it a particularly good fit for the YGN Framework. Shining Pig represents the choices we made for the behaviour we wanted. They do not have to be yours.
+  </br>
+  </br>
+  The complete design is open source. Change the gain taper, alter the EQ, build a 9V version, change the transistor biasing or turn it into something else entirely.
+  </br>
+  </br>
+  There are enough Power Boost revisions already. One more will be fine.
 
 knobs:
   - name: Volume
-    desc: This is the Master Volume the original never had. It sits at the very end of the circuit, allowing you to crank the Gain and EQ to get the transistors cooking while keeping the actual output level reasonable.
-  - name: Gain
-    desc: Controls the amount of drive using our custom taper. It covers a massive range from a high-headroom clean boost at minimum, through a wide edge-of-breakup texture in the middle and all the way to a gated, vintage silicon fuzz when fully cranked.
+    desc: |
+      Sets the final output level.
+      </br>
+      </br>
+      This is a master volume added after the original circuit, allowing Gain and output level to be adjusted independently. The Power Boost can produce a considerable amount of level, so this makes its more distorted settings much easier to use without also hitting whatever comes next quite so hard.
   - name: EQ (Bass / Treble)
-    desc: A powerful, active 2-band EQ based on the Baxandall topology. The Bass control adds massive body and thump, while the Treble adds glass and slice. These controls are somewhat interactive. Boosting one will affect the behavior of the other.
+    desc: |
+      A two-band active EQ based on the Baxandall topology.
+      </br>
+      </br>
+      Both controls can boost or cut broad frequency ranges and their responses overlap through part of the midrange, so they interact more than a typical passive guitar tone control. Small adjustments can have a fairly large effect, particularly once the circuit is being pushed into distortion.
+      </br>
+      </br>
+      Starting with both controls around noon is sensible. What happens after that is between you and your amplifier.
+  - name: Gain
+    desc: |
+      Controls the gain of the transistor stages using a 1k linear pot.
+      </br>
+      </br>
+      The original circuit used a 10k linear control, which concentrates most of the useful change into a very small part of its travel. Reducing the value to 1k spreads that range out considerably.
+      </br>
+      </br>
+      The taper then determines which part of the response gets the most control. A 1k reverse-log pot gives finer adjustment once the circuit is already distorting. We chose 1k linear instead, which leaves the first part of the control fairly quiet but gives much better resolution around the transition from clean to dirty.
+      </br>
+      </br>
+      That transition is where we tend to leave it.
 
 
 internals:
 ioboard:
   - name: Mode
-    desc: This jumper allows you to set the power-on state of the pedal. With the jumper present it will stay off and without the jumper it will switch on upon powering.
+    desc: Sets the power-on state of the pedal. With the DIP switch set to the ON position, the effect starts active.
   - name: Bright
-    desc: This trimpot allows you to set the brightness of the status LED.
+    desc: Adjusts the brightness of the status LED.
 
-tips:
-  - name: The "Hair" Control
+using:
+  - name: The spot
     desc: |
-      We modified the Gain pot (using a 1kB value) to give you fine control over the onset of distortion. You might notice a small "dead spot" at the very bottom of the range—this is intentional. It allows us to stretch out the transition point where the transistors just start to clip. This is where this pedal lives: adding "hair" and sparkle to a clean amp without fully taking over the tone.
-  - name: The Secret Life of the EQ
+      This is how we use Shining Pig most of the time.
+      </br>
+      </br>
+      Start with Bass and Treble around noon and bring Gain up slowly until the circuit is just beginning to distort. Set Volume for the level you need, then adjust the EQ to suit the instrument and amp.
+      </br>
+      </br>
+      Around that transition, picking dynamics do most of the work. Play softly and the signal remains largely clean. Dig in and the transistor stages start clipping, adding a little hair around harder notes. There is a fairly small range where this happens, which is exactly why we chose the 1k linear Gain control.
+      </br>
+      </br>
+      Once you find it, moving the Gain control by a surprisingly small amount can make a big difference.
+  - name: As a boost
     desc: |
-      Don't let the labels fool you, this isn't your standard amp tone stack.<br>
-      The Bass control is wide, affecting frequencies starting around 300Hz and extending all the way down to sub-guitar frequencies (with a massive bump at around 60Hz when maxed). It doesn't just add bass, it pushes the low-mids into distortion.<br>
-      The Treble control actually starts working around 200Hz, meaning it acts more like a high-mid presence control than a simple brightness knob. Because these ranges overlap in the midrange, tweaking one changes the character of the other. Start with both at noon and make small moves.
-  - name: Placement
+      Keep Gain lower and use Volume to push the next stage.
+      </br>
+      </br>
+      Running at 18V gives the circuit plenty of output before it gets heavily distorted, while the active EQ lets you decide which part of the signal gets pushed harder. Into an already loud valve amp this can become rather effective rather quickly.
+      </br>
+      </br>
+      Use whatever hearing protection seems appropriate for the poor decisions involved.
+  - name: Straight into the pickups
     desc: |
-      This circuit is surprisingly versatile regarding placement.
-      <ul>
-        <li>
-          <strong>First in chain:</strong> If you want that classic, touch-sensitive interaction with your guitar's volume knob, put it first. The low input impedance loads your pickups slightly, giving you a dynamic feel that cleans up beautifully.
-        </li>
-        <li>
-          <strong>End of chain:</strong> Unlike some vintage fuzzes the Shining Pig handles buffered, low-impedance signals perfectly well. Try placing it at the very end of your drive section as an always-on sweetener, adding that 18V headroom and a final dusting of hair to your entire signal chain.
-        </li>
-      </ul>
-      This circuit is surprisingly versatile regarding placement.
+      With nothing buffered in front of it, higher Gain settings can push Shining Pig into fuzzier territory with strong interaction from the guitar's volume control.
+      </br>
+      </br>
+      The circuit responds directly to the pickups in this position, which gives those settings much more of the cleanup and feel associated with early transistor fuzz circuits.
+      </br>
+      </br>
+      We rarely use it this way, but it is there if you want it.
 
 resources:
   - name: hardware
