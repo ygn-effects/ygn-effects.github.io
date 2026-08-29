@@ -465,7 +465,35 @@ footer {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
+  .design-story-layout {
+    display: block;
+    margin-inline: 0;
+  }
+
+  .design-story-layout::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+
+  .design-story-media {
+    float: left;
+    width: min(32%, 26rem);
+    padding-top: 2rem;
+    margin: 0 3rem 2rem 0;
+  }
+
+  .design-story-media img {
+    display: block;
+    width: 100%;
+  }
+
+  .design-story-copy {
+    width: auto;
+    padding: 0;
+  }
+
   .design-front-panel {
     display: block;
   }
