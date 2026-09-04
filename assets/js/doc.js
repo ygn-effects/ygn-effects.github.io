@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     javascript: 'JavaScript', js: 'JavaScript', css: 'CSS',
     html: 'HTML', yaml: 'YAML', json: 'JSON',
     ruby: 'Ruby', python: 'Python', c: 'C', cpp: 'C++',
-    ini: 'INI', powershell: 'PowerShell'
+    ini: 'INI', powershell: 'PowerShell', html: 'SpinASM'
   };
 
   const LANG_ICONS = {
@@ -86,7 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
     yaml: 'fa-solid fa-file-code', json: 'fa-solid fa-braces',
     ruby: 'fa-regular fa-gem', python: 'fa-brands fa-python',
     c: 'fa-solid fa-c', cpp: 'fa-solid fa-code',
-    ini: 'fa-solid fa-sliders', powershell: 'fa-solid fa-terminal'
+    ini: 'fa-solid fa-sliders', powershell: 'fa-solid fa-terminal',
+    html: 'fa-solid fa-microchip'
   };
 
   document.querySelectorAll('.doc-content div.highlighter-rouge').forEach(block => {

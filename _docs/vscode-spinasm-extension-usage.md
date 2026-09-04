@@ -295,7 +295,7 @@ With the workspace mapped, you can work on one `.spn` file without a programmer 
 3. **Give** a new file a descriptive name ending in `.spn`, such as `passthrough.spn`.
 4. **Enter** a small program. This example sends the FV-1's left input directly to its left output:
 
-   ```spinasm
+   ```html
    ; Left-channel passthrough
    rdax ADCL, 1.0
    wrax DACL, 0.0
