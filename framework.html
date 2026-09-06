@@ -8,8 +8,11 @@ permalink: /framework/
   <div class="container">
     <div class="ygn-hero">
       <div class="ygn-hero-content">
-        <h1 class="display-4 fw- mb-3">Industrial-Grade Standards</h1>
-        <p class="lead mb-0 opacity-75">Bridging the gap between "hacky DIY" and mass production.</p>
+        <h1 class="display-4 fw- mb-3">An Open Hardware Framework for Effects</h1>
+        <p class="lead mb-0 opacity-75">
+          A standardized enclosure, IO Board and Effect Board that let you reuse everything around
+          the circuit and concentrate on the part that changes.
+        </p>
       </div>
     </div>
   </div>
@@ -21,23 +24,40 @@ permalink: /framework/
     <div class="row justify-content-center">
       <div class="col-lg-12 text-center">
         <h2 class="section-title text-primary">Why We Standardize</h2>
-        <p class="section-subtitle">To some, standardization sounds boring. To us, it’s the only way to truly be creative.</p>
+        <p class="section-subtitle">Build the shared parts once. Spend your time on the circuit.</p>
       </div>
       <div class="row" style="max-width: 750px;">
         <div class="doc-content">
           <p>
-            The biggest friction in building pedals isn't the circuit design, it's the physical reality. It's the
-            off-board wiring that looks like a rat's nest. It's drilling enclosures slightly off-center. It's trying
-            to fit a complex circuit into a generic box.
+            A pedal contains a lot of work that has nothing to do with the effect circuit.
           </p>
           <p>
-            We built the YGN Framework to bridge the gap between DIY and mass production ready.
-            We have a borderline obsessive passion for uniformization. We believe that if you solve the mechanical
-            and structural problems <em>once</em>, you gain the freedom to experiment endlessly with the electronics.
+            There is the enclosure, control placement, power input, switching, external
+            connections, wiring and assembly. None of those things disappear when the next
+            circuit comes along, but building them from scratch every time means solving the
+            same problems over and over again.
+          </p>
+          <p>
+            <strong>The YGN Framework gives those jobs a fixed home.</strong>
+          </p>
+          <p>
+            The enclosure defines the mechanical format. The IO Board handles the shared
+            electrical infrastructure. The Effect Board contains the part that actually
+            changes from one design to the next: the effect circuit itself.
+          </p>
+          <p>
+            Once those boundaries are defined, a new design can spend more of its complexity
+            where it matters. You can prototype a new Effect Board, plug it into the same IO
+            system and put it into an enclosure that already has known dimensions, mounting
+            points and control positions.
+          </p>
+          <p>
+            We are perhaps slightly too fond of standardization, but that is the point.
+            Solve the common parts once, document them properly and reuse them.
           </p>
           <blockquote>
-            <strong>Our Core Belief:</strong> Everything is open source and under permissive license.
-            Always. Hardware, software, firmware and mechanicals. It’s not just a product; it’s a public standard.
+            Everything needed to build, modify and manufacture the Framework is published under
+            permissive licences: hardware, firmware, software, mechanical files and tooling.
           </blockquote>
         </div>
       </div>
@@ -50,7 +70,7 @@ permalink: /framework/
   <div class="container">
     <div class="mb-5 text-center">
       <h2 class="section-title text-primary">The Architecture</h2>
-      <p class="section-subtitle">A modular "Separation of Concerns" system with 3 distinct modules.</p>
+      <p class="section-subtitle">Three parts, each with one job.</p>
     </div>
 
     <div class="row g-4 mb-5">
@@ -59,7 +79,9 @@ permalink: /framework/
           <div class="ygn-card-body text-center">
             <div class="text-secondary mb-3 display-5"><i class="fas fa-cube"></i></div>
             <h3 class="h5">The Enclosure</h3>
-            <p class="opacity-75">A standardized, two-piece bent aluminum chassis.</p>
+            <p class="opacity-75">
+              A standardized two-piece bent aluminium chassis that defines the mechanical format.
+            </p>
           </div>
         </div>
       </div>
@@ -68,7 +90,9 @@ permalink: /framework/
           <div class="ygn-card-body text-center">
             <div class="text-secondary mb-3 display-5"><i class="fas fa-plug"></i></div>
             <h3 class="h5">The IO Board</h3>
-            <p class="opacity-75">Handles power, switching, and external connections.</p>
+            <p class="opacity-75">
+              Handles power, switching and external connections shared between designs.
+            </p>
           </div>
         </div>
       </div>
@@ -77,7 +101,9 @@ permalink: /framework/
           <div class="ygn-card-body text-center">
             <div class="text-secondary mb-3 display-5"><i class="fas fa-wave-square"></i></div>
             <h3 class="h5">The Effect Board</h3>
-            <p class="opacity-75">The heart of the pedal where the audio circuit lives.</p>
+            <p class="opacity-75">
+              Holds the audio circuit and front-panel controls specific to each effect.
+            </p>
           </div>
         </div>
       </div>
@@ -89,16 +115,22 @@ permalink: /framework/
         <div class="col-md-4 mb-3 mb-md-0">
           <h5 class="">Size S</h5>
           <h6 class="mb-1">126x41x70mm</h6>
-          <p class="opacity-75 mb-0">The standard single unit. One IO, one Effect board.</p>
+          <p class="opacity-75 mb-0">
+            The standard single-effect format, with one IO Board and one Effect Board.
+          </p>
         </div>
         <div class="col-md-4 mb-3 mb-md-0">
           <h5 class="">Size M</h5>
           <h6 class="mb-1">126x41x140mm</h6>
-          <p class="opacity-75 mb-0">Double width. Holds two Size S PCBs side-by-side. Perfect for dual pedals with our Size M IO Board.</p>
+          <p class="opacity-75 mb-0">
+            Double width, with room for two Size S Effect Boards side by side and a Size M IO Board.
+            Intended for dual effects and other designs that need the extra space.
+          </p>
         </div>
         <div class="col-md-4">
           <h5 class="">Size L</h5>
-          <p class="opacity-75 mb-0">Dedicated Digital Platform (DSP). Currently in development.</p>
+          <p class="opacity-75 mb-0">A larger format intended for the digital effects platform.
+            Currently in development.</p>
         </div>
       </div>
     </div>
@@ -111,30 +143,42 @@ permalink: /framework/
     <div class="row gx-4 gx-lg-5 gy-5 align-items-center">
       <div class="col-lg-6 p-5">
         <h4 class="text-secondary mb-4">The Enclosure System</h4>
-        <p class="lead opacity-75 mb-4">We stepped away from die-cast boxes for a two-piece bent sheet aluminum design.</p>
+        <p class="lead opacity-75 mb-4">
+          We use a two-piece bent aluminium enclosure instead of a generic die-cast box.
+          Its dimensions are designed around the Framework boards, control positions and connectors,
+          giving every design the same mechanical starting point.
+        </p>
         <ul class="list-unstyled">
           <li class="mb-3 d-flex">
             <i class="far fa-square text-secondary mt-1 me-3"></i>
             <div>
-              <strong>Bent Aluminum Aesthetic:</strong> Distinct industrial look.
+              <strong>Bent aluminium construction:</strong> The enclosure is made from two formed
+              sheet-aluminium parts. This gives us a repeatable internal geometry while keeping
+              the construction relatively simple.
             </div>
           </li>
           <li class="mb-3 d-flex">
             <i class="fas fa-crop-alt text-secondary mt-1 me-3"></i>
             <div>
-              <strong>Superior Access:</strong> Two-part construction makes assembly and maintenance easy.
+              <strong>Easy access:</strong> Remove the cover and the boards, controls and
+              connectors are immediately accessible. That makes assembly, troubleshooting
+              and modification considerably less awkward.
             </div>
           </li>
           <li class="mb-3 d-flex">
             <i class="fas fa-hammer text-secondary mt-1 me-3"></i>
             <div>
-              <strong>DIY Friendly:</strong> Print our bending jigs to make them in your garage.
+              <strong>Build it yourself:</strong> The enclosure can be made from the published
+              dimensions using printable bending jigs. You can fabricate one in a small workshop
+              without needing dedicated sheet-metal tooling.
             </div>
           </li>
           <li class="mb-3 d-flex">
             <i class="far fa-images text-secondary mt-1 me-3"></i>
             <div>
-              <strong>Easy to customize:</strong> Use a faceplate (plastic or PCB) or etching, stamping, decals...
+              <strong>Finish it however you like:</strong> Use a PCB or plastic faceplate, etch
+              the aluminium, stamp it, apply decals or come up with something stranger.
+              The enclosure defines the mechanical format, not what it has to look like.
             </div>
           </li>
         </ul>
@@ -154,37 +198,52 @@ permalink: /framework/
         <img src="/assets/images/framework/io-board-s.jpg" alt="{{ page.title }}" class="img-fluid rounded">
       </div>
       <div class="col-lg-6 p-5">
-        <h4 class="text-secondary mb-4">The Smart IO Board</h4>
-        <p class="lead opacity-75 mb-4">Not just a breakout board. An intelligent power plant.</p>
+        <h4 class="text-secondary mb-4">The IO Board</h4>
+        <p class="lead opacity-75 mb-4">
+          Power, switching and external connections live on the IO Board so the Effect Board can concentrate
+          on the effect itself.
+        </p>
         <ul class="list-unstyled">
           <li class="mb-3 d-flex">
             <i class="fas fa-microchip text-secondary mt-1 me-3"></i>
             <div>
-              <strong>Intelligent Switching:</strong> AVR microcontroller + DPDT relay + optocoupler muting. Silence, no pops.
+              <strong>Relay switching:</strong> An AVR microcontroller controls a DPDT relay, with optocoupler
+              muting around the switching event. This keeps bypass control and switching logic off the Effect
+              Board and gives every design the same switching interface.
             </div>
           </li>
           <li class="mb-3 d-flex">
             <i class="fas fa-shield-alt text-secondary mt-1 me-3"></i>
             <div>
-              <strong>Bulletproof Power:</strong> Filtered input, over-voltage & reverse polarity protection.
+              <strong>Protected power input:</strong> Input filtering, reverse-polarity protection and
+              over-voltage protection are handled on the IO Board before power reaches the effect circuit.
             </div>
           </li>
           <li class="mb-3 d-flex">
             <i class="fas fa-bolt text-secondary mt-1 me-3"></i>
             <div>
-              <strong>Voltage Flexibility:</strong> Optional charge pump for -9V, 18V or ±15V operations.
+              <strong>Optional voltage conversion:</strong> The IO Board can provide additional supply
+              rails when a design needs them, with charge-pump options for -9V, 18V or ±15V operation.
+              </br>
+              If an effect needs something other than the standard 9V supply, the rail is already
+              available without adding the same conversion circuitry to every Effect Board.
             </div>
           </li>
           <li class="mb-3 d-flex">
             <i class="fas fa-sliders-h text-secondary mt-1 me-3"></i>
             <div>
-              <strong>QoL Features:</strong> Dip switch for default power-on state and LED brightness trimpot.
+              <strong>Configuration:</strong> A DIP switch sets the default power-on state and an internal
+              trimmer adjusts the brightness of the status LED.
             </div>
           </li>
           <li class="d-flex">
             <i class="fas fa-link text-secondary mt-1 me-3"></i>
             <div>
-              <strong>Ribbon Connection:</strong> 10-pin JST PH cable to the effect board. No soldering wires to lugs.
+              <strong>One connection to the Effect Board:</strong> A 10-pin JST-PH cable carries the required
+              connections between the IO Board and Effect Board.
+              </br>
+              The interface stays consistent across the Framework, so the Effect Board does not need its
+              own power jack, bypass relay or bundle of wires running to panel-mounted hardware.
             </div>
           </li>
         </ul>
@@ -199,30 +258,51 @@ permalink: /framework/
     <div class="row gx-4 gx-lg-5 gy-5 align-items-center">
       <div class="col-lg-6 p-5">
         <h4 class="text-secondary mb-4">The Effect Board</h4>
-        <p class="lead opacity-75 mb-4">The Effect Board is pure, unadulterated free real estate for your circuit design</p>
+        <p class="lead opacity-75 mb-4">
+          The Effect Board is where the actual effect circuit lives. The Framework defines its size,
+          mounting points, connectors and control positions. Everything inside those boundaries is left to
+          the design.
+        </p>
         <ul class="list-unstyled">
           <li class="mb-3 d-flex">
             <i class="far fa-file text-secondary mt-1 me-3"></i>
             <div>
-              <strong>Blank canvas:</strong> The IO Board does the heavy lifting, this 73mm x 62mm PCB is where the magic happens.
+              <strong>Fixed mechanical format:</strong> A Size S Effect Board uses a 73 × 62 mm PCB with
+              known mounting points and clearances inside the enclosure.
+              </br>
+              That gives a new circuit a mechanical target from the start, rather than defining the PCB
+              and enclosure around each other every time.
             </div>
           </li>
           <li class="mb-3 d-flex">
             <i class="fas fa-link text-secondary mt-1 me-3"></i>
             <div>
-              <strong>Standard Connectors:</strong> JST PH headers for IO, Footswitch, and LED.
+              <strong>Standard connections:</strong> JST-PH headers connect the Effect Board to the IO Board,
+              footswitch and status LED.
+              </br>
+              Power, audio connections and switching interfaces therefore stay consistent from one design to the next.
             </div>
           </li>
           <li class="mb-3 d-flex">
             <i class="fas fa-align-justify text-secondary mt-1 me-3"></i>
             <div>
-              <strong>Aligned Controls:</strong> Templates define placements for up to 6 pots or 3 pots and 3 switches.
+              <strong>Defined control positions:</strong> Templates provide positions for up to six
+              potentiometers or three potentiometers and three switches.
+              </br>
+              The positions are standardized so the PCB, enclosure and faceplate can be designed around
+              the same geometry.
             </div>
           </li>
           <li class="mb-3 d-flex">
             <i class="fas fa-plug text-secondary mt-1 me-3"></i>
             <div>
-              <strong>Plug & Play:</strong> No off-board wiring. Route to the connector, plug it in.
+              <strong>No off-board signal wiring:</strong> Controls and connectors are mounted directly to
+              the boards, with the shared connections routed through the standard headers.
+              </br>
+              Once the PCB is assembled, the Effect Board plugs into the rest of the Framework without
+              soldering wires between panel-mounted parts.
+              </br>
+              The mechanical format is fixed. The circuit is yours.
             </div>
           </li>
         </ul>
@@ -239,33 +319,44 @@ permalink: /framework/
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-12 text-center">
-        <h2 class="section-title text-primary">Garage Industrialization</h2>
-        <p class="section-subtitle">We don't just give you the files for the thing, we give you the files for <em>the machines that make the thing</em>.</p>
+        <h2 class="section-title text-primary">Manufacturing and Tooling</h2>
+        <p class="section-subtitle">
+          The Framework includes the tooling used to make it.
+        </p>
       </div>
       <div class="row" style="max-width: 750px;">
         <div class="doc-content text-start">
           <p>
-            Our goal is "Micro-Industrialization." We want you to achieve factory-level consistency using the
-            affordable tools you may already have, like a standard Ender 3 3D printer or a generic 3018
-            desktop CNC.
+            Alongside the hardware and mechanical files, we publish bending jigs, assembly fixtures, stencil
+            files and CAM where they make the process easier to reproduce.
           </p>
           <p>
-            We believe in a pragmatic approach to manufacturing. We don't DIY for the sake of it; we DIY when it improves the process.
+            The goal is repeatability with tools that are realistic for a small workshop. A basic 3D printer
+            and desktop CNC can cover a surprising amount of the process when the tooling is designed around
+            them.
+          </p>
+          <p>
+            We take a pragmatic approach to what should be made in-house. We do not make things ourselves
+            simply for the sake of calling them DIY. We bring a process in-house when it gives us useful
+            control, flexibility or repeatability.
           </p>
           <ul class="list-unstyled">
             <li class="mb-1 d-flex">
               <i class="far fa-times-circle text-secondary mt-1 me-3"></i>
               <div>
-                <strong>Outsource the Hard Stuff:</strong> Don't etch or mill PCBs at home.
-                It's messy and imprecise. We design 4-layer boards for professional fab houses
-                because they are cheap, reliable, and superior.
+                <strong>Let board houses make the PCBs:</strong> Modern multilayer PCB fabrication is cheap,
+                accurate and widely available. Milling or etching boards at home adds a lot of process for
+                little benefit when professionally fabricated multilayer boards are cheap and readily available.
               </div>
             </li>
             <li class="mb-3 d-flex">
               <i class="far fa-check-circle text-secondary mt-1 me-3"></i>
               <div>
-                <strong>In-Source the Assembly:</strong> SMT assembly is fast, fun, and cost-effective if you have the
-                right process. That's where our tooling comes in.
+                <strong>Bring assembly in-house where it makes sense:</strong> PCB assembly, on the other hand,
+                is practical to handle on a small scale.. With a stencil, a repeatable paste process and a reflow
+                setup, small batches can be assembled quickly without requiring industrial equipment.
+                </br>
+                That is where the Framework tooling concentrates.
               </div>
             </li>
           </ul>
@@ -279,22 +370,31 @@ permalink: /framework/
           <div class="col-md-4">
             <div class="ygn-card p-3 text-center">
               <i class="fas fa-pencil-ruler fa-2x text-secondary mb-2"></i>
-              <h5 class="h6">DIY Stencils</h5>
-              <p class="small opacity-75 mb-0">Models and CAM paths to mill your own stencils from plastic sheets.</p>
+              <h5 class="h6">Stencil tooling</h5>
+              <p class="small opacity-75 mb-0">
+                Models and CAM files make it possible to produce reusable solder-paste stencils from plastic
+                sheet using a small CNC.
+              </p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="ygn-card p-3 text-center">
               <i class="fas fa-border-all fa-2x text-secondary mb-2"></i>
-              <h5 class="h6">Paste Application</h5>
-              <p class="small opacity-75 mb-0">Perfect paste application every time with our printable jig.</p>
+              <h5 class="h6">Paste application</h5>
+              <p class="small opacity-75 mb-0">
+                Printable fixtures keep the PCB and stencil aligned during paste application, making the
+                process faster and more repeatable.
+              </p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="ygn-card p-3 text-center">
               <i class="fas fa-toolbox fa-2x text-secondary mb-2"></i>
-              <h5 class="h6">Enclosure Templates</h5>
-              <p class="small opacity-75 mb-0">Printable templates for repeatable enclosure fabrication.</p>
+              <h5 class="h6">Enclosure fabrication</h5>
+              <p class="small opacity-75 mb-0">
+                Printable templates and bending jigs define the enclosure geometry so the same dimensions
+                can be reproduced without dedicated sheet-metal tooling.
+              </p>
             </div>
           </div>
         </div>
@@ -309,7 +409,10 @@ permalink: /framework/
     <div class="row gx-4 gx-lg-5 gy-5">
       <div class="col-lg-6">
         <h3 class="h4 text-primary mb-3">Docs & Licenses</h3>
-        <p class="small opacity-75">We don't just dump a ZIP file. We document the process.</p>
+        <p class="small opacity-75">
+          The files are only useful if you can understand how to build and modify them, so the Framework
+          is documented alongside the hardware, software and mechanical resources.
+        </p>
         <ul class="list-unstyled">
           <li class="mb-2">
             <strong class="text-secondary">Hardware ({{ site.data.licenses.hardware.name }}):</strong> {{ site.data.licenses.hardware.description }}
@@ -324,8 +427,10 @@ permalink: /framework/
         <a href="/docs/" class="btn btn-sm btn-secondary mt-2">Read the Docs</a>
       </div>
       <div class="col-lg-6"><h3 class="h4 text-primary mb-3">Roadmap</h3>
-        <p class="small opacity-75"><strong>Our Digital Platform</strong> is in Alpha. Built around the FV-1 chip with custom VSCode tools.</p>
-        <a href="https://github.com/ygn-effects/project-fv1-platform" class="btn btn-sm btn-secondary mt-2">Check the repo</a>
+        <p class="small opacity-75"><strong>The digital platform is still in development.</strong> It is built
+          around the FV-1 and extends the same Framework approach to DSP-based effects, with dedicated
+          hardware and supporting development tools.</p>
+        <a href="https://github.com/ygn-effects/project-fv1-platform" class="btn btn-sm btn-secondary mt-2">Follow the repo</a>
       </div>
     </div>
   </div>
